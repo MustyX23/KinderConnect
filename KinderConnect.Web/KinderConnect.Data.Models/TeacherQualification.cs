@@ -5,7 +5,7 @@ namespace KinderConnect.Data.Models
     public class TeacherQualification
     {
         [Required]
-        public string TeacherId { get; set; } = null!;
+        public Guid TeacherId { get; set; }
         public Teacher Teacher { get; set; } = null!;
 
         [Required]
