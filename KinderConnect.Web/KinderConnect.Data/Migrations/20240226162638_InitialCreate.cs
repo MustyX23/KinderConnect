@@ -193,8 +193,7 @@ namespace KinderConnect.Data.Migrations
                     MedicalInformation = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     Allergies = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     ParentGuardianId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ClassroomId = table.Column<int>(type: "int", nullable: false),
-                    ClassroomId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ClassroomId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -206,8 +205,8 @@ namespace KinderConnect.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Children_Classrooms_ClassroomId1",
-                        column: x => x.ClassroomId1,
+                        name: "FK_Children_Classrooms_ClassroomId",
+                        column: x => x.ClassroomId,
                         principalTable: "Classrooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -268,9 +267,8 @@ namespace KinderConnect.Data.Migrations
                 name: "TeachersQualifications",
                 columns: table => new
                 {
-                    TeacherId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    QualificationId = table.Column<int>(type: "int", nullable: false),
-                    TeacherId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    TeacherId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    QualificationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -279,14 +277,12 @@ namespace KinderConnect.Data.Migrations
                         name: "FK_TeachersQualifications_Qualifications_QualificationId",
                         column: x => x.QualificationId,
                         principalTable: "Qualifications",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_TeachersQualifications_Teachers_TeacherId1",
-                        column: x => x.TeacherId1,
+                        name: "FK_TeachersQualifications_Teachers_TeacherId",
+                        column: x => x.TeacherId,
                         principalTable: "Teachers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -329,9 +325,9 @@ namespace KinderConnect.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Children_ClassroomId1",
+                name: "IX_Children_ClassroomId",
                 table: "Children",
-                column: "ClassroomId1");
+                column: "ClassroomId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Children_ParentGuardianId",
@@ -357,11 +353,6 @@ namespace KinderConnect.Data.Migrations
                 name: "IX_TeachersQualifications_QualificationId",
                 table: "TeachersQualifications",
                 column: "QualificationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TeachersQualifications_TeacherId1",
-                table: "TeachersQualifications",
-                column: "TeacherId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

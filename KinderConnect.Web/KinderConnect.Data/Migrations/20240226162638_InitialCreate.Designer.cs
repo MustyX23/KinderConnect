@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KinderConnect.Data.Migrations
 {
     [DbContext(typeof(KinderConnectDbContext))]
-    [Migration("20240226153646_InitialCreate")]
+    [Migration("20240226162638_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,10 +100,7 @@ namespace KinderConnect.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("ClassroomId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("ClassroomId1")
+                    b.Property<Guid>("ClassroomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -136,7 +133,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassroomId1");
+                    b.HasIndex("ClassroomId");
 
                     b.HasIndex("ParentGuardianId");
 
@@ -230,20 +227,15 @@ namespace KinderConnect.Data.Migrations
 
             modelBuilder.Entity("KinderConnect.Data.Models.TeacherQualification", b =>
                 {
-                    b.Property<string>("TeacherId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("QualificationId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("TeacherId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("TeacherId", "QualificationId");
 
                     b.HasIndex("QualificationId");
-
-                    b.HasIndex("TeacherId1");
 
                     b.ToTable("TeachersQualifications");
                 });
@@ -387,7 +379,7 @@ namespace KinderConnect.Data.Migrations
                 {
                     b.HasOne("KinderConnect.Data.Models.Classroom", "Classroom")
                         .WithMany("Children")
-                        .HasForeignKey("ClassroomId1")
+                        .HasForeignKey("ClassroomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -445,13 +437,13 @@ namespace KinderConnect.Data.Migrations
                     b.HasOne("KinderConnect.Data.Models.Qualification", "Qualification")
                         .WithMany("TeachersQualifications")
                         .HasForeignKey("QualificationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("KinderConnect.Data.Models.Teacher", "Teacher")
                         .WithMany("TeachersQualifications")
-                        .HasForeignKey("TeacherId1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Qualification");
