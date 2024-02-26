@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KinderConnect.Common\KinderConnect.Common.csproj" />
+    <ProjectReference Include="..\KinderConnect.Data.Models\KinderConnect.Data.Models.csproj" />
+    <ProjectReference Include="..\KinderConnect.Data\KinderConnect.Data.csproj" />
+    <ProjectReference Include="..\KinderConnect.Web.ViewModels\KinderConnect.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>
