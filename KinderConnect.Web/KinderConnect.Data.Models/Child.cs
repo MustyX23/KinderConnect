@@ -39,7 +39,7 @@ namespace KinderConnect.Data.Models
         public ApplicationUser ParentGuardian { get; set; } = null!;
 
         [Required]
-        public int ClassroomId { get; set; }
+        public Guid ClassroomId { get; set; }
 
         public Classroom Classroom { get; set; } = null!;
     }
