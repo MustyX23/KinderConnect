@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static KinderConnect.Common.EntityValidationConstants.Classroom;
 
 namespace KinderConnect.Data.Models
 {
@@ -14,7 +15,7 @@ namespace KinderConnect.Data.Models
         public Guid Id { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 3)]
+        [StringLength(NameMaxLenght, MinimumLength = NameMinLenght)]
         public string Name { get; set; } = null!;
 
         public ICollection<Child> Children { get; set; }

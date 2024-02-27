@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static KinderConnect.Common.EntityValidationConstants.Child;
 
 namespace KinderConnect.Data.Models
 {
@@ -12,11 +13,11 @@ namespace KinderConnect.Data.Models
         public Guid Id { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 1)]
+        [StringLength(FirstNameMaxLenght, MinimumLength = FirstNameMinLenght)]
         public string FirstName { get; set; } = null!;
 
         [Required]
-        [StringLength(50, MinimumLength = 1)]
+        [StringLength(LastNameMaxLenght, MinimumLength = LastNameMinLenght)]
         public string LastName { get; set; } = null!;
 
         [Required]
@@ -29,10 +30,10 @@ namespace KinderConnect.Data.Models
         [RegularExpression(@"^(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})$")]
         public string ParentGuardianContact { get; set; } = null!;
 
-        [StringLength(1000, MinimumLength = 20)]
+        [StringLength(MedicalInfoMaxLenght, MinimumLength = MedicalInfoMinLenght)]
         public string? MedicalInformation { get; set; }
 
-        [StringLength(500, MinimumLength = 50)]
+        [StringLength(AllergiesMaxLenght, MinimumLength = AllergiesMinLenght)]
         public string? Allergies { get; set; }
 
         [Required]
