@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static KinderConnect.Common.EntityValidationConstants.Qualification;
 
 namespace KinderConnect.Data.Models
 {
@@ -12,11 +13,11 @@ namespace KinderConnect.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(120)]
+        [StringLength(NameMaxLenght)]
         public string Name { get; set; } = null!;
 
         [Required]
-        [StringLength(500, MinimumLength = 15)]
+        [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength)]
         public string Description { get; set; } = null!;
         public ICollection<TeacherQualification> TeachersQualifications { get; set; }
     }
