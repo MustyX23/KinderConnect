@@ -9,6 +9,7 @@ namespace KinderConnect.Data.Models
             Id = Guid.NewGuid();
             ClassroomsTeachers = new HashSet<ClassroomTeacher>();
             TeachersQualifications = new HashSet<TeacherQualification>();
+            AttendanceRecords = new HashSet<AttendanceRecord>();
         }
 
         public Guid Id { get; set; }
@@ -22,12 +23,26 @@ namespace KinderConnect.Data.Models
         public string LastName { get; set; } = null!;
 
         [Required]
+        public int Age { get; set; }
+
+        [Required]
+        public string ImageUrl { get; set; } = null!;
+
+        [Required]
+        public string Gender { get; set; } = null!;
+
+        [Required]
         public int QualificationId { get; set; }
         public Qualification Qualification { get; set; } = null!;
+
+        [Required]
+        public Guid TeacherUserId { get; set; }
 
         [Required]
         public ApplicationUser TeacherUser { get; set; } = null!;
         public ICollection<ClassroomTeacher> ClassroomsTeachers { get; set; }
         public ICollection<TeacherQualification> TeachersQualifications { get; set; } = null!;
+
+        public ICollection<AttendanceRecord> AttendanceRecords { get; set; } = null!;
     }
 }

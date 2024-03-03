@@ -15,6 +15,9 @@
 
             public const int AllergiesMinLenght = 50;
             public const int AllergiesMaxLenght = 500;
+
+            public const int AgeMin = 1;
+            public const int AgeMax = 6;
         }
         public static class Classroom
         {
@@ -27,6 +30,11 @@
 
             public const int DescriptionMinLength = 15;
             public const int DescriptionMaxLength = 500;
+        }
+        public static class Activity
+        {
+            public const int NameMinLength = 5;
+            public const int NameMaxLength = 50;
         }
     }
 }

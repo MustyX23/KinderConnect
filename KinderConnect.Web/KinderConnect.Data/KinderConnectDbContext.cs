@@ -19,6 +19,9 @@ namespace KinderConnect.Data
         public DbSet<Qualification> Qualifications { get; set; } = null!;
         public DbSet<TeacherQualification> TeachersQualifications { get; set; } = null!;
         public DbSet<ClassroomTeacher> ClassroomsTeachers { get; set; } = null!;
+        public DbSet<AttendanceRecord> AttendanceRecords { get; set; } = null!;
+        public DbSet<Activity> Activities { get; set; } = null!;
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
