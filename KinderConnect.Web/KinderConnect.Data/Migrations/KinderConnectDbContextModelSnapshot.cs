@@ -17,28 +17,10 @@ namespace KinderConnect.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.27")
+                .HasAnnotation("ProductVersion", "6.0.22")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("KinderConnect.Data.Models.Activity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Activities");
-                });
 
             modelBuilder.Entity("KinderConnect.Data.Models.ApplicationUser", b =>
                 {
@@ -106,49 +88,11 @@ namespace KinderConnect.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("KinderConnect.Data.Models.AttendanceRecord", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("ActivityId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("ChildId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<TimeSpan>("End")
-                        .HasColumnType("time");
-
-                    b.Property<DateTime>("Start")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("TeacherId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActivityId");
-
-                    b.HasIndex("ChildId");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("AttendanceRecords");
-                });
-
             modelBuilder.Entity("KinderConnect.Data.Models.Child", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
 
                     b.Property<string>("Allergies")
                         .HasMaxLength(500)
@@ -169,10 +113,6 @@ namespace KinderConnect.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -187,9 +127,6 @@ namespace KinderConnect.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ParentGuardianId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -209,8 +146,8 @@ namespace KinderConnect.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -253,26 +190,6 @@ namespace KinderConnect.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Qualifications");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "A bachelor's degree in early childhood education prepares teachers with comprehensive knowledge and skills in child development, curriculum design, assessment, and family engagement. This qualification enables educators to implement evidence-based practices and support children's holistic development.",
-                            Name = "Bachelor's Degree in Early Childhood Education"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "This qualification equips teachers with essential knowledge and skills to effectively engage and educate young children in a kindergarten setting. It covers topics such as child development, curriculum planning, and fostering a nurturing learning environment.",
-                            Name = "Early Childhood Education Certificate"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "The CDA credential is a nationally recognized certification for early childhood professionals. It emphasizes the importance of nurturing children's physical, social, emotional, and cognitive development. Teachers with a CDA credential demonstrate competence in providing high-quality care and education to young children.",
-                            Name = "Child Development Associate (CDA) Credential"
-                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Teacher", b =>
@@ -281,21 +198,10 @@ namespace KinderConnect.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -315,30 +221,6 @@ namespace KinderConnect.Data.Migrations
                     b.HasIndex("TeacherUserId");
 
                     b.ToTable("Teachers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("43849457-8db7-4557-a1ed-78fa776b4274"),
-                            Age = 56,
-                            FirstName = "Lybomir",
-                            Gender = "male",
-                            ImageUrl = "https://i.guim.co.uk/img/media/b897974dce4559ebe02af27e10c475068ead46a8/0_0_4000_2400/master/4000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=a53a3c7714a215af7051daea5b14971c",
-                            LastName = "Popov",
-                            QualificationId = 1,
-                            TeacherUserId = new Guid("702de3dd-c1e7-4f40-9131-623aadb7e765")
-                        },
-                        new
-                        {
-                            Id = new Guid("a801401d-65f3-4862-9e81-97ce782967a5"),
-                            Age = 50,
-                            FirstName = "Mustafa",
-                            Gender = "male",
-                            ImageUrl = "https://img.freepik.com/premium-photo/old-male-teacher-portrait-closeup-face-professor-teacher-blackboard-isolated_265223-53892.jpg",
-                            LastName = "Buhov",
-                            QualificationId = 1,
-                            TeacherUserId = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f")
-                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.TeacherQualification", b =>
@@ -491,33 +373,6 @@ namespace KinderConnect.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("KinderConnect.Data.Models.AttendanceRecord", b =>
-                {
-                    b.HasOne("KinderConnect.Data.Models.Activity", "Activity")
-                        .WithMany()
-                        .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("KinderConnect.Data.Models.Child", "Child")
-                        .WithMany()
-                        .HasForeignKey("ChildId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("KinderConnect.Data.Models.Teacher", "Teacher")
-                        .WithMany("AttendanceRecords")
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Activity");
-
-                    b.Navigation("Child");
-
-                    b.Navigation("Teacher");
-                });
-
             modelBuilder.Entity("KinderConnect.Data.Models.Child", b =>
                 {
                     b.HasOne("KinderConnect.Data.Models.Classroom", "Classroom")
@@ -659,8 +514,6 @@ namespace KinderConnect.Data.Migrations
 
             modelBuilder.Entity("KinderConnect.Data.Models.Teacher", b =>
                 {
-                    b.Navigation("AttendanceRecords");
-
                     b.Navigation("ClassroomsTeachers");
 
                     b.Navigation("TeachersQualifications");
