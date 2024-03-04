@@ -45,7 +45,7 @@ namespace KinderConnect.Data.Models
         public string? Allergies { get; set; }
 
         [Required]
-        public Guid UserId { get; set; }
+        public Guid ParentGuardianId { get; set; }
 
         [Required]
         public ApplicationUser ParentGuardian { get; set; } = null!;
