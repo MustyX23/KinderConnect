@@ -1,5 +1,7 @@
 using KinderConnect.Data;
 using KinderConnect.Data.Models;
+using KinderConnect.Services.Data.Interfaces;
+using KinderConnect.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +31,8 @@ namespace KinderConnect.Web
                 .AddEntityFrameworkStores<KinderConnectDbContext>();
 
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddApplicationServices(typeof(ITeacherService));
 
             WebApplication app = builder.Build();
 
