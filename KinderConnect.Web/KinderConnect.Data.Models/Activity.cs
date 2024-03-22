@@ -9,7 +9,10 @@ namespace KinderConnect.Data.Models
 
         [Required]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength)]
-        [Display(Name = "Activity")]
         public string Name { get; set; } = null!;
+
+        [Required]
+        [StringLength(DescriptionMaxLength, MinimumLength = DesctiptionMinLength)]
+        public string Description { get; set; } = null!;
     }
 }

@@ -35,6 +35,9 @@
         {
             public const int NameMinLength = 5;
             public const int NameMaxLength = 50;
+
+            public const int DesctiptionMinLength = 5;
+            public const int DescriptionMaxLength = 50;
         }
     }
 }
