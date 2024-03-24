@@ -1,21 +1,27 @@
-﻿@model IEnumerable<IndexAllActivitiesViewModel>
+﻿@using KinderConnect.Services.Data.Interfaces;
+
+@inject IActivityService ActivityService
+
+@{
+    var allActivities = await ActivityService.GetAllActivitiesForIndexAsync();
+}
 
 <div class="container-fluid pt-5">    
     <div class="container pb-3">
         <div class="row">
-            @* @foreach (var e in Model)
+            @foreach (var a in allActivities)
             {
                 <div class="col-lg-4 col-md-6 pb-1">
                     <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
                         <i class="activity h1 font-weight-normal text-primary mb-3"></i>
                         <div class="pl-4">
-                            <h4>@e.Name</h4>
-                            <p class="m-0">@e.Description</p>
+                            <h4>@a.Name</h4>
+                            <p class="m-0">@a.Description</p>
                         </div>
                     </div>
                 </div>
-            }   *@         
-            <div class="col-lg-4 col-md-6 pb-1">
+            }           
+            @* <div class="col-lg-4 col-md-6 pb-1">
                 <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
                     <i class="flaticon-022-drum h1 font-weight-normal text-primary mb-3"></i>
                     <div class="pl-4">
@@ -59,7 +65,7 @@
                         <p class="m-0">Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero lorem amet elitr vero...</p>
                     </div>
                 </div>
-            </div>
+            </div> *@
         </div>
     </div>
 </div>

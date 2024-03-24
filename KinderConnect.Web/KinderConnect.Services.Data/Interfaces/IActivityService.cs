@@ -1,6 +1,9 @@
-﻿namespace KinderConnect.Services.Data.Interfaces
+﻿using KinderConnect.Web.ViewModels.Activity;
+
+namespace KinderConnect.Services.Data.Interfaces
 {
     public interface IActivityService
     {
+        Task<IEnumerable<IndexAllActivitiesViewModel>> GetAllActivitiesForIndexAsync();
     }
 }
