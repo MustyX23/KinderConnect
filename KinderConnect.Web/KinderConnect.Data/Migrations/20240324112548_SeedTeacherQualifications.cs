@@ -30,8 +30,7 @@ namespace KinderConnect.Data.Migrations
                 table: "Qualifications",
                 keyColumn: "Id",
                 keyValue: 1);
-
-            migrationBuilder.DeleteData(
+                migrationBuilder.DeleteData(
                 table: "Qualifications",
                 keyColumn: "Id",
                 keyValue: 2);

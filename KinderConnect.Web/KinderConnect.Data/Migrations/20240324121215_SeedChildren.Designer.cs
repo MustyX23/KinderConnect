@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KinderConnect.Data.Migrations
 {
     [DbContext(typeof(KinderConnectDbContext))]
-    [Migration("20240303161248_SeedTeacherQualifications")]
-    partial class SeedTeacherQualifications
+    [Migration("20240324121215_SeedChildren")]
+    partial class SeedChildren
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -106,6 +106,68 @@ namespace KinderConnect.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("702de3dd-c1e7-4f40-9131-623aadb7e765"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3390a944-06ee-4e87-8b36-9730c3a013ec",
+                            Email = "mrpopov@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MRPOPOV@gmail.com",
+                            NormalizedUserName = "MR.POPOV",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "Mr.Popov"
+                        },
+                        new
+                        {
+                            Id = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f1d03d38-24c2-4e07-81af-3205c239f607",
+                            Email = "mrbuhov@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MRBUHOV@GMAIL.COM",
+                            NormalizedUserName = "MR.BUHOV",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "Mr.Buhov"
+                        },
+                        new
+                        {
+                            Id = new Guid("bbfe1b04-2741-4440-9334-595cb40a9f64"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f683ea11-8b7b-426d-a581-14316afad189",
+                            Email = "parent1@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PARENT1@GMAIL.COM",
+                            NormalizedUserName = "PARENT1",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "Parent1"
+                        },
+                        new
+                        {
+                            Id = new Guid("b785b0d0-3d8c-4c37-a304-e2c41dcab31a"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2b2c1eb4-62d9-44c1-9bf5-8b4567a7b901",
+                            Email = "parent2@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "PARENT2@GMAIL.COM",
+                            NormalizedUserName = "PARENT2",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "Parent2"
+                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.AttendanceRecord", b =>
@@ -156,7 +218,7 @@ namespace KinderConnect.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<Guid>("ClassroomId")
+                    b.Property<Guid?>("ClassroomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -191,9 +253,6 @@ namespace KinderConnect.Data.Migrations
                     b.Property<Guid>("ParentGuardianId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ClassroomId");
@@ -201,6 +260,34 @@ namespace KinderConnect.Data.Migrations
                     b.HasIndex("ParentGuardianId");
 
                     b.ToTable("Children");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8056eaa7-c723-4c54-b7d5-9bbd7af93b08"),
+                            Age = 3,
+                            ClassroomId = new Guid("632bc679-3cc2-45b7-971b-6a92105321de"),
+                            DateOfBirth = new DateTime(2021, 3, 3, 18, 30, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Chicken",
+                            Gender = "male",
+                            ImageUrl = "https://onebighappyphoto.com/wp-content/uploads/2-year-old-boy-and-family-photoshoot-2951-One-Big-Happy-Photo.jpg",
+                            LastName = "Little",
+                            ParentGuardianContact = "+1987654321",
+                            ParentGuardianId = new Guid("bbfe1b04-2741-4440-9334-595cb40a9f64")
+                        },
+                        new
+                        {
+                            Id = new Guid("b6a90bd5-def8-45b1-99a6-9b2c01ee51ec"),
+                            Age = 4,
+                            ClassroomId = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"),
+                            DateOfBirth = new DateTime(2020, 3, 10, 19, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Emma",
+                            Gender = "female",
+                            ImageUrl = "https://previews.123rf.com/images/mashiki/mashiki1802/mashiki180200333/96303002-close-up-indoor-portrait-of-cute-happy-2-years-old-baby-girl-in-pink-sweater.jpg",
+                            LastName = "Malinkova",
+                            ParentGuardianContact = "+1234567890",
+                            ParentGuardianId = new Guid("b785b0d0-3d8c-4c37-a304-e2c41dcab31a")
+                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Classroom", b =>
@@ -255,26 +342,6 @@ namespace KinderConnect.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Qualifications");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "A bachelor's degree in early childhood education prepares teachers with comprehensive knowledge and skills in child development, curriculum design, assessment, and family engagement. This qualification enables educators to implement evidence-based practices and support children's holistic development.",
-                            Name = "Bachelor's Degree in Early Childhood Education"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "This qualification equips teachers with essential knowledge and skills to effectively engage and educate young children in a kindergarten setting. It covers topics such as child development, curriculum planning, and fostering a nurturing learning environment.",
-                            Name = "Early Childhood Education Certificate"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "The CDA credential is a nationally recognized certification for early childhood professionals. It emphasizes the importance of nurturing children's physical, social, emotional, and cognitive development. Teachers with a CDA credential demonstrate competence in providing high-quality care and education to young children.",
-                            Name = "Child Development Associate (CDA) Credential"
-                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Teacher", b =>
@@ -310,9 +377,6 @@ namespace KinderConnect.Data.Migrations
                     b.Property<Guid>("TeacherUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("QualificationId");
@@ -320,6 +384,30 @@ namespace KinderConnect.Data.Migrations
                     b.HasIndex("TeacherUserId");
 
                     b.ToTable("Teachers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("715c4eb6-aca1-4864-b04a-396e8f16ee7c"),
+                            Age = 56,
+                            FirstName = "Lybomir",
+                            Gender = "male",
+                            ImageUrl = "https://i.guim.co.uk/img/media/b897974dce4559ebe02af27e10c475068ead46a8/0_0_4000_2400/master/4000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=a53a3c7714a215af7051daea5b14971c",
+                            LastName = "Popov",
+                            QualificationId = 1,
+                            TeacherUserId = new Guid("702de3dd-c1e7-4f40-9131-623aadb7e765")
+                        },
+                        new
+                        {
+                            Id = new Guid("f51fd481-6ca4-45b8-9848-304132b479f8"),
+                            Age = 50,
+                            FirstName = "Mustafa",
+                            Gender = "male",
+                            ImageUrl = "https://img.freepik.com/premium-photo/old-male-teacher-portrait-closeup-face-professor-teacher-blackboard-isolated_265223-53892.jpg",
+                            LastName = "Buhov",
+                            QualificationId = 1,
+                            TeacherUserId = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f")
+                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.TeacherQualification", b =>
@@ -503,9 +591,7 @@ namespace KinderConnect.Data.Migrations
                 {
                     b.HasOne("KinderConnect.Data.Models.Classroom", "Classroom")
                         .WithMany("Children")
-                        .HasForeignKey("ClassroomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClassroomId");
 
                     b.HasOne("KinderConnect.Data.Models.ApplicationUser", "ParentGuardian")
                         .WithMany()
