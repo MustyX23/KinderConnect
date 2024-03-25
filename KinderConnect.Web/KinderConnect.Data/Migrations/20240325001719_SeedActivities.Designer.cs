@@ -4,6 +4,7 @@ using KinderConnect.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KinderConnect.Data.Migrations
 {
     [DbContext(typeof(KinderConnectDbContext))]
-    partial class KinderConnectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240325001719_SeedActivities")]
+    partial class SeedActivities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +44,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Activities", (string)null);
+                    b.ToTable("Activities");
 
                     b.HasData(
                         new
@@ -225,7 +227,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("AttendanceRecords", (string)null);
+                    b.ToTable("AttendanceRecords");
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Child", b =>
@@ -282,7 +284,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("ParentGuardianId");
 
-                    b.ToTable("Children", (string)null);
+                    b.ToTable("Children");
 
                     b.HasData(
                         new
@@ -326,7 +328,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Classrooms", (string)null);
+                    b.ToTable("Classrooms");
 
                     b.HasData(
                         new
@@ -353,7 +355,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("ClassroomId");
 
-                    b.ToTable("ClassroomsTeachers", (string)null);
+                    b.ToTable("ClassroomsTeachers");
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Qualification", b =>
@@ -376,7 +378,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Qualifications", (string)null);
+                    b.ToTable("Qualifications");
 
                     b.HasData(
                         new
@@ -438,7 +440,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("TeacherUserId");
 
-                    b.ToTable("Teachers", (string)null);
+                    b.ToTable("Teachers");
 
                     b.HasData(
                         new
@@ -477,7 +479,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("QualificationId");
 
-                    b.ToTable("TeachersQualifications", (string)null);
+                    b.ToTable("TeachersQualifications");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
