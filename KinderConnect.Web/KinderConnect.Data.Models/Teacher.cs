@@ -13,23 +13,9 @@ namespace KinderConnect.Data.Models
         }
 
         public Guid Id { get; set; }
-
-        [Required]
-        [StringLength(50, MinimumLength = 1)]
-        public string FirstName { get; set; } = null!;
-
-        [Required]
-        [StringLength(50, MinimumLength = 1)]
-        public string LastName { get; set; } = null!;
-
-        [Required]
-        public int Age { get; set; }
-
+       
         [Required]
         public string ImageUrl { get; set; } = null!;
-
-        [Required]
-        public string Gender { get; set; } = null!;
 
         [Required]
         public int QualificationId { get; set; }

@@ -4,6 +4,7 @@ using KinderConnect.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KinderConnect.Data.Migrations
 {
     [DbContext(typeof(KinderConnectDbContext))]
-    partial class KinderConnectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240326005544_TeacherToApplicationUserDataRefactoringMigration")]
+    partial class TeacherToApplicationUserDataRefactoringMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,9 +108,7 @@ namespace KinderConnect.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -159,88 +159,6 @@ namespace KinderConnect.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("702de3dd-c1e7-4f40-9131-623aadb7e765"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "8215e17f-4e28-45f3-a22f-4f524004a3f4",
-                            DateOfBirth = new DateTime(1972, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "mrpopov@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Lyubomir",
-                            Gender = "male",
-                            IsActive = false,
-                            LastName = "Popov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "MRPOPOV@gmail.com",
-                            NormalizedUserName = "MR.POPOV",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "Mr.Popov"
-                        },
-                        new
-                        {
-                            Id = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "ee350e22-8a41-45ea-8df0-1fee4c7aca6a",
-                            DateOfBirth = new DateTime(1971, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "mrbuhov@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Mustafa",
-                            Gender = "male",
-                            IsActive = false,
-                            LastName = "Buhov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "MRBUHOV@GMAIL.COM",
-                            NormalizedUserName = "MR.BUHOV",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "Mr.Buhov"
-                        },
-                        new
-                        {
-                            Id = new Guid("bbfe1b04-2741-4440-9334-595cb40a9f64"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "d0fa02e6-33f4-4098-98f9-e5ea170505ad",
-                            DateOfBirth = new DateTime(1990, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "parent1@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Father",
-                            Gender = "male",
-                            IsActive = false,
-                            LastName = "Mitev",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "PARENT1@GMAIL.COM",
-                            NormalizedUserName = "PARENT1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "Parent1"
-                        },
-                        new
-                        {
-                            Id = new Guid("b785b0d0-3d8c-4c37-a304-e2c41dcab31a"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "f0c3f9eb-e036-47d9-bb84-dfc2a1ed8faf",
-                            DateOfBirth = new DateTime(1992, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "parent2@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Mother",
-                            Gender = "female",
-                            IsActive = false,
-                            LastName = "Ivanova",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "PARENT2@GMAIL.COM",
-                            NormalizedUserName = "PARENT2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "Parent2"
-                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.AttendanceRecord", b =>
@@ -347,7 +265,7 @@ namespace KinderConnect.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("763046f0-157f-43e2-9e2f-c3e87698ea1c"),
+                            Id = new Guid("c963aff4-f4ab-47ea-87bb-e4301fdbd6ca"),
                             Age = 3,
                             ClassroomId = new Guid("632bc679-3cc2-45b7-971b-6a92105321de"),
                             DateOfBirth = new DateTime(2021, 3, 3, 18, 30, 0, 0, DateTimeKind.Unspecified),
@@ -361,7 +279,7 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4fe06e33-2022-4ddd-a358-aa39f1950e82"),
+                            Id = new Guid("435fc179-1a3f-404c-8477-1e60674be270"),
                             Age = 4,
                             ClassroomId = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"),
                             DateOfBirth = new DateTime(2020, 3, 10, 19, 0, 0, 0, DateTimeKind.Unspecified),
@@ -499,22 +417,6 @@ namespace KinderConnect.Data.Migrations
                     b.HasIndex("TeacherUserId");
 
                     b.ToTable("Teachers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("e2862254-0de4-4091-a7f6-14fa6438d835"),
-                            ImageUrl = "https://i.guim.co.uk/img/media/b897974dce4559ebe02af27e10c475068ead46a8/0_0_4000_2400/master/4000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=a53a3c7714a215af7051daea5b14971c",
-                            QualificationId = 1,
-                            TeacherUserId = new Guid("702de3dd-c1e7-4f40-9131-623aadb7e765")
-                        },
-                        new
-                        {
-                            Id = new Guid("7cf9ec27-0552-44e1-af37-b6c1d74e132a"),
-                            ImageUrl = "https://img.freepik.com/premium-photo/old-male-teacher-portrait-closeup-face-professor-teacher-blackboard-isolated_265223-53892.jpg",
-                            QualificationId = 1,
-                            TeacherUserId = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f")
-                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.TeacherQualification", b =>
