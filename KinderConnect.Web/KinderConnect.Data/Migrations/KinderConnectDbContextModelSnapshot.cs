@@ -30,11 +30,6 @@ namespace KinderConnect.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -42,7 +37,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Activities");
+                    b.ToTable("Activities", (string)null);
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.ApplicationUser", b =>
@@ -115,7 +110,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("702de3dd-c1e7-4f40-9131-623aadb7e765"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "88d9b25f-fb25-4d49-868e-004e729501a8",
+                            ConcurrencyStamp = "3390a944-06ee-4e87-8b36-9730c3a013ec",
                             Email = "mrpopov@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -130,7 +125,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fcd43360-4791-44a0-8944-1fcd6fa33a35",
+                            ConcurrencyStamp = "f1d03d38-24c2-4e07-81af-3205c239f607",
                             Email = "mrbuhov@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -145,7 +140,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("bbfe1b04-2741-4440-9334-595cb40a9f64"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a8d63cd3-2041-459c-b454-5d0010f361ca",
+                            ConcurrencyStamp = "f683ea11-8b7b-426d-a581-14316afad189",
                             Email = "parent1@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -160,7 +155,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("b785b0d0-3d8c-4c37-a304-e2c41dcab31a"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d0e16c53-bc94-4c7d-a477-8046176f6be1",
+                            ConcurrencyStamp = "2b2c1eb4-62d9-44c1-9bf5-8b4567a7b901",
                             Email = "parent2@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
@@ -205,7 +200,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("AttendanceRecords");
+                    b.ToTable("AttendanceRecords", (string)null);
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Child", b =>
@@ -221,7 +216,7 @@ namespace KinderConnect.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<Guid>("ClassroomId")
+                    b.Property<Guid?>("ClassroomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -262,12 +257,12 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("ParentGuardianId");
 
-                    b.ToTable("Children");
+                    b.ToTable("Children", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9ebd72ce-2ced-43cc-ae32-a889e0021e8e"),
+                            Id = new Guid("8056eaa7-c723-4c54-b7d5-9bbd7af93b08"),
                             Age = 3,
                             ClassroomId = new Guid("632bc679-3cc2-45b7-971b-6a92105321de"),
                             DateOfBirth = new DateTime(2021, 3, 3, 18, 30, 0, 0, DateTimeKind.Unspecified),
@@ -280,7 +275,7 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2c49acf4-a1b1-4126-9222-bf420e748a6a"),
+                            Id = new Guid("b6a90bd5-def8-45b1-99a6-9b2c01ee51ec"),
                             Age = 4,
                             ClassroomId = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"),
                             DateOfBirth = new DateTime(2020, 3, 10, 19, 0, 0, 0, DateTimeKind.Unspecified),
@@ -306,19 +301,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Classrooms");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("632bc679-3cc2-45b7-971b-6a92105321de"),
-                            Name = "Little Explorers"
-                        },
-                        new
-                        {
-                            Id = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"),
-                            Name = "Doodle Den"
-                        });
+                    b.ToTable("Classrooms", (string)null);
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.ClassroomTeacher", b =>
@@ -333,7 +316,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("ClassroomId");
 
-                    b.ToTable("ClassroomsTeachers");
+                    b.ToTable("ClassroomsTeachers", (string)null);
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Qualification", b =>
@@ -356,27 +339,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Qualifications");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "A bachelor's degree in early childhood education prepares teachers with comprehensive knowledge and skills in child development, curriculum design, assessment, and family engagement. This qualification enables educators to implement evidence-based practices and support children's holistic development.",
-                            Name = "Bachelor's Degree in Early Childhood Education"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "This qualification equips teachers with essential knowledge and skills to effectively engage and educate young children in a kindergarten setting. It covers topics such as child development, curriculum planning, and fostering a nurturing learning environment.",
-                            Name = "Early Childhood Education Certificate"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "The CDA credential is a nationally recognized certification for early childhood professionals. It emphasizes the importance of nurturing children's physical, social, emotional, and cognitive development. Teachers with a CDA credential demonstrate competence in providing high-quality care and education to young children.",
-                            Name = "Child Development Associate (CDA) Credential"
-                        });
+                    b.ToTable("Qualifications", (string)null);
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Teacher", b =>
@@ -418,12 +381,12 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("TeacherUserId");
 
-                    b.ToTable("Teachers");
+                    b.ToTable("Teachers", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("980ab394-e22f-4a16-921a-39f6beaff504"),
+                            Id = new Guid("715c4eb6-aca1-4864-b04a-396e8f16ee7c"),
                             Age = 56,
                             FirstName = "Lybomir",
                             Gender = "male",
@@ -434,7 +397,7 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1ba0b6e1-4a58-4cb8-93c1-17c44450af3d"),
+                            Id = new Guid("f51fd481-6ca4-45b8-9848-304132b479f8"),
                             Age = 50,
                             FirstName = "Mustafa",
                             Gender = "male",
@@ -457,7 +420,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("QualificationId");
 
-                    b.ToTable("TeachersQualifications");
+                    b.ToTable("TeachersQualifications", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -626,9 +589,7 @@ namespace KinderConnect.Data.Migrations
                 {
                     b.HasOne("KinderConnect.Data.Models.Classroom", "Classroom")
                         .WithMany("Children")
-                        .HasForeignKey("ClassroomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClassroomId");
 
                     b.HasOne("KinderConnect.Data.Models.ApplicationUser", "ParentGuardian")
                         .WithMany()
