@@ -22,17 +22,15 @@ namespace KinderConnect.Data.Models
 
         [Required]
         [Range(AgeMin, AgeMax)]
-        public int Age { get; set; }
-
-
-        [Required]
-        public DateTime DateOfBirth { get; set; }
+        public int Age { get; set; }        
 
         [Required]
         public string Gender { get; set; } = null!;
 
         [Required]
         public string ImageUrl { get; set; } = null!;
+
+        public bool IsActive { get; set; }
 
         [Required]
         [RegularExpression(@"^(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})$")]
@@ -43,6 +41,9 @@ namespace KinderConnect.Data.Models
 
         [StringLength(AllergiesMaxLenght, MinimumLength = AllergiesMinLenght)]
         public string? Allergies { get; set; }
+
+        [Required]
+        public DateTime DateOfBirth { get; set; }
 
         [Required]
         public Guid ParentGuardianId { get; set; }

@@ -28,6 +28,8 @@ namespace KinderConnect.Data.Models
 
         public string? Comment { get; set; }
 
+        public bool IsActive {  get; set; }
+
         [Required]
         public Child Child { get; set; } = null!;
 

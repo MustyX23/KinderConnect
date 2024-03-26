@@ -4,6 +4,7 @@ using KinderConnect.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KinderConnect.Data.Migrations
 {
     [DbContext(typeof(KinderConnectDbContext))]
-    partial class KinderConnectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240326005544_TeacherToApplicationUserDataRefactoringMigration")]
+    partial class TeacherToApplicationUserDataRefactoringMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,8 +32,6 @@ namespace KinderConnect.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-<<<<<<< HEAD
-=======
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -42,7 +42,6 @@ namespace KinderConnect.Data.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -50,9 +49,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Activities", (string)null);
-<<<<<<< HEAD
-=======
+                    b.ToTable("Activities");
 
                     b.HasData(
                         new
@@ -76,7 +73,6 @@ namespace KinderConnect.Data.Migrations
                             IsActive = false,
                             Name = "Play"
                         });
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.ApplicationUser", b =>
@@ -112,9 +108,7 @@ namespace KinderConnect.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -165,104 +159,6 @@ namespace KinderConnect.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("702de3dd-c1e7-4f40-9131-623aadb7e765"),
-                            AccessFailedCount = 0,
-<<<<<<< HEAD
-                            ConcurrencyStamp = "3390a944-06ee-4e87-8b36-9730c3a013ec",
-=======
-                            ConcurrencyStamp = "8215e17f-4e28-45f3-a22f-4f524004a3f4",
-                            DateOfBirth = new DateTime(1972, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
-                            Email = "mrpopov@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Lyubomir",
-                            Gender = "male",
-                            IsActive = false,
-                            LastName = "Popov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "MRPOPOV@gmail.com",
-                            NormalizedUserName = "MR.POPOV",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "Mr.Popov"
-                        },
-                        new
-                        {
-                            Id = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f"),
-                            AccessFailedCount = 0,
-<<<<<<< HEAD
-                            ConcurrencyStamp = "f1d03d38-24c2-4e07-81af-3205c239f607",
-=======
-                            ConcurrencyStamp = "ee350e22-8a41-45ea-8df0-1fee4c7aca6a",
-                            DateOfBirth = new DateTime(1971, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
-                            Email = "mrbuhov@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Mustafa",
-                            Gender = "male",
-                            IsActive = false,
-                            LastName = "Buhov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "MRBUHOV@GMAIL.COM",
-                            NormalizedUserName = "MR.BUHOV",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "Mr.Buhov"
-                        },
-                        new
-                        {
-                            Id = new Guid("bbfe1b04-2741-4440-9334-595cb40a9f64"),
-                            AccessFailedCount = 0,
-<<<<<<< HEAD
-                            ConcurrencyStamp = "f683ea11-8b7b-426d-a581-14316afad189",
-=======
-                            ConcurrencyStamp = "d0fa02e6-33f4-4098-98f9-e5ea170505ad",
-                            DateOfBirth = new DateTime(1990, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
-                            Email = "parent1@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Father",
-                            Gender = "male",
-                            IsActive = false,
-                            LastName = "Mitev",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "PARENT1@GMAIL.COM",
-                            NormalizedUserName = "PARENT1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "Parent1"
-                        },
-                        new
-                        {
-                            Id = new Guid("b785b0d0-3d8c-4c37-a304-e2c41dcab31a"),
-                            AccessFailedCount = 0,
-<<<<<<< HEAD
-                            ConcurrencyStamp = "2b2c1eb4-62d9-44c1-9bf5-8b4567a7b901",
-=======
-                            ConcurrencyStamp = "f0c3f9eb-e036-47d9-bb84-dfc2a1ed8faf",
-                            DateOfBirth = new DateTime(1992, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
-                            Email = "parent2@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Mother",
-                            Gender = "female",
-                            IsActive = false,
-                            LastName = "Ivanova",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "PARENT2@GMAIL.COM",
-                            NormalizedUserName = "PARENT2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "Parent2"
-                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.AttendanceRecord", b =>
@@ -302,7 +198,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("AttendanceRecords", (string)null);
+                    b.ToTable("AttendanceRecords");
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Child", b =>
@@ -318,7 +214,7 @@ namespace KinderConnect.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<Guid?>("ClassroomId")
+                    b.Property<Guid>("ClassroomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -364,16 +260,12 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("ParentGuardianId");
 
-                    b.ToTable("Children", (string)null);
+                    b.ToTable("Children");
 
                     b.HasData(
                         new
                         {
-<<<<<<< HEAD
-                            Id = new Guid("8056eaa7-c723-4c54-b7d5-9bbd7af93b08"),
-=======
-                            Id = new Guid("763046f0-157f-43e2-9e2f-c3e87698ea1c"),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
+                            Id = new Guid("c963aff4-f4ab-47ea-87bb-e4301fdbd6ca"),
                             Age = 3,
                             ClassroomId = new Guid("632bc679-3cc2-45b7-971b-6a92105321de"),
                             DateOfBirth = new DateTime(2021, 3, 3, 18, 30, 0, 0, DateTimeKind.Unspecified),
@@ -387,11 +279,7 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-<<<<<<< HEAD
-                            Id = new Guid("b6a90bd5-def8-45b1-99a6-9b2c01ee51ec"),
-=======
-                            Id = new Guid("4fe06e33-2022-4ddd-a358-aa39f1950e82"),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
+                            Id = new Guid("435fc179-1a3f-404c-8477-1e60674be270"),
                             Age = 4,
                             ClassroomId = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"),
                             DateOfBirth = new DateTime(2020, 3, 10, 19, 0, 0, 0, DateTimeKind.Unspecified),
@@ -423,9 +311,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Classrooms", (string)null);
-<<<<<<< HEAD
-=======
+                    b.ToTable("Classrooms");
 
                     b.HasData(
                         new
@@ -440,7 +326,6 @@ namespace KinderConnect.Data.Migrations
                             IsActive = false,
                             Name = "Doodle Den"
                         });
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.ClassroomTeacher", b =>
@@ -455,7 +340,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("ClassroomId");
 
-                    b.ToTable("ClassroomsTeachers", (string)null);
+                    b.ToTable("ClassroomsTeachers");
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Qualification", b =>
@@ -483,9 +368,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Qualifications", (string)null);
-<<<<<<< HEAD
-=======
+                    b.ToTable("Qualifications");
 
                     b.HasData(
                         new
@@ -509,7 +392,6 @@ namespace KinderConnect.Data.Migrations
                             IsActive = false,
                             Name = "Child Development Associate (CDA) Credential"
                         });
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Teacher", b =>
@@ -534,37 +416,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("TeacherUserId");
 
-                    b.ToTable("Teachers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-<<<<<<< HEAD
-                            Id = new Guid("715c4eb6-aca1-4864-b04a-396e8f16ee7c"),
-                            Age = 56,
-                            FirstName = "Lybomir",
-                            Gender = "male",
-=======
-                            Id = new Guid("e2862254-0de4-4091-a7f6-14fa6438d835"),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
-                            ImageUrl = "https://i.guim.co.uk/img/media/b897974dce4559ebe02af27e10c475068ead46a8/0_0_4000_2400/master/4000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=a53a3c7714a215af7051daea5b14971c",
-                            QualificationId = 1,
-                            TeacherUserId = new Guid("702de3dd-c1e7-4f40-9131-623aadb7e765")
-                        },
-                        new
-                        {
-<<<<<<< HEAD
-                            Id = new Guid("f51fd481-6ca4-45b8-9848-304132b479f8"),
-                            Age = 50,
-                            FirstName = "Mustafa",
-                            Gender = "male",
-=======
-                            Id = new Guid("7cf9ec27-0552-44e1-af37-b6c1d74e132a"),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
-                            ImageUrl = "https://img.freepik.com/premium-photo/old-male-teacher-portrait-closeup-face-professor-teacher-blackboard-isolated_265223-53892.jpg",
-                            QualificationId = 1,
-                            TeacherUserId = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f")
-                        });
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.TeacherQualification", b =>
@@ -579,7 +431,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("QualificationId");
 
-                    b.ToTable("TeachersQualifications", (string)null);
+                    b.ToTable("TeachersQualifications");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -748,7 +600,9 @@ namespace KinderConnect.Data.Migrations
                 {
                     b.HasOne("KinderConnect.Data.Models.Classroom", "Classroom")
                         .WithMany("Children")
-                        .HasForeignKey("ClassroomId");
+                        .HasForeignKey("ClassroomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("KinderConnect.Data.Models.ApplicationUser", "ParentGuardian")
                         .WithMany()

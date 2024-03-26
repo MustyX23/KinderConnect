@@ -4,6 +4,7 @@ using KinderConnect.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KinderConnect.Data.Migrations
 {
     [DbContext(typeof(KinderConnectDbContext))]
-    partial class KinderConnectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240325001719_SeedActivities")]
+    partial class SeedActivities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,19 +32,11 @@ namespace KinderConnect.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-<<<<<<< HEAD
-=======
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -50,33 +44,27 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Activities", (string)null);
-<<<<<<< HEAD
-=======
+                    b.ToTable("Activities");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             Description = "We learn to draw circles and triangles :)",
-                            IsActive = false,
                             Name = "Drawing"
                         },
                         new
                         {
                             Id = 2,
                             Description = "We learn to write the Alphabet :)",
-                            IsActive = false,
                             Name = "Writing"
                         },
                         new
                         {
                             Id = 3,
                             Description = "We play a lot of football and volleyball :)",
-                            IsActive = false,
                             Name = "Play"
                         });
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.ApplicationUser", b =>
@@ -92,34 +80,12 @@ namespace KinderConnect.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -171,18 +137,9 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("702de3dd-c1e7-4f40-9131-623aadb7e765"),
                             AccessFailedCount = 0,
-<<<<<<< HEAD
-                            ConcurrencyStamp = "3390a944-06ee-4e87-8b36-9730c3a013ec",
-=======
-                            ConcurrencyStamp = "8215e17f-4e28-45f3-a22f-4f524004a3f4",
-                            DateOfBirth = new DateTime(1972, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
+                            ConcurrencyStamp = "a92616da-cb9d-4b65-8bad-9b85b861f883",
                             Email = "mrpopov@gmail.com",
                             EmailConfirmed = false,
-                            FirstName = "Lyubomir",
-                            Gender = "male",
-                            IsActive = false,
-                            LastName = "Popov",
                             LockoutEnabled = false,
                             NormalizedEmail = "MRPOPOV@gmail.com",
                             NormalizedUserName = "MR.POPOV",
@@ -195,18 +152,9 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f"),
                             AccessFailedCount = 0,
-<<<<<<< HEAD
-                            ConcurrencyStamp = "f1d03d38-24c2-4e07-81af-3205c239f607",
-=======
-                            ConcurrencyStamp = "ee350e22-8a41-45ea-8df0-1fee4c7aca6a",
-                            DateOfBirth = new DateTime(1971, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
+                            ConcurrencyStamp = "34149a1b-a2f7-438b-82ac-e6b918b9149d",
                             Email = "mrbuhov@gmail.com",
                             EmailConfirmed = false,
-                            FirstName = "Mustafa",
-                            Gender = "male",
-                            IsActive = false,
-                            LastName = "Buhov",
                             LockoutEnabled = false,
                             NormalizedEmail = "MRBUHOV@GMAIL.COM",
                             NormalizedUserName = "MR.BUHOV",
@@ -219,18 +167,9 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("bbfe1b04-2741-4440-9334-595cb40a9f64"),
                             AccessFailedCount = 0,
-<<<<<<< HEAD
-                            ConcurrencyStamp = "f683ea11-8b7b-426d-a581-14316afad189",
-=======
-                            ConcurrencyStamp = "d0fa02e6-33f4-4098-98f9-e5ea170505ad",
-                            DateOfBirth = new DateTime(1990, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
+                            ConcurrencyStamp = "20dd25e0-1a55-4e68-b6aa-5cb314609d2f",
                             Email = "parent1@gmail.com",
                             EmailConfirmed = false,
-                            FirstName = "Father",
-                            Gender = "male",
-                            IsActive = false,
-                            LastName = "Mitev",
                             LockoutEnabled = false,
                             NormalizedEmail = "PARENT1@GMAIL.COM",
                             NormalizedUserName = "PARENT1",
@@ -243,18 +182,9 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("b785b0d0-3d8c-4c37-a304-e2c41dcab31a"),
                             AccessFailedCount = 0,
-<<<<<<< HEAD
-                            ConcurrencyStamp = "2b2c1eb4-62d9-44c1-9bf5-8b4567a7b901",
-=======
-                            ConcurrencyStamp = "f0c3f9eb-e036-47d9-bb84-dfc2a1ed8faf",
-                            DateOfBirth = new DateTime(1992, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
+                            ConcurrencyStamp = "7caf63be-d0e9-420f-9f35-e1ca839c85ab",
                             Email = "parent2@gmail.com",
                             EmailConfirmed = false,
-                            FirstName = "Mother",
-                            Gender = "female",
-                            IsActive = false,
-                            LastName = "Ivanova",
                             LockoutEnabled = false,
                             NormalizedEmail = "PARENT2@GMAIL.COM",
                             NormalizedUserName = "PARENT2",
@@ -283,11 +213,6 @@ namespace KinderConnect.Data.Migrations
                     b.Property<TimeSpan>("End")
                         .HasColumnType("time");
 
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
                     b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
 
@@ -302,7 +227,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("AttendanceRecords", (string)null);
+                    b.ToTable("AttendanceRecords");
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Child", b =>
@@ -318,7 +243,7 @@ namespace KinderConnect.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<Guid?>("ClassroomId")
+                    b.Property<Guid>("ClassroomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateOfBirth")
@@ -336,11 +261,6 @@ namespace KinderConnect.Data.Migrations
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -364,41 +284,31 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("ParentGuardianId");
 
-                    b.ToTable("Children", (string)null);
+                    b.ToTable("Children");
 
                     b.HasData(
                         new
                         {
-<<<<<<< HEAD
-                            Id = new Guid("8056eaa7-c723-4c54-b7d5-9bbd7af93b08"),
-=======
-                            Id = new Guid("763046f0-157f-43e2-9e2f-c3e87698ea1c"),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
+                            Id = new Guid("d95dcd40-d598-40bf-85f0-32ae1ac69785"),
                             Age = 3,
                             ClassroomId = new Guid("632bc679-3cc2-45b7-971b-6a92105321de"),
                             DateOfBirth = new DateTime(2021, 3, 3, 18, 30, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Chicken",
                             Gender = "male",
                             ImageUrl = "https://onebighappyphoto.com/wp-content/uploads/2-year-old-boy-and-family-photoshoot-2951-One-Big-Happy-Photo.jpg",
-                            IsActive = false,
                             LastName = "Little",
                             ParentGuardianContact = "+1987654321",
                             ParentGuardianId = new Guid("bbfe1b04-2741-4440-9334-595cb40a9f64")
                         },
                         new
                         {
-<<<<<<< HEAD
-                            Id = new Guid("b6a90bd5-def8-45b1-99a6-9b2c01ee51ec"),
-=======
-                            Id = new Guid("4fe06e33-2022-4ddd-a358-aa39f1950e82"),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
+                            Id = new Guid("193d01f8-d7f2-4521-8577-e7c5f9f7676f"),
                             Age = 4,
                             ClassroomId = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"),
                             DateOfBirth = new DateTime(2020, 3, 10, 19, 0, 0, 0, DateTimeKind.Unspecified),
                             FirstName = "Emma",
                             Gender = "female",
                             ImageUrl = "https://previews.123rf.com/images/mashiki/mashiki1802/mashiki180200333/96303002-close-up-indoor-portrait-of-cute-happy-2-years-old-baby-girl-in-pink-sweater.jpg",
-                            IsActive = false,
                             LastName = "Malinkova",
                             ParentGuardianContact = "+1234567890",
                             ParentGuardianId = new Guid("b785b0d0-3d8c-4c37-a304-e2c41dcab31a")
@@ -411,11 +321,6 @@ namespace KinderConnect.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -423,24 +328,19 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Classrooms", (string)null);
-<<<<<<< HEAD
-=======
+                    b.ToTable("Classrooms");
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("632bc679-3cc2-45b7-971b-6a92105321de"),
-                            IsActive = false,
                             Name = "Little Explorers"
                         },
                         new
                         {
                             Id = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"),
-                            IsActive = false,
                             Name = "Doodle Den"
                         });
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.ClassroomTeacher", b =>
@@ -455,7 +355,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("ClassroomId");
 
-                    b.ToTable("ClassroomsTeachers", (string)null);
+                    b.ToTable("ClassroomsTeachers");
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Qualification", b =>
@@ -471,11 +371,6 @@ namespace KinderConnect.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(120)
@@ -483,33 +378,27 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Qualifications", (string)null);
-<<<<<<< HEAD
-=======
+                    b.ToTable("Qualifications");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             Description = "A bachelor's degree in early childhood education prepares teachers with comprehensive knowledge and skills in child development, curriculum design, assessment, and family engagement. This qualification enables educators to implement evidence-based practices and support children's holistic development.",
-                            IsActive = false,
                             Name = "Bachelor's Degree in Early Childhood Education"
                         },
                         new
                         {
                             Id = 2,
                             Description = "This qualification equips teachers with essential knowledge and skills to effectively engage and educate young children in a kindergarten setting. It covers topics such as child development, curriculum planning, and fostering a nurturing learning environment.",
-                            IsActive = false,
                             Name = "Early Childhood Education Certificate"
                         },
                         new
                         {
                             Id = 3,
                             Description = "The CDA credential is a nationally recognized certification for early childhood professionals. It emphasizes the importance of nurturing children's physical, social, emotional, and cognitive development. Teachers with a CDA credential demonstrate competence in providing high-quality care and education to young children.",
-                            IsActive = false,
                             Name = "Child Development Associate (CDA) Credential"
                         });
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Teacher", b =>
@@ -518,9 +407,26 @@ namespace KinderConnect.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("QualificationId")
                         .HasColumnType("int");
@@ -534,34 +440,28 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("TeacherUserId");
 
-                    b.ToTable("Teachers", (string)null);
+                    b.ToTable("Teachers");
 
                     b.HasData(
                         new
                         {
-<<<<<<< HEAD
-                            Id = new Guid("715c4eb6-aca1-4864-b04a-396e8f16ee7c"),
+                            Id = new Guid("4ffef0e2-c56e-4342-aae7-18f858a999c3"),
                             Age = 56,
                             FirstName = "Lybomir",
                             Gender = "male",
-=======
-                            Id = new Guid("e2862254-0de4-4091-a7f6-14fa6438d835"),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
                             ImageUrl = "https://i.guim.co.uk/img/media/b897974dce4559ebe02af27e10c475068ead46a8/0_0_4000_2400/master/4000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=a53a3c7714a215af7051daea5b14971c",
+                            LastName = "Popov",
                             QualificationId = 1,
                             TeacherUserId = new Guid("702de3dd-c1e7-4f40-9131-623aadb7e765")
                         },
                         new
                         {
-<<<<<<< HEAD
-                            Id = new Guid("f51fd481-6ca4-45b8-9848-304132b479f8"),
+                            Id = new Guid("4110a7dc-00a6-4167-8785-34f7d1f53429"),
                             Age = 50,
                             FirstName = "Mustafa",
                             Gender = "male",
-=======
-                            Id = new Guid("7cf9ec27-0552-44e1-af37-b6c1d74e132a"),
->>>>>>> ba902a0ea23189b220b24bca65c62808a7094765
                             ImageUrl = "https://img.freepik.com/premium-photo/old-male-teacher-portrait-closeup-face-professor-teacher-blackboard-isolated_265223-53892.jpg",
+                            LastName = "Buhov",
                             QualificationId = 1,
                             TeacherUserId = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f")
                         });
@@ -579,7 +479,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("QualificationId");
 
-                    b.ToTable("TeachersQualifications", (string)null);
+                    b.ToTable("TeachersQualifications");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -748,7 +648,9 @@ namespace KinderConnect.Data.Migrations
                 {
                     b.HasOne("KinderConnect.Data.Models.Classroom", "Classroom")
                         .WithMany("Children")
-                        .HasForeignKey("ClassroomId");
+                        .HasForeignKey("ClassroomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("KinderConnect.Data.Models.ApplicationUser", "ParentGuardian")
                         .WithMany()

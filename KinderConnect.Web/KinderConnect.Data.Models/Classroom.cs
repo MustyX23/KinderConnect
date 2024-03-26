@@ -18,6 +18,8 @@ namespace KinderConnect.Data.Models
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght)]
         public string Name { get; set; } = null!;
 
+        public bool IsActive { get; set; }
+
         public ICollection<Child> Children { get; set; }
 
         public ICollection<ClassroomTeacher> ClassroomsTeachers { get; set; } = null!;
