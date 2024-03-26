@@ -47,7 +47,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Activities");
+                    b.ToTable("Activities", (string)null);
 
                     b.HasData(
                         new
@@ -280,7 +280,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("AttendanceRecords");
+                    b.ToTable("AttendanceRecords", (string)null);
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Child", b =>
@@ -342,7 +342,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("ParentGuardianId");
 
-                    b.ToTable("Children");
+                    b.ToTable("Children", (string)null);
 
                     b.HasData(
                         new
@@ -393,7 +393,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Classrooms");
+                    b.ToTable("Classrooms", (string)null);
 
                     b.HasData(
                         new
@@ -422,7 +422,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("ClassroomId");
 
-                    b.ToTable("ClassroomsTeachers");
+                    b.ToTable("ClassroomsTeachers", (string)null);
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Qualification", b =>
@@ -450,7 +450,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Qualifications");
+                    b.ToTable("Qualifications", (string)null);
 
                     b.HasData(
                         new
@@ -498,7 +498,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("TeacherUserId");
 
-                    b.ToTable("Teachers");
+                    b.ToTable("Teachers", (string)null);
 
                     b.HasData(
                         new
@@ -529,7 +529,7 @@ namespace KinderConnect.Data.Migrations
 
                     b.HasIndex("QualificationId");
 
-                    b.ToTable("TeachersQualifications");
+                    b.ToTable("TeachersQualifications", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
