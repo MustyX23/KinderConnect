@@ -8,6 +8,10 @@ namespace KinderConnect.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Qualification> builder)
         {
+            builder
+                .Property(q => q.IsActive)
+                .HasDefaultValue(true);
+
             builder.HasData(GenerateQualifications());
         }
         private Qualification[] GenerateQualifications()

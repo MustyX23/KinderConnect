@@ -8,6 +8,10 @@ namespace KinderConnect.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Classroom> builder)
         {
+            builder
+                .Property(c => c.IsActive)
+                .HasDefaultValue(true);
+
             builder.HasData(GenerateClassrooms());
         }
 

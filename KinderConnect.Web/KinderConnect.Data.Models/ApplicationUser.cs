@@ -8,5 +8,7 @@ namespace KinderConnect.Data.Models
         {
             Id = Guid.NewGuid();
         }
+
+        public bool IsActive { get; set; }
     }
 }

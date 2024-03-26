@@ -14,5 +14,7 @@ namespace KinderConnect.Data.Models
         [Required]
         [StringLength(DescriptionMaxLength, MinimumLength = DesctiptionMinLength)]
         public string Description { get; set; } = null!;
+
+        public bool IsActive { get; set; }
     }
 }

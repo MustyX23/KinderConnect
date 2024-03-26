@@ -34,6 +34,8 @@ namespace KinderConnect.Data.Models
         [Required]
         public string ImageUrl { get; set; } = null!;
 
+        public bool IsActive { get; set; }
+
         [Required]
         [RegularExpression(@"^(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})$")]
         public string ParentGuardianContact { get; set; } = null!;

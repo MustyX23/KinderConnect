@@ -19,6 +19,9 @@ namespace KinderConnect.Data.Models
         [Required]
         [StringLength(DescriptionMaxLength, MinimumLength = DescriptionMinLength)]
         public string Description { get; set; } = null!;
+
+        public bool IsActive { get; set; }
+
         public ICollection<TeacherQualification> TeachersQualifications { get; set; }
     }
 }

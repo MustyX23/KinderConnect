@@ -8,6 +8,10 @@ namespace KinderConnect.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Activity> builder)
         {
+            builder
+                .Property(a => a.IsActive)
+                .HasDefaultValue(true);
+
             builder.HasData(GenerateActivities());
         }
 
