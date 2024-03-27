@@ -4,6 +4,7 @@ using KinderConnect.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KinderConnect.Data.Migrations
 {
     [DbContext(typeof(KinderConnectDbContext))]
-    partial class KinderConnectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240327142431_AddBlogPost")]
+    partial class AddBlogPost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,9 +38,7 @@ namespace KinderConnect.Data.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -48,29 +48,6 @@ namespace KinderConnect.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Activities");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "We learn to draw circles and triangles :)",
-                            IsActive = false,
-                            Name = "Drawing"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "We learn to write the Alphabet :)",
-                            IsActive = false,
-                            Name = "Writing"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "We play a lot of football and volleyball :)",
-                            IsActive = false,
-                            Name = "Play"
-                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.ApplicationUser", b =>
@@ -106,9 +83,7 @@ namespace KinderConnect.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -159,88 +134,6 @@ namespace KinderConnect.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("702de3dd-c1e7-4f40-9131-623aadb7e765"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "0a932166-1aea-4abc-8afb-2ae24eefe3f0",
-                            DateOfBirth = new DateTime(1972, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "mrpopov@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Lyubomir",
-                            Gender = "male",
-                            IsActive = false,
-                            LastName = "Popov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "MRPOPOV@gmail.com",
-                            NormalizedUserName = "MR.POPOV",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "Mr.Popov"
-                        },
-                        new
-                        {
-                            Id = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "56eeb7e6-98db-416c-8b69-3f50541dbc7c",
-                            DateOfBirth = new DateTime(1971, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "mrbuhov@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Mustafa",
-                            Gender = "male",
-                            IsActive = false,
-                            LastName = "Buhov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "MRBUHOV@GMAIL.COM",
-                            NormalizedUserName = "MR.BUHOV",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "Mr.Buhov"
-                        },
-                        new
-                        {
-                            Id = new Guid("bbfe1b04-2741-4440-9334-595cb40a9f64"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "8edd1700-b88d-4ca4-a9f3-708facbebccc",
-                            DateOfBirth = new DateTime(1990, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "parent1@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Father",
-                            Gender = "male",
-                            IsActive = false,
-                            LastName = "Mitev",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "PARENT1@GMAIL.COM",
-                            NormalizedUserName = "PARENT1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "Parent1"
-                        },
-                        new
-                        {
-                            Id = new Guid("b785b0d0-3d8c-4c37-a304-e2c41dcab31a"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "df82a429-bf0b-4a89-af9b-b26fcfde14b1",
-                            DateOfBirth = new DateTime(1992, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "parent2@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Mother",
-                            Gender = "female",
-                            IsActive = false,
-                            LastName = "Ivanova",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "PARENT2@GMAIL.COM",
-                            NormalizedUserName = "PARENT2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false,
-                            UserName = "Parent2"
-                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.AttendanceRecord", b =>
@@ -313,32 +206,6 @@ namespace KinderConnect.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BlogPosts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Author = "KinderConnect's Headmaster",
-                            Content = "Outdoor play is crucial for children's development. It provides them with opportunities to explore their environment, develop their physical skills, and engage in imaginative play.\r\nResearch has shown that children who engage in regular outdoor play have better physical health, including stronger immune systems and reduced risk of obesity. Outdoor play also promotes mental well-being, as it allows children to release energy, reduce stress, and improve their mood.\r\nAdditionally, outdoor play encourages creativity and problem-solving skills. When children play outdoors, they are free to explore and interact with their surroundings, which stimulates their imagination and encourages them to think critically.\r\nFurthermore, outdoor play fosters social skills and cooperation. Children who play together outdoors learn to share, take turns, and communicate effectively with their peers. They also develop empathy and understanding as they navigate social interactions and resolve conflicts.\r\nIn conclusion, outdoor play is essential for children's overall development. It provides numerous physical, mental, and social benefits that contribute to their health and well-being.",
-                            ImageUrl = "https://example.com/outdoor-play-image.jpg",
-                            Title = "The Importance of Outdoor Play for Children"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Author = "KinderConnect's Headmaster",
-                            Content = "Ensuring a safe environment is essential for preschoolers to thrive. Young children are naturally curious and eager to explore their surroundings, so it's important to take steps to prevent accidents and injuries.\r\nOne way to create a safe environment for preschoolers is to childproof the space. This includes securing furniture and appliances, covering electrical outlets, and removing small objects that could be choking hazards. It's also important to keep hazardous substances out of reach and store them securely.\r\nIn addition to childproofing, it's essential to supervise preschoolers closely, especially when they're engaged in activities that pose a risk of injury. By keeping a watchful eye on them, caregivers can quickly intervene if they encounter any dangers.\r\nFurthermore, teaching preschoolers about safety rules and procedures is crucial. This includes educating them about fire safety, road safety, and personal boundaries. By empowering children with knowledge and skills, caregivers can help them make safer choices and avoid accidents.\r\nOverall, creating a safe environment for preschoolers requires careful planning, supervision, and education. By taking these steps, caregivers can ensure that young children have the opportunity to learn and grow in a secure and nurturing environment.",
-                            ImageUrl = "https://example.com/safe-environment-image.jpg",
-                            Title = "Creating a Safe Environment for Preschoolers"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Author = "KinderConnect's Headmaster",
-                            Content = "Storytelling has numerous benefits for young children, including enhancing their language development, cognitive skills, and emotional intelligence.\r\nFirstly, storytelling promotes language development by exposing children to rich and varied vocabulary. When children listen to stories, they learn new words and phrases, which helps expand their vocabulary and improve their comprehension skills. Additionally, storytelling helps children develop their speaking skills as they retell stories and engage in discussions about the plot, characters, and themes.\r\nFurthermore, storytelling stimulates cognitive skills such as memory, imagination, and problem-solving. When children listen to stories, they use their imagination to visualize the characters and events, which enhances their creativity and critical thinking skills. Additionally, storytelling helps children develop their memory skills as they recall details from the story and make connections between different events.\r\nMoreover, storytelling encourages emotional intelligence by helping children identify and express their feelings. When children listen to stories with relatable characters and themes, they learn about empathy, compassion, and resilience. Storytelling also provides children with opportunities to explore complex emotions and learn coping strategies for dealing with difficult situations.\r\nIn conclusion, storytelling is a valuable tool for early childhood education. It promotes language development, cognitive skills, and emotional intelligence, providing children with a solid foundation for learning and growth.",
-                            ImageUrl = "https://example.com/storytelling-image.jpg",
-                            Title = "Benefits of Storytelling in Early Childhood Education"
-                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Child", b =>
@@ -374,9 +241,7 @@ namespace KinderConnect.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -401,36 +266,6 @@ namespace KinderConnect.Data.Migrations
                     b.HasIndex("ParentGuardianId");
 
                     b.ToTable("Children");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("4fd19f9f-afe4-4f3a-a6ae-2963ff4d8601"),
-                            Age = 3,
-                            ClassroomId = new Guid("632bc679-3cc2-45b7-971b-6a92105321de"),
-                            DateOfBirth = new DateTime(2021, 3, 3, 18, 30, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Chicken",
-                            Gender = "male",
-                            ImageUrl = "https://onebighappyphoto.com/wp-content/uploads/2-year-old-boy-and-family-photoshoot-2951-One-Big-Happy-Photo.jpg",
-                            IsActive = false,
-                            LastName = "Little",
-                            ParentGuardianContact = "+1987654321",
-                            ParentGuardianId = new Guid("bbfe1b04-2741-4440-9334-595cb40a9f64")
-                        },
-                        new
-                        {
-                            Id = new Guid("1ea9e858-fa7e-4412-91bf-d15338b9d7b4"),
-                            Age = 4,
-                            ClassroomId = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"),
-                            DateOfBirth = new DateTime(2020, 3, 10, 19, 0, 0, 0, DateTimeKind.Unspecified),
-                            FirstName = "Emma",
-                            Gender = "female",
-                            ImageUrl = "https://previews.123rf.com/images/mashiki/mashiki1802/mashiki180200333/96303002-close-up-indoor-portrait-of-cute-happy-2-years-old-baby-girl-in-pink-sweater.jpg",
-                            IsActive = false,
-                            LastName = "Malinkova",
-                            ParentGuardianContact = "+1234567890",
-                            ParentGuardianId = new Guid("b785b0d0-3d8c-4c37-a304-e2c41dcab31a")
-                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Classroom", b =>
@@ -440,9 +275,7 @@ namespace KinderConnect.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -452,20 +285,6 @@ namespace KinderConnect.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Classrooms");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("632bc679-3cc2-45b7-971b-6a92105321de"),
-                            IsActive = false,
-                            Name = "Little Explorers"
-                        },
-                        new
-                        {
-                            Id = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"),
-                            IsActive = false,
-                            Name = "Doodle Den"
-                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.ClassroomTeacher", b =>
@@ -497,9 +316,7 @@ namespace KinderConnect.Data.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -509,29 +326,6 @@ namespace KinderConnect.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Qualifications");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "A bachelor's degree in early childhood education prepares teachers with comprehensive knowledge and skills in child development, curriculum design, assessment, and family engagement. This qualification enables educators to implement evidence-based practices and support children's holistic development.",
-                            IsActive = false,
-                            Name = "Bachelor's Degree in Early Childhood Education"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "This qualification equips teachers with essential knowledge and skills to effectively engage and educate young children in a kindergarten setting. It covers topics such as child development, curriculum planning, and fostering a nurturing learning environment.",
-                            IsActive = false,
-                            Name = "Early Childhood Education Certificate"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "The CDA credential is a nationally recognized certification for early childhood professionals. It emphasizes the importance of nurturing children's physical, social, emotional, and cognitive development. Teachers with a CDA credential demonstrate competence in providing high-quality care and education to young children.",
-                            IsActive = false,
-                            Name = "Child Development Associate (CDA) Credential"
-                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Teacher", b =>
@@ -557,22 +351,6 @@ namespace KinderConnect.Data.Migrations
                     b.HasIndex("TeacherUserId");
 
                     b.ToTable("Teachers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("50849afa-af6e-44b2-99df-03a0d8fd3b80"),
-                            ImageUrl = "https://i.guim.co.uk/img/media/b897974dce4559ebe02af27e10c475068ead46a8/0_0_4000_2400/master/4000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=a53a3c7714a215af7051daea5b14971c",
-                            QualificationId = 1,
-                            TeacherUserId = new Guid("702de3dd-c1e7-4f40-9131-623aadb7e765")
-                        },
-                        new
-                        {
-                            Id = new Guid("ef43fd1e-d1c9-4505-9288-44c389486ee0"),
-                            ImageUrl = "https://img.freepik.com/premium-photo/old-male-teacher-portrait-closeup-face-professor-teacher-blackboard-isolated_265223-53892.jpg",
-                            QualificationId = 1,
-                            TeacherUserId = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f")
-                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.TeacherQualification", b =>

@@ -39,5 +39,16 @@
             public const int DesctiptionMinLength = 5;
             public const int DescriptionMaxLength = 50;
         }
+        public static class BlogPost
+        {
+            public const int TitleMaxLength = 60;
+            public const int TitleMinLength = 5;
+
+            public const int ContentMaxLength = 3500;
+            public const int ContentMinLength = 700;
+
+            public const int AuthorMaxLength = 40;
+            public const int AuthorMinLength = 2;
+        }
     }
 }
