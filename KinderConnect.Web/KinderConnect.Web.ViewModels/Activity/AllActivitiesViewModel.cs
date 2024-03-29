@@ -1,6 +1,6 @@
 ﻿namespace KinderConnect.Web.ViewModels.Activity
 {
-    public class IndexAllActivitiesViewModel
+    public class AllActivitiesViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;

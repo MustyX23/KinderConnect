@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace KinderConnect.Web.ViewModels.BlogPost
 {
-    public class IndexBlogPost
+    public class BlogPostViewModel
     {
         public int Id { get; set; }
 

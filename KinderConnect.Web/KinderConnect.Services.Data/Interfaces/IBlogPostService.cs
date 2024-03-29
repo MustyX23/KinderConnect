@@ -9,6 +9,6 @@ namespace KinderConnect.Services.Data.Interfaces
 {
     public interface IBlogPostService
     {
-        Task<IEnumerable<IndexBlogPost>> GetThreeBlogPostsAsync();
+        Task<IEnumerable<BlogPostViewModel>> GetThreeBlogPostsAsync();
     }
 }

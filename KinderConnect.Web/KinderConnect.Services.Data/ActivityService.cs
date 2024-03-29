@@ -13,10 +13,10 @@ namespace KinderConnect.Services.Data
         {
             this.dbContext = dbContext;
         }
-        public async Task<IEnumerable<IndexAllActivitiesViewModel>> GetAllActivitiesForIndexAsync()
+        public async Task<IEnumerable<AllActivitiesViewModel>> GetAllActivitiesAsync()
         {
             var activities = await dbContext.Activities
-                .Select(a => new IndexAllActivitiesViewModel()
+                .Select(a => new AllActivitiesViewModel()
                 {
                     Id = a.Id,
                     Name = a.Name,

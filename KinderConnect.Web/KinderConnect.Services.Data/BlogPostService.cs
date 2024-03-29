@@ -14,10 +14,10 @@ namespace KinderConnect.Services.Data
         {
             this.dbContext = dbContext;
         }
-        public async Task<IEnumerable<IndexBlogPost>> GetThreeBlogPostsAsync()
+        public async Task<IEnumerable<BlogPostViewModel>> GetThreeBlogPostsAsync()
         {
             var blogPosts = await dbContext.BlogPosts
-                .Select(bp => new IndexBlogPost()
+                .Select(bp => new BlogPostViewModel()
                 {
                     Id = bp.Id,
                     Title = bp.Title,

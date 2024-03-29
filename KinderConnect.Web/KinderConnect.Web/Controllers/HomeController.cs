@@ -1,4 +1,6 @@
-﻿using KinderConnect.Web.Models;
+﻿using KinderConnect.Services.Data.Interfaces;
+using KinderConnect.Web.Models;
+using KinderConnect.Web.ViewModels.Home;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,16 +8,30 @@ namespace KinderConnect.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IActivityService activityService;
+        private readonly IBlogPostService blogPostService;
+        public HomeController(IActivityService activityService
+            , IBlogPostService blogPostService)
         {
-            _logger = logger;
+            this.blogPostService = blogPostService;
+            this.activityService = activityService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var activitiesViewModel
+                = await activityService.GetAllActivitiesAsync();
+
+            var blogViewModel
+                = await blogPostService.GetThreeBlogPostsAsync();
+
+            var indexViewModel = new IndexViewModel
+            {
+                Activities = activitiesViewModel,
+                BlogPosts = blogViewModel
+            };
+
+            return View(indexViewModel);
         }
 
         public IActionResult Privacy()

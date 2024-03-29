@@ -1,22 +1,17 @@
-﻿@using KinderConnect.Services.Data.Interfaces;
-
-@inject IActivityService ActivityService
-
-@{
-    var allActivities = await ActivityService.GetAllActivitiesForIndexAsync();
-}
+﻿@using KinderConnect.Web.ViewModels.Home;
+@model IndexViewModel
 
 <div class="container-fluid pt-5">    
     <div class="container pb-3">
         <div class="row">
-            @foreach (var a in allActivities)
+            @foreach (var activity in Model.Activities)
             {
                 <div class="col-lg-4 col-md-6 pb-1">
                     <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
                         <i class="flaticon-048-paper-plane h1 font-weight-normal text-primary mb-3"></i>
                         <div class="pl-4">
-                            <h4>@a.Name</h4>
-                            <p class="m-0">@a.Description</p>
+                            <h4>@activity.Name</h4>
+                            <p class="m-0">@activity.Description</p>
                         </div>
                     </div>
                 </div>

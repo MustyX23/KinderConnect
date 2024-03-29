@@ -1,10 +1,6 @@
-﻿@using KinderConnect.Services.Data.Interfaces;
+﻿@using KinderConnect.Web.ViewModels.Home;
 
-@inject IBlogPostService BlogPostService
-
-@{
-    var allActivities = await BlogPostService.GetThreeBlogPostsAsync();
-}
+@model IndexViewModel
 
 <div class="container-fluid pt-5">
     <div class="container">
@@ -13,51 +9,28 @@
             <h1 class="mb-4">Latest Posts From Blog</h1>
         </div>
         <div class="row pb-3">
-            <div class="col-lg-4 mb-4">
-                <div class="card border-0 shadow-sm mb-2">
-                    <img class="card-img-top mb-2" src="img/blog-1.jpg" alt="">
-                    <div class="card-body bg-light text-center p-4">
-                        <h4 class="">Diam amet eos at no eos</h4>
-                        <div class="d-flex justify-content-center mb-3">
-                            <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                            <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                            <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+            @foreach (var blogPost in Model.BlogPosts)
+            {
+                <div class="col-lg-4 mb-4">
+                    <div class="card border-0 shadow-sm mb-2">
+                        <img class="card-img-top mb-2" src="@blogPost.ImageUrl" alt="">
+                        <div class="card-body bg-light text-center p-4">
+                            <h4 class="">@blogPost.Title</h4>
+                            <div class="d-flex justify-content-center mb-3">
+                                <small class="mr-3"><i class="fa fa-user text-primary"></i> @blogPost.Author</small>
+                            </div>
+                            <div class="content-summary">
+                                <p>@blogPost.Content.Substring(0, 100)...</p>
+                            </div>
+                            <div class="content-full" style="display: none;">
+                                <p>@blogPost.Content</p>
+                            </div>
+                            <a class="btn btn-primary px-4 mx-auto my-2 toggle-content">Read More</a>
+                            <a class="btn btn-primary px-4 mx-auto my-2 toggle-content" style="display: none;">Hide</a>
                         </div>
-                        <p>Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam eirmod, duo et sed sit eirmod kasd clita tempor dolor stet lorem. Tempor ipsum justo amet stet...</p>
-                        <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card border-0 shadow-sm mb-2">
-                    <img class="card-img-top mb-2" src="img/blog-2.jpg" alt="">
-                    <div class="card-body bg-light text-center p-4">
-                        <h4 class="">Diam amet eos at no eos</h4>
-                        <div class="d-flex justify-content-center mb-3">
-                            <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                            <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                            <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
-                        </div>
-                        <p>Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam eirmod, duo et sed sit eirmod kasd clita tempor dolor stet lorem. Tempor ipsum justo amet stet...</p>
-                        <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card border-0 shadow-sm mb-2">
-                    <img class="card-img-top mb-2" src="img/blog-3.jpg" alt="">
-                    <div class="card-body bg-light text-center p-4">
-                        <h4 class="">Diam amet eos at no eos</h4>
-                        <div class="d-flex justify-content-center mb-3">
-                            <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin</small>
-                            <small class="mr-3"><i class="fa fa-folder text-primary"></i> Web Design</small>
-                            <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
-                        </div>
-                        <p>Sed kasd sea sed at elitr sed ipsum justo, sit nonumy diam eirmod, duo et sed sit eirmod kasd clita tempor dolor stet lorem. Tempor ipsum justo amet stet...</p>
-                        <a href="" class="btn btn-primary px-4 mx-auto my-2">Read More</a>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>
