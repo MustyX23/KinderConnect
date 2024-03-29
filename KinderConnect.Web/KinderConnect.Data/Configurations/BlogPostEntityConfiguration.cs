@@ -27,7 +27,8 @@ Additionally, outdoor play encourages creativity and problem-solving skills. Whe
 Furthermore, outdoor play fosters social skills and cooperation. Children who play together outdoors learn to share, take turns, and communicate effectively with their peers. They also develop empathy and understanding as they navigate social interactions and resolve conflicts.
 In conclusion, outdoor play is essential for children's overall development. It provides numerous physical, mental, and social benefits that contribute to their health and well-being.",
                 Author = "KinderConnect's Headmaster",
-                ImageUrl = "https://example.com/outdoor-play-image.jpg"
+                ImageUrl = "https://example.com/outdoor-play-image.jpg",
+                CreatedOn = DateTime.Parse("2024/3/29 16:30"),
             };
             blogposts.Add(blogPost);
 
@@ -41,7 +42,9 @@ In addition to childproofing, it's essential to supervise preschoolers closely, 
 Furthermore, teaching preschoolers about safety rules and procedures is crucial. This includes educating them about fire safety, road safety, and personal boundaries. By empowering children with knowledge and skills, caregivers can help them make safer choices and avoid accidents.
 Overall, creating a safe environment for preschoolers requires careful planning, supervision, and education. By taking these steps, caregivers can ensure that young children have the opportunity to learn and grow in a secure and nurturing environment.",
                 Author = "KinderConnect's Headmaster",
-                ImageUrl = "https://example.com/safe-environment-image.jpg"
+                ImageUrl = "https://example.com/safe-environment-image.jpg",
+                CreatedOn = DateTime.Parse("2024/3/29 16:45"),
+
             };
             blogposts.Add(blogPost);
 
@@ -55,7 +58,8 @@ Furthermore, storytelling stimulates cognitive skills such as memory, imaginatio
 Moreover, storytelling encourages emotional intelligence by helping children identify and express their feelings. When children listen to stories with relatable characters and themes, they learn about empathy, compassion, and resilience. Storytelling also provides children with opportunities to explore complex emotions and learn coping strategies for dealing with difficult situations.
 In conclusion, storytelling is a valuable tool for early childhood education. It promotes language development, cognitive skills, and emotional intelligence, providing children with a solid foundation for learning and growth.",
                 Author = "KinderConnect's Headmaster",
-                ImageUrl = "https://example.com/storytelling-image.jpg"
+                ImageUrl = "https://example.com/storytelling-image.jpg",
+                CreatedOn = DateTime.Parse("2024/3/29 16:50"),
             };
             blogposts.Add(blogPost);
 

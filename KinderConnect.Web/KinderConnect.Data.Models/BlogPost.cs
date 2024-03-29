@@ -25,5 +25,7 @@ namespace KinderConnect.Data.Models
 
         [Required]
         public string ImageUrl { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }
