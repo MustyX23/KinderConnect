@@ -1,0 +1,35 @@
+﻿using KinderConnect.Data;
+using KinderConnect.Services.Data.Interfaces;
+using KinderConnect.Web.ViewModels.BlogPost;
+using Microsoft.EntityFrameworkCore;
+
+namespace KinderConnect.Services.Data
+{
+    public class BlogPostService : IBlogPostService
+    {
+
+        private readonly KinderConnectDbContext dbContext;
+
+        public BlogPostService(KinderConnectDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+        public async Task<IEnumerable<IndexBlogPost>> GetThreeBlogPostsAsync()
+        {
+            var blogPosts = await dbContext.BlogPosts
+                .Select(bp => new IndexBlogPost()
+                {
+                    Id = bp.Id,
+                    Title = bp.Title,
+                    Content = bp.Content,
+                    Author = bp.Author,
+                    ImageUrl = bp.ImageUrl
+                })
+                .Take(3)
+                .ToArrayAsync();
+
+            return blogPosts;
+
+        }
+    }
+}
