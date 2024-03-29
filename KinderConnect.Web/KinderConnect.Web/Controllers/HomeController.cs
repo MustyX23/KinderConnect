@@ -1,6 +1,7 @@
 ﻿using KinderConnect.Services.Data.Interfaces;
 using KinderConnect.Web.Models;
 using KinderConnect.Web.ViewModels.Home;
+using KinderConnect.Web.ViewModels.Teacher;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -10,11 +11,17 @@ namespace KinderConnect.Web.Controllers
     {
         private readonly IActivityService activityService;
         private readonly IBlogPostService blogPostService;
-        public HomeController(IActivityService activityService
-            , IBlogPostService blogPostService)
+        private readonly ITeacherService teacherService;
+
+        public HomeController(
+             IActivityService activityService
+            ,IBlogPostService blogPostService
+            ,ITeacherService teacherService)
         {
             this.blogPostService = blogPostService;
             this.activityService = activityService;
+            this.teacherService = teacherService;
+            this.teacherService = teacherService;
         }
 
         public async Task<IActionResult> Index()
@@ -23,7 +30,7 @@ namespace KinderConnect.Web.Controllers
                 = await activityService.GetAllActivitiesAsync();
 
             var blogViewModel
-                = await blogPostService.GetThreeBlogPostsAsync();
+                = await blogPostService.GetThreeLastBlogPostsAsync();
 
             var indexViewModel = new IndexViewModel
             {
@@ -32,6 +39,19 @@ namespace KinderConnect.Web.Controllers
             };
 
             return View(indexViewModel);
+        }
+
+        public async Task<IActionResult> About()
+        {
+            IEnumerable<TeachersForViewModel> teachersForView
+                = await teacherService.GetTeachersForViewAsync();
+
+            var aboutViewModel = new AboutViewModel
+            {
+                Teachers = teachersForView
+            };
+
+            return View(aboutViewModel);
         }
 
         public IActionResult Privacy()

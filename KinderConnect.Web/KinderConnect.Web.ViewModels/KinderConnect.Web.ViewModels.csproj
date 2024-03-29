@@ -14,7 +14,6 @@
     <Folder Include="Attendance\" />
     <Folder Include="Child\" />
     <Folder Include="Classroom\" />
-    <Folder Include="Teacher\" />
   </ItemGroup>
 
 </Project>
