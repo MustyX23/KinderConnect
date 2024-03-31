@@ -24,7 +24,15 @@ namespace KinderConnect.Data.Configurations
             classroom = new Classroom()
             {
                 Id = Guid.Parse("632bc679-3cc2-45b7-971b-6a92105321de"),
-                Name = "Little Explorers"
+                Name = "Little Explorers",
+                Information = "Nature walks." +
+                "Sensory play with natural materials." +
+                "Learning about different animals and habitats." +
+                "Creative storytelling sessions",
+                MinimumAge = 0,
+                MaximumAge = 3,
+                TotalSeats = 25,
+                TutionFee = 100,
             };
 
             classrooms.Add(classroom);
@@ -32,7 +40,15 @@ namespace KinderConnect.Data.Configurations
             classroom = new Classroom()
             {
                 Id = Guid.Parse("958b5667-9055-40a7-b7b2-81c19afe3329"),
-                Name = "Doodle Den"
+                Name = "Doodle Den",
+                Information = "Art studio with easels and drawing tables." +
+                "Variety of art supplies and materials." +
+                "Display area for showcasing student artwork." +
+                "Cozy reading corner for inspiration",
+                MinimumAge = 3,
+                MaximumAge = 6,
+                TotalSeats = 25,
+                TutionFee = 150
             };
 
             classrooms.Add(classroom);

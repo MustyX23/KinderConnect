@@ -13,7 +13,6 @@
   <ItemGroup>
     <Folder Include="Attendance\" />
     <Folder Include="Child\" />
-    <Folder Include="Classroom\" />
   </ItemGroup>
 
 </Project>

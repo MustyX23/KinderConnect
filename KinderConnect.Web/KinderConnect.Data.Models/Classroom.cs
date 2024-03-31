@@ -18,8 +18,25 @@ namespace KinderConnect.Data.Models
         [StringLength(NameMaxLenght, MinimumLength = NameMinLenght)]
         public string Name { get; set; } = null!;
 
-        public bool IsActive { get; set; }
+        [Required]
+        [StringLength(InfoMaxLenght, MinimumLength = InfoMaxLenght)]
+        public string Information { get; set; } = null!;
 
+        [Required]
+        [Range(MinimumAgeMinLenght, MinimumAgeMaxLenght)]
+        public int MinimumAge { get; set; }
+
+        [Required]
+        [Range(MaximumAgeAgeMinLenght, MaximumAgeAgeMaxLenght)]
+        public int MaximumAge { get; set; }
+
+        [Required]
+        public int TotalSeats { get; set; }
+
+        [Required]
+        public decimal TutionFee { get; set; }
+
+        public bool IsActive { get; set; }
         public ICollection<Child> Children { get; set; }
 
         public ICollection<ClassroomTeacher> ClassroomsTeachers { get; set; } = null!;

@@ -23,6 +23,15 @@
         {
             public const int NameMinLenght = 1;
             public const int NameMaxLenght = 20;
+
+            public const int InfoMinLenght = 20;
+            public const int InfoMaxLenght = 3000;
+
+            public const int MinimumAgeMinLenght = 0;
+            public const int MinimumAgeMaxLenght = 3;
+
+            public const int MaximumAgeAgeMinLenght = 3;
+            public const int MaximumAgeAgeMaxLenght = 6;
         }
         public static class Qualification
         {
