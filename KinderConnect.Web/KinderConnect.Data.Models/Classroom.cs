@@ -23,6 +23,9 @@ namespace KinderConnect.Data.Models
         public string Information { get; set; } = null!;
 
         [Required]
+        public string ImageUrl { get; set; } = null!;
+
+        [Required]
         [Range(MinimumAgeMinLenght, MinimumAgeMaxLenght)]
         public int MinimumAge { get; set; }
 

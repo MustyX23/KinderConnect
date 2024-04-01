@@ -33,6 +33,7 @@ namespace KinderConnect.Data.Configurations
                 MaximumAge = 3,
                 TotalSeats = 25,
                 TutionFee = 100,
+                ImageUrl = "https://pbs.twimg.com/profile_images/557241923597914112/wuYMY-Sj_400x400.png"
             };
 
             classrooms.Add(classroom);
@@ -48,7 +49,8 @@ namespace KinderConnect.Data.Configurations
                 MinimumAge = 3,
                 MaximumAge = 6,
                 TotalSeats = 25,
-                TutionFee = 150
+                TutionFee = 150,
+                ImageUrl = "https://www.abnewswire.com/uploads/1692132999.jpeg"
             };
 
             classrooms.Add(classroom);
