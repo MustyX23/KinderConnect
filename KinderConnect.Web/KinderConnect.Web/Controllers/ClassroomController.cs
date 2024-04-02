@@ -25,7 +25,9 @@ namespace KinderConnect.Web.Controllers
 
         public async Task<IActionResult> JoinClassroom(string id)
         {
-            JoinClassroomFormModel formModel = new JoinClassroomFormModel();
+            var formModel = 
+                await classroomService.GetJoinClassroomFormModelByIdAsync(id);
+
             return View(formModel);
         }
     }

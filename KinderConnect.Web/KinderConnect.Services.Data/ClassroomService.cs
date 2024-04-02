@@ -31,5 +31,20 @@ namespace KinderConnect.Services.Data
 
             return allClassroomsForView;
         }
+
+        public async Task<JoinClassroomFormModel> GetJoinClassroomFormModelByIdAsync(string classroomId)
+        {
+            var classroomFormModel = await dbContext.Classrooms
+                .Select(c => new JoinClassroomFormModel()
+                {
+                    ClassroomImageUrl = c.ImageUrl,
+                    ClassroomId = c.Id.ToString(),
+                    ClassroomName = c.Name,
+                })
+                .FirstAsync(c => c.ClassroomId == classroomId);
+
+            return classroomFormModel;
+                
+        }
     }
 }
