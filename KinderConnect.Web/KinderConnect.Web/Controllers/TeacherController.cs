@@ -1,4 +1,5 @@
 ﻿using KinderConnect.Services.Data.Interfaces;
+using KinderConnect.Web.ViewModels.Teacher;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KinderConnect.Web.Controllers
@@ -17,6 +18,13 @@ namespace KinderConnect.Web.Controllers
                 = await teacherService.GetTeachersForViewAsync();
 
             return View(allTeachers);
+        }
+        public async Task<IActionResult> Details(string id)
+        {
+            TeacherDetailsViewModel viewModel
+                = await teacherService.GetDetailsByIdAsync(id);
+
+            return View(viewModel);
         }
     }
 }
