@@ -33,7 +33,7 @@ namespace KinderConnect.Data.Models
         public bool IsActive { get; set; }
 
         [Required]
-        [RegularExpression(@"^(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})$")]
+        [RegularExpression(@"^(?:\+?\d{1,3}\s?)?(?:\d{3}(?:[-\s]?)\d{2,3}(?:[-\s]?)\d{4})$")]
         public string ParentGuardianContact { get; set; } = null!;
 
         [StringLength(MedicalInfoMaxLenght, MinimumLength = MedicalInfoMinLenght)]
