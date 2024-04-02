@@ -59,5 +59,10 @@
             public const int AuthorMaxLength = 40;
             public const int AuthorMinLength = 2;
         }
+        public static class Teacher
+        {
+            public const int SummaryMinLength = 15;
+            public const int SummaryMaxLength = 500;
+        }
     }
 }

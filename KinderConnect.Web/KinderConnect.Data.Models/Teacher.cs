@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static KinderConnect.Common.EntityValidationConstants.Teacher;
 
 namespace KinderConnect.Data.Models
 {
@@ -23,6 +24,9 @@ namespace KinderConnect.Data.Models
 
         [Required]
         public Guid TeacherUserId { get; set; }
+
+        [StringLength(SummaryMaxLength, MinimumLength = SummaryMinLength)]
+        public string Summary {  get; set; }
 
         [Required]
         public ApplicationUser TeacherUser { get; set; } = null!;
