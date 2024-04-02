@@ -40,6 +40,7 @@ namespace KinderConnect.Data.Models
         public decimal TutionFee { get; set; }
 
         public bool IsActive { get; set; }
+
         public ICollection<Child> Children { get; set; }
 
         public ICollection<ClassroomTeacher> ClassroomsTeachers { get; set; } = null!;

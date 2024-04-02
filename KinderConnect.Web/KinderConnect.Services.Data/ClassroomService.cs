@@ -18,6 +18,7 @@ namespace KinderConnect.Services.Data
             var allClassroomsForView = await dbContext.Classrooms
                 .Select(c => new AllClassroomViewModel()
                 {
+                    Id = c.Id.ToString(),
                     Name = c.Name,
                     Information = c.Information,
                     MinimumAge = c.MinimumAge,
