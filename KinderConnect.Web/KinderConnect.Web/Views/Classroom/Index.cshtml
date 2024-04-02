@@ -26,12 +26,12 @@
                                 <div class="col-6 py-1 text-right border-right"><strong>Total Seats</strong></div>
                                 <div class="col-6 py-1">@classroom.TotalSeats Seats</div>
                             </div>
-                            <div class="row">
+@*                             <div class="row">
                                 <div class="col-6 py-1 text-right border-right"><strong>Tution Fee</strong></div>
                                 <div class="col-6 py-1">$@classroom.TutionFee / Month</div>
-                            </div>
+                            </div> *@
                         </div>
-                        <a href="" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+                        <a asp-action="JoinClassroom" asp-route-id="@classroom.Id" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
                     </div>
                 </div>
             }                        

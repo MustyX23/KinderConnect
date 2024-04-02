@@ -1,5 +1,7 @@
 ﻿using KinderConnect.Services.Data.Interfaces;
+using KinderConnect.Web.ViewModels.Classroom;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace KinderConnect.Web.Controllers
@@ -19,6 +21,12 @@ namespace KinderConnect.Web.Controllers
                 = await classroomService.GetAllClassroomsAsync();
 
             return View(allClassrooms);
+        }
+
+        public async Task<IActionResult> JoinClassroom(string id)
+        {
+            JoinClassroomFormModel formModel = new JoinClassroomFormModel();
+            return View(formModel);
         }
     }
 }
