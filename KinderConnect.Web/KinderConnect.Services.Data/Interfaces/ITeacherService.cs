@@ -4,7 +4,7 @@ namespace KinderConnect.Services.Data.Interfaces
 {
     public interface ITeacherService
     {
-        Task<IEnumerable<TeachersForViewModel>> GetTeachersForViewAsync();
+        Task<IEnumerable<AllTeacherViewModel>> GetTeachersForViewAsync();
         //Task<TeacherDto> GetTeacherByIdAsync(string teacherId);
         //Task CreateTeacherAsync(TeacherDto teacherDto);
         //Task EditTeacherByIdAsync(string teacherId, TeacherDto teacherDto);

@@ -1,6 +1,6 @@
 ﻿namespace KinderConnect.Web.ViewModels.Teacher
 {
-    public class TeachersForViewModel
+    public class AllTeacherViewModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

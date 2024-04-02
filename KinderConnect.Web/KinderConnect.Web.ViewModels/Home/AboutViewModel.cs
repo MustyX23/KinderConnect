@@ -4,7 +4,7 @@ namespace KinderConnect.Web.ViewModels.Home
 {
     public class AboutViewModel
     {
-        public IEnumerable<TeachersForViewModel> Teachers { get; set; }
-            = new HashSet<TeachersForViewModel>();
+        public IEnumerable<AllTeacherViewModel> Teachers { get; set; }
+            = new HashSet<AllTeacherViewModel>();
     }
 }

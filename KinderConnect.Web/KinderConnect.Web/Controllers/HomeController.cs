@@ -43,7 +43,7 @@ namespace KinderConnect.Web.Controllers
 
         public async Task<IActionResult> About()
         {
-            IEnumerable<TeachersForViewModel> teachersForView
+            IEnumerable<AllTeacherViewModel> teachersForView
                 = await teacherService.GetTeachersForViewAsync();
 
             var aboutViewModel = new AboutViewModel

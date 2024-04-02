@@ -14,10 +14,10 @@ namespace KinderConnect.Services.Data
             this.dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<TeachersForViewModel>> GetTeachersForViewAsync()
+        public async Task<IEnumerable<AllTeacherViewModel>> GetTeachersForViewAsync()
         {
             var teachersForView = await dbContext.Teachers
-                .Select(t => new TeachersForViewModel
+                .Select(t => new AllTeacherViewModel
                 {
                     FirstName = t.TeacherUser.FirstName,
                     LastName = t.TeacherUser.LastName,
