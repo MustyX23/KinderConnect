@@ -46,8 +46,8 @@
             <label asp-for="ImageUrl">Image URL:</label>
             <input asp-for="ImageUrl" type="url" class="form-control" id="imageUrl" name="ImageUrl" required>
         </div>
-        <input type="hidden" name="ParentGuardianId" value="your_parent_guardian_id">
-        <input type="hidden" name="ClassroomId" value="your_classroom_id">
+        <input type="hidden" name="ParentGuardianId">
+        <input type="hidden" name="ClassroomId" value="@ViewContext.RouteData.Values["id"]">
 
         <button type="submit" class="btn btn-primary">Join</button>
     </form>
