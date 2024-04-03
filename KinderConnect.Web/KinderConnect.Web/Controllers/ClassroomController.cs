@@ -45,19 +45,6 @@ namespace KinderConnect.Web.Controllers
         {
             string parentguardianId = User.GetUserId();
 
-            model.Children = await
-                childrenService.GetChildrenByParentIdAsync(parentguardianId);
-
-            bool isChildInClassroom
-                = await childrenService.IsChildAlreadyInAClassroomAsync(parentguardianId, model.ClassroomId);
-
-            if (isChildInClassroom)
-            {
-                ModelState.AddModelError(string.Empty, "The child is already in this classroom.");
-                TempData[ErrorMessage] = $"Your child is already in a classroom.";
-                return View(model);
-            }
-
             if (!IsValidAgeForClassroom(model.DateOfBirth, model.ClassroomMinimumAge, model.ClassroomMaximumAge))
             {
                 ModelState.AddModelError(string.Empty, "The child's age does not meet the classroom requirements.");
