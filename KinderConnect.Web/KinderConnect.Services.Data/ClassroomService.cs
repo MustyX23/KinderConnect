@@ -15,19 +15,27 @@ namespace KinderConnect.Services.Data
         }
         public async Task<IEnumerable<AllClassroomViewModel>> GetAllClassroomsAsync()
         {
-            var allClassroomsForView = await dbContext.Classrooms
-                .Select(c => new AllClassroomViewModel()
+            var allClassrooms = await dbContext.Classrooms.ToListAsync(); 
+
+            var allClassroomsForView = new List<AllClassroomViewModel>();
+
+            foreach (var classroom in allClassrooms)
+            {               
+                var seatsAvailable = await IsClassroomSeatsAvailableAsync(classroom.Id.ToString());
+
+                allClassroomsForView.Add(new AllClassroomViewModel
                 {
-                    Id = c.Id.ToString(),
-                    Name = c.Name,
-                    Information = c.Information,
-                    MinimumAge = c.MinimumAge,
-                    MaximumAge = c.MaximumAge,
-                    TotalSeats = c.TotalSeats,
-                    TutionFee = c.TutionFee.ToString(),
-                    ImageUrl = c.ImageUrl,
-                })
-                .ToArrayAsync();
+                    Id = classroom.Id.ToString(),
+                    Name = classroom.Name,
+                    Information = classroom.Information,
+                    MinimumAge = classroom.MinimumAge,
+                    MaximumAge = classroom.MaximumAge,
+                    TotalSeats = classroom.TotalSeats,
+                    TutionFee = classroom.TutionFee.ToString(),
+                    ImageUrl = classroom.ImageUrl,
+                    SeatsAvailable = seatsAvailable
+                });
+            }
 
             return allClassroomsForView;
         }
@@ -47,6 +55,15 @@ namespace KinderConnect.Services.Data
 
             return classroomFormModel;
                 
+        }
+        public async Task<bool> IsClassroomSeatsAvailableAsync(string classroomId)
+        {
+            int currentSeats = await dbContext.Children
+             .CountAsync(c => c.ClassroomId.ToString() == classroomId);
+
+            var classroom = await dbContext.Classrooms.FindAsync(Guid.Parse(classroomId));
+
+            return currentSeats < classroom!.TotalSeats;
         }
     }
 }
