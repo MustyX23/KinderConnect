@@ -17,5 +17,7 @@
 
         public string TutionFee { get; set; } = null!;
 
+        public bool SeatsAvailable { get; set; }
+
     }
 }

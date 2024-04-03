@@ -26,15 +26,26 @@
                                 <div class="col-6 py-1 text-right border-right"><strong>Total Seats</strong></div>
                                 <div class="col-6 py-1">@classroom.TotalSeats Seats</div>
                             </div>
-@*                             <div class="row">
-                                <div class="col-6 py-1 text-right border-right"><strong>Tution Fee</strong></div>
-                                <div class="col-6 py-1">$@classroom.TutionFee / Month</div>
-                            </div> *@
+                            @if (!classroom.SeatsAvailable)
+                            {
+                                <div class="row border-bottom">
+                                    <div class="col-12 py-1 text-center">
+                                        <span class="text-danger">Classroom is already full</span>
+                                    </div>
+                                </div>
+                            }
                         </div>
-                        <a asp-action="JoinClassroom" asp-route-id="@classroom.Id" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+                        @if (classroom.SeatsAvailable)
+                        {
+                            <a asp-action="JoinClassroom" asp-route-id="@classroom.Id" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary px-4 mx-auto mb-4" disabled>Join Now</button>
+                        }
                     </div>
                 </div>
-            }                        
+            }
         </div>
     </div>
 </div>
