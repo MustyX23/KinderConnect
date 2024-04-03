@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using KinderConnect.Web.ViewModels.Child;
+using System.ComponentModel.DataAnnotations;
 using static KinderConnect.Common.EntityValidationConstants.Child;
+using static KinderConnect.Common.EntityValidationConstants.Classroom;
 
 namespace KinderConnect.Web.ViewModels.Classroom
 {
@@ -10,12 +12,23 @@ namespace KinderConnect.Web.ViewModels.Classroom
         public string ClassroomImageUrl { get; set; } = null!;
 
         [Required]
+        [Range(MinimumAgeMinLenght, MinimumAgeMaxLenght)]
+        public int ClassroomMinimumAge { get; set; }
+
+        [Required]
+        [Range(MaximumAgeAgeMinLenght, MaximumAgeAgeMaxLenght)]
+        public int ClassroomMaximumAge { get; set; }
+
+        [Required]
         [StringLength(FirstNameMaxLenght, MinimumLength = FirstNameMinLenght)]
         public string FirstName { get; set; } = null!;
 
         [Required]
         [StringLength(LastNameMaxLenght, MinimumLength = LastNameMinLenght)]
         public string LastName { get; set; } = null!;
+
+        [Range(MinimumAgeMinLenght, MaximumAgeAgeMaxLenght)]
+        public int Age { get; set; }
 
         [Required]
         public string Gender { get; set; } = null!;
@@ -39,5 +52,8 @@ namespace KinderConnect.Web.ViewModels.Classroom
         public string ParentGuardianId { get; set; } = null!;
 
         public string ClassroomId { get; set; } = null!;
+
+        public IEnumerable<ChildClassroomJoinViewModel> Children { get; set; }
+            = new HashSet<ChildClassroomJoinViewModel>();
     }
 }

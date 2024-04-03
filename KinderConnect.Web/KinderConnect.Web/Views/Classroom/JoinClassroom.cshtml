@@ -48,6 +48,10 @@
         </div>
         <input type="hidden" name="ParentGuardianId">
         <input type="hidden" name="ClassroomId" value="@ViewContext.RouteData.Values["id"]">
+         @Html.HiddenFor(model => model.ClassroomMaximumAge)
+         @Html.HiddenFor(model => model.ClassroomMinimumAge)
+         @Html.HiddenFor(model => model.ClassroomName)
+         @Html.HiddenFor(model => model.ClassroomImageUrl)
 
         <button type="submit" class="btn btn-primary">Join</button>
     </form>
