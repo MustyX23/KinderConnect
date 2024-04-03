@@ -40,6 +40,8 @@ namespace KinderConnect.Services.Data
                     ClassroomImageUrl = c.ImageUrl,
                     ClassroomId = c.Id.ToString(),
                     ClassroomName = c.Name,
+                    ClassroomMaximumAge = c.MaximumAge,
+                    ClassroomMinimumAge = c.MinimumAge,
                 })
                 .FirstAsync(c => c.ClassroomId == classroomId);
 
