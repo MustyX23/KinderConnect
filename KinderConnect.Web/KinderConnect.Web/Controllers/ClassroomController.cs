@@ -34,10 +34,20 @@ namespace KinderConnect.Web.Controllers
         {
             string parentGuardianId = User.GetUserId();
 
-            var formModel = 
+            try
+            {
+                var formModel =
                 await classroomService.GetJoinClassroomFormModelByIdAsync(id);
 
-            return View(formModel);
+                return View(formModel);
+            }
+            catch (Exception)
+            {
+                GeneralError();
+            }
+
+            return RedirectToAction("Index", "Classroom");
+            
         }
 
         [HttpPost]

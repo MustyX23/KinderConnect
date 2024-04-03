@@ -32,7 +32,6 @@ namespace KinderConnect.Data.Models
         public ApplicationUser TeacherUser { get; set; } = null!;
         public ICollection<ClassroomTeacher> ClassroomsTeachers { get; set; }
         public ICollection<TeacherQualification> TeachersQualifications { get; set; } = null!;
-
         public ICollection<AttendanceRecord> AttendanceRecords { get; set; } = null!;
     }
 }
