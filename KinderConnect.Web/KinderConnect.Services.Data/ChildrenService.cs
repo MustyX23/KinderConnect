@@ -50,24 +50,19 @@ namespace KinderConnect.Services.Data
             return children;
         }
 
-        public async Task<bool> IsChildAlreadyInAClassroomAsync(string parentGuardianId, string classroomId)
+        public async Task<bool> IsChildAlreadyInAClassroomAsync(JoinClassroomFormModel model, string parentGuardianId)
         {
-            IEnumerable<ChildClassroomJoinViewModel> children =
-                await GetChildrenByParentIdAsync(parentGuardianId);
+            bool result = await dbContext.Children
+                .AnyAsync(c => c.FirstName == model.FirstName
+                    && c.LastName == model.LastName
+                    && c.DateOfBirth == model.DateOfBirth
+                    && c.ParentGuardianId.ToString() == parentGuardianId
+                    && c.ClassroomId.ToString() == model.ClassroomId);
 
-            // Iterate over each child and check if they are associated with the specified classroom
-            foreach (var child in children)
-            {
-                if (await dbContext.Children
-                    .Where(c => c.Id.ToString() == child.Id && c.IsActive && c.ParentGuardianId.ToString() == parentGuardianId && c.ClassroomId.ToString() == classroomId)
-                    .AnyAsync())
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return result;
         }
+
+        
 
         public async Task JoinChildToClassroomAsync(JoinClassroomFormModel model, string parentGuardianId)
         {
