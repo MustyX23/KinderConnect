@@ -92,6 +92,14 @@ namespace KinderConnect.Web.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> LeaveClassroom(string childId)
+        {
+            LeaveClassroomViewModel viewModel
+                = await classroomService.GetLeaveClassroomViewModelByChildIdAsync(childId);
+
+            return View(viewModel);
+        }
         private bool IsValidAgeForClassroom(DateTime dateOfBirth, int minAge, int maxAge)
         {
             int childAge = DateTime.Now.Year - dateOfBirth.Year;

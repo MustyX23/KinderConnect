@@ -15,6 +15,7 @@
             <p>Allergies: @Model.Allergies</p>
             <p>Classroom: @Model.Classroom.Name</p>
             <a asp-controller="Child" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-primary rounded">Edit</a>
+            <a asp-controller="Classroom" asp-action="LeaveClassroom" asp-route-id="@Model.Id" class="btn btn-danger btn-primary rounded">Leave a classroom</a>
         </div>
     </div>
 </div>
