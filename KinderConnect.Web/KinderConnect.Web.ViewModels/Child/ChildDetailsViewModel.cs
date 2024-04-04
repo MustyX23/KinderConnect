@@ -24,7 +24,6 @@ namespace KinderConnect.Web.ViewModels.Child
 
         public string DateOfBirth { get; set; } = null!;
 
-        public IEnumerable<DetailsClassroomViewModel> Classrooms { get; set; } =
-            new HashSet<DetailsClassroomViewModel>();
+        public DetailsClassroomViewModel Classroom { get; set; } = null!;
     }
 }

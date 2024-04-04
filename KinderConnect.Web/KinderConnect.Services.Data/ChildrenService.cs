@@ -35,15 +35,15 @@ namespace KinderConnect.Services.Data
 
         public async Task<ChildDetailsViewModel> GetChildForDetailsByIdAsync(string childId)
         {
-            var classrooms = await dbContext
+            var classroom = await dbContext
                 .Classrooms
                 .Where(c => c.IsActive && c.Children.Any(c => c.Id.ToString() == childId))
                 .Select(c => new DetailsClassroomViewModel()
                 {
-                    Id = c.Id.ToString(),
+                    Id= c.Id.ToString(),
                     Name = c.Name,
                 })
-                .ToArrayAsync();
+                .FirstAsync();
 
             var child = await dbContext
                 .Children
@@ -61,7 +61,7 @@ namespace KinderConnect.Services.Data
                     IsActive = c.IsActive,
                     MedicalInformation = c.MedicalInformation,
                     ParentGuardianContact = c.ParentGuardianContact,
-                    Classrooms = classrooms,
+                    Classroom = classroom,
                 })
                 .FirstOrDefaultAsync(c => c.Id == childId);
 
