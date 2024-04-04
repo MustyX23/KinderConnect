@@ -3,6 +3,7 @@ using KinderConnect.Data.Models;
 using KinderConnect.Services.Data.Interfaces;
 using KinderConnect.Web.ViewModels.Child;
 using KinderConnect.Web.ViewModels.Classroom;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace KinderConnect.Services.Data
@@ -14,6 +15,25 @@ namespace KinderConnect.Services.Data
         public ChildrenService(KinderConnectDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task EditChildByIdAsync(string id, EditChildFormModel formModel)
+        {
+            Child child = await dbContext
+                .Children
+                .Where(c => c.IsActive)
+                .FirstAsync(c => c.Id.ToString() == id);
+
+            child.FirstName = formModel.FirstName;
+            child.LastName = formModel.LastName;
+            child.Gender = formModel.Gender;
+            child.DateOfBirth = DateTime.Parse(formModel.DateOfBirth);
+            child.Age = DateTime.Now.Year - DateTime.Parse(formModel.DateOfBirth).Year;
+            child.Allergies = formModel.Allergies;
+            child.MedicalInformation = formModel.MedicalInformation;
+            child.ImageUrl = formModel.ImageUrl;
+
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<ChildClassroomJoinViewModel> GetChildByParentIdAsync(string parentguardianId)
@@ -45,7 +65,7 @@ namespace KinderConnect.Services.Data
                 })
                 .FirstAsync();
 
-            var child = await dbContext
+            var childForDetails = await dbContext
                 .Children
                 .Where(c => c.IsActive)
                 .Select(c => new ChildDetailsViewModel
@@ -54,7 +74,7 @@ namespace KinderConnect.Services.Data
                     Age = c.Age,
                     FirstName = c.FirstName,
                     LastName = c.LastName,
-                    DateOfBirth = c.DateOfBirth.ToString("f"),
+                    DateOfBirth = c.DateOfBirth.ToString("yyyy/MM/dd HH:mm"),
                     Allergies = c.Allergies,
                     Gender = c.Gender,
                     ImageUrl = c.ImageUrl,
@@ -65,7 +85,28 @@ namespace KinderConnect.Services.Data
                 })
                 .FirstOrDefaultAsync(c => c.Id == childId);
 
-            return child;
+            return childForDetails;
+        }
+
+        public async Task<EditChildFormModel> GetChildForEditByIdAsync(string id)
+        {
+            var childForEdit = await dbContext
+                .Children
+                .Where(c => c.IsActive && c.Id.ToString() == id)
+                .Select(c => new EditChildFormModel()
+                {
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    Gender = c.Gender,
+                    DateOfBirth = c.DateOfBirth.ToString("yyyy/MM/dd HH:mm"),
+                    Allergies = c.Allergies,
+                    MedicalInformation = c.MedicalInformation,
+                    ParentGuardianContact = c.ParentGuardianContact,
+                    ImageUrl = c.ImageUrl
+                })
+                .FirstOrDefaultAsync();
+
+            return childForEdit;
         }
 
         public async Task<IEnumerable<MyChildrenIndexViewModel>> GetChildrenByParentIdAsync(string parentguardianId)
@@ -87,14 +128,14 @@ namespace KinderConnect.Services.Data
 
         public async Task<bool> IsChildAlreadyInAClassroomAsync(JoinClassroomFormModel model, string parentGuardianId)
         {
-            bool result = await dbContext.Children
+            bool isChildAlreadyInAClassroom = await dbContext.Children
                 .AnyAsync(c => c.FirstName == model.FirstName
                     && c.LastName == model.LastName
                     && c.DateOfBirth == model.DateOfBirth
                     && c.ParentGuardianId.ToString() == parentGuardianId
                     && c.ClassroomId != null);
 
-            return result;
+            return isChildAlreadyInAClassroom;
         }
 
         
