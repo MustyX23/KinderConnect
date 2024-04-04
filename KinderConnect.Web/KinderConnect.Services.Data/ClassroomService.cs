@@ -56,6 +56,35 @@ namespace KinderConnect.Services.Data
             return classroomFormModel;
                 
         }
+
+        public async Task<LeaveClassroomViewModel> GetLeaveClassroomViewModelByChildIdAsync(string childId)
+        {
+            string childsFirstName = await dbContext
+                .Children
+                .Where(c => c.IsActive && c.Id.ToString() == childId)
+                .Select(c => c.FirstName)
+                .FirstAsync();
+
+            Guid classroomId = await dbContext
+                .Children
+                .Where(c => c.IsActive && c.Id.ToString() == childId)
+                .Select(c => c.ClassroomId)
+                .FirstAsync();
+
+            var viewModel = await dbContext
+                .Classrooms
+                .Where(c => c.IsActive && c.Id == classroomId)                
+                .Select (c => new LeaveClassroomViewModel()
+                {
+                    ChildFirstName = childsFirstName,
+                    Name = c.Name,
+                    ImageUrl = c.ImageUrl,
+                })
+                .FirstAsync();
+
+            return viewModel;
+        }
+
         public async Task<bool> IsClassroomSeatsAvailableAsync(string classroomId)
         {
             int currentSeats = await dbContext.Children
