@@ -4,8 +4,6 @@ using KinderConnect.Services.Data.Interfaces;
 using KinderConnect.Web.ViewModels.Child;
 using KinderConnect.Web.ViewModels.Classroom;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System.Collections;
 
 namespace KinderConnect.Services.Data
 {
@@ -34,16 +32,53 @@ namespace KinderConnect.Services.Data
 
             return child;
         }
-        public async Task<IEnumerable<ChildClassroomJoinViewModel>> GetChildrenByParentIdAsync(string parentguardianId)
+
+        public async Task<ChildDetailsViewModel> GetChildForDetailsByIdAsync(string childId)
+        {
+            var classrooms = await dbContext
+                .Classrooms
+                .Where(c => c.IsActive && c.Children.Any(c => c.Id.ToString() == childId))
+                .Select(c => new DetailsClassroomViewModel()
+                {
+                    Id = c.Id.ToString(),
+                    Name = c.Name,
+                })
+                .ToArrayAsync();
+
+            var child = await dbContext
+                .Children
+                .Where(c => c.IsActive)
+                .Select(c => new ChildDetailsViewModel
+                {
+                    Id = c.Id.ToString(),
+                    Age = c.Age,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    DateOfBirth = c.DateOfBirth.ToString("f"),
+                    Allergies = c.Allergies,
+                    Gender = c.Gender,
+                    ImageUrl = c.ImageUrl,
+                    IsActive = c.IsActive,
+                    MedicalInformation = c.MedicalInformation,
+                    ParentGuardianContact = c.ParentGuardianContact,
+                    Classrooms = classrooms,
+                })
+                .FirstOrDefaultAsync(c => c.Id == childId);
+
+            return child;
+        }
+
+        public async Task<IEnumerable<MyChildrenIndexViewModel>> GetChildrenByParentIdAsync(string parentguardianId)
         {
             var children = await dbContext
                 .Children
                 .Where(c => c.IsActive && c.ParentGuardianId.ToString() == parentguardianId)
-                .Select(c => new ChildClassroomJoinViewModel
+                .Select(c => new MyChildrenIndexViewModel
                 {
-                    Id = c.Id.ToString(),
+                    Id= c.Id.ToString(),
                     FirstName = c.FirstName,
-                    LastName = c.LastName
+                    LastName = c.LastName,
+                    ImageUrl = c.ImageUrl,
                 })
                 .ToArrayAsync();
 

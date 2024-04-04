@@ -8,7 +8,8 @@ namespace KinderConnect.Services.Data.Interfaces
         Task JoinChildToClassroomAsync(JoinClassroomFormModel model, string parentGuardianId);
         Task<bool> IsChildAlreadyInAClassroomAsync(JoinClassroomFormModel model, string parentGuardianId);
         Task <ChildClassroomJoinViewModel> GetChildByParentIdAsync(string parentGuardianId);
-        Task<IEnumerable<ChildClassroomJoinViewModel>> GetChildrenByParentIdAsync(string parentGuardianId);       
+        Task<IEnumerable<MyChildrenIndexViewModel>> GetChildrenByParentIdAsync(string parentGuardianId);
+        Task<ChildDetailsViewModel> GetChildForDetailsByIdAsync(string childId);
         //Task<IEnumerable<ChildDto>> GetAllChildrenAsync();
         //Task<ChildDto> GetChildByIdAsync(string childId);
         //Task CreateChildAsync(ChildDto childDto);
