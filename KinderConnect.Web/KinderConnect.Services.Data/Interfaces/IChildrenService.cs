@@ -10,6 +10,8 @@ namespace KinderConnect.Services.Data.Interfaces
         Task <ChildClassroomJoinViewModel> GetChildByParentIdAsync(string parentGuardianId);
         Task<IEnumerable<MyChildrenIndexViewModel>> GetChildrenByParentIdAsync(string parentGuardianId);
         Task<ChildDetailsViewModel> GetChildForDetailsByIdAsync(string childId);
+        Task<EditChildFormModel> GetChildForEditByIdAsync(string id);
+        Task EditChildByIdAsync(string id, EditChildFormModel formModel);
         //Task<IEnumerable<ChildDto>> GetAllChildrenAsync();
         //Task<ChildDto> GetChildByIdAsync(string childId);
         //Task CreateChildAsync(ChildDto childDto);
