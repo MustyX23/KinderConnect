@@ -2,15 +2,19 @@
 @model ChildDetailsViewModel
 <div class="container">
     <div class="row">
-        <div class="col-md-6 offset-md-3">
-            <h2 class="text-center">Teacher Details</h2>
-            <div class="card">
-                <img class="card-img-top" src="@Model.ImageUrl" alt="Your Child Image">
-                <div class="card-body">
-                    <h5 class="card-title">@Model.FirstName @Model.LastName</h5>
-                    <p class="card-text">@Model.Classroom.Name</p>
-                </div>
-            </div>
+        <div class="col-md-6">
+            <img src="@Model.ImageUrl" class="img-fluid" alt="@Model.FirstName @Model.LastName">
+        </div>
+        <div class="col-md-6">
+            <h1>@Model.FirstName @Model.LastName</h1>
+            <p>Age: @Model.Age</p>
+            <p>Gender: @Model.Gender</p>
+            <p>Date of Birth: @Model.DateOfBirth</p>
+            <p>Parent/Guardian Contact: @Model.ParentGuardianContact</p>
+            <p>Medical Information: @Model.MedicalInformation</p>
+            <p>Allergies: @Model.Allergies</p>
+            <p>Classroom: @Model.Classroom.Name</p>
+            <a asp-controller="Child" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-primary rounded">Edit</a>
         </div>
     </div>
 </div>
