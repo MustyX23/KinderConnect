@@ -1,0 +1,61 @@
+﻿@using KinderConnect.Web.ViewModels.Child
+@model EditChildFormModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 order-lg-2">
+            <img src="@Model.ImageUrl" class="img-fluid" alt="@Model.FirstName @Model.LastName">
+        </div>
+        <div class="col-lg-6 order-lg-1">
+            <h2>Edit Child Information</h2>
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="FirstName">First Name:</label>
+                    <input asp-for="FirstName" class="form-control" placeholder="Child's First Name...">
+                    <span asp-validation-for="FirstName" class="small text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName">Last Name:</label>
+                    <input asp-for="LastName" class="form-control" placeholder="Child's Last Name...">
+                    <span asp-validation-for="LastName" class="small text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Gender">Gender:</label>
+                    <select asp-for="Gender" name="Gender" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateOfBirth">Date of Birth:</label>
+                    <input asp-for="DateOfBirth" class="form-control" id="dob" name="DateOfBirth" required>
+                    <span asp-validation-for="DateOfBirth" class="small text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ParentGuardianContact">Parent/Guardian Contact:</label>
+                    <input asp-for="ParentGuardianContact" class="form-control" id="contact" name="ParentGuardianContact" required>
+                    <span asp-validation-for="ParentGuardianContact" class="small text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MedicalInformation">Medical Information:</label>
+                    <textarea asp-for="MedicalInformation" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="MedicalInformation" class="small text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Allergies">Allergies:</label>
+                    <input asp-for="Allergies" type="text" class="form-control" id="allergies" name="Allergies">
+                    <span asp-validation-for="Allergies" class="small text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ImageUrl">Image URL:</label>
+                    <input asp-for="ImageUrl" type="url" class="form-control" id="imageUrl" name="ImageUrl" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
