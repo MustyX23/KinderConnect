@@ -1,4 +1,6 @@
-﻿<!-- Dashboard Layout -->
+﻿@using KinderConnect.Web.ViewModels.Child;
+<!-- Dashboard Layout -->
+@model IEnumerable<MyChildrenIndexViewModel>
 <div class="container-fluid">
     <div class="row">
         <!-- Sidebar for Navigation -->
@@ -7,12 +9,7 @@
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
-                            Dashboard <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Child Profile
+                            My Kids Dashboard <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -37,22 +34,25 @@
         <!-- Main Content Area -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Parent Dashboard</h1>
+                <h1 class="h2">My Kids Dashboard</h1>
             </div>
 
             <!-- Child Cards -->
             <div class="row">
-                <!-- Sample Child Card -->
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Child's Name</h5>
-                            <p class="card-text">Overview of child's recent activities and performance.</p>
-                            <a href="#" class="btn btn-primary">View Details</a>
-                        </div>
+                @foreach (var child in Model)
+                {
+                    <div class="col-md-4">
+                        <a asp-controller="Child" asp-action="Details" asp-route-id="@child.Id" class="card-link">
+                            <div class="card mb-4 shadow-sm">
+                                <!-- Child Image -->
+                                <img src="@child.ImageUrl" class="card-img-top" alt="@child.ImageUrl">
+                                <div class="card-body">
+                                    <h5 class="card-title">@child.FirstName @child.LastName</h5>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </div>
-                <!-- Add more child cards here -->
+                }
             </div>
 
             <!-- More sections can be added below -->
