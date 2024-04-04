@@ -70,7 +70,7 @@ namespace KinderConnect.Web.Controllers
             if (childIsAlreadyInAClassroom)
             {
                 ModelState.AddModelError(string.Empty, "The child's already in a classroom.");
-                TempData[ErrorMessage] = $"Your child's already in the {model.ClassroomName} classroom.";
+                TempData[ErrorMessage] = $"Your child's already in a classroom.";
                 return View(model);
             }
 

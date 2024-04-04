@@ -92,7 +92,7 @@ namespace KinderConnect.Services.Data
                     && c.LastName == model.LastName
                     && c.DateOfBirth == model.DateOfBirth
                     && c.ParentGuardianId.ToString() == parentGuardianId
-                    && c.ClassroomId.ToString() == model.ClassroomId);
+                    && c.ClassroomId != null);
 
             return result;
         }
