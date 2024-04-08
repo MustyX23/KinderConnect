@@ -30,6 +30,7 @@ namespace KinderConnect.Web.Controllers
             return View(allClassrooms);
         }
 
+        [HttpGet("JoinClassroom/{id}")]
         public async Task<IActionResult> JoinClassroom(string id)
         {
             string parentGuardianId = User.GetUserId();
@@ -49,8 +50,7 @@ namespace KinderConnect.Web.Controllers
             return RedirectToAction("Index", "Classroom");
             
         }
-
-        [HttpPost]
+        [HttpPost("JoinClassroom/{id}")]
         public async Task<IActionResult> JoinClassroom(JoinClassroomFormModel model)
         {
             string parentguardianId = User.GetUserId();
@@ -92,6 +92,27 @@ namespace KinderConnect.Web.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        [HttpGet("JoinClassroom/{id}/{childId}")]
+        public async Task<IActionResult> JoinClassroom(string id, string childId)
+        {
+            string parentGuardianId = User.GetUserId();
+
+            try
+            {
+                var formModel =
+                await classroomService.GetJoinClassroomViewModelAsync(id, childId);
+
+                return View("JoinClassroomByChildId", formModel);
+            }
+            catch (Exception)
+            {
+                GeneralError();
+            }
+
+            return RedirectToAction("Index", "Classroom");
+
+        }
+
 
         public async Task<IActionResult> LeaveClassroom(string id)
         {
@@ -99,6 +120,20 @@ namespace KinderConnect.Web.Controllers
                 = await classroomService.GetLeaveClassroomViewModelByChildIdAsync(id);
 
             return View(viewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> LeaveClassroom(string id, LeaveClassroomViewModel model)
+        {
+            try
+            {
+                await childrenService.LeaveClassroomByChildIdAsync(id);
+                TempData[SuccessMessage] = $"You successfully removed {model.ChildFirstName} from the {model.Name}!";
+                return RedirectToAction("Index", "Child");
+            }
+            catch (Exception)
+            {
+                return GeneralError();
+            }
         }
         private bool IsValidAgeForClassroom(DateTime dateOfBirth, int minAge, int maxAge)
         {
@@ -109,7 +144,7 @@ namespace KinderConnect.Web.Controllers
         private IActionResult GeneralError()
         {
             TempData[ErrorMessage] = "Unexpected Error occured. Please try again later :(";
-            return RedirectToAction("Home", "Index");
+            return RedirectToAction("Index", "Home");
         }
 
     }

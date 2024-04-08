@@ -1,5 +1,6 @@
 ﻿@using KinderConnect.Web.ViewModels.Child;
 @model ChildDetailsViewModel
+
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -13,9 +14,19 @@
             <p>Parent/Guardian Contact: @Model.ParentGuardianContact</p>
             <p>Medical Information: @Model.MedicalInformation</p>
             <p>Allergies: @Model.Allergies</p>
-            <p>Classroom: @Model.Classroom.Name</p>
+
+            @if (Model.Classroom != null)
+            {
+                <p>Classroom: @Model.Classroom.Name</p>
+                <a asp-controller="Classroom" asp-action="LeaveClassroom" asp-route-id="@Model.Id" class="btn btn-danger btn-primary rounded">Leave Classroom</a>
+            }
+            else
+            {
+                <p class="text-danger">This child is not assigned to any classroom.</p>
+                <a asp-controller="Classroom" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-success btn-primary rounded">Join Classroom?</a>
+            }
+
             <a asp-controller="Child" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning btn-primary rounded">Edit</a>
-            <a asp-controller="Classroom" asp-action="LeaveClassroom" asp-route-id="@Model.Id" class="btn btn-danger btn-primary rounded">Leave a classroom</a>
         </div>
     </div>
 </div>

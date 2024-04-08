@@ -1,30 +1,25 @@
-﻿@using KinderConnect.Web.ViewModels.Classroom
+﻿@using KinderConnect.Web.ViewModels.Classroom;
 @model LeaveClassroomViewModel
 
-<div class="modal fade" id="leaveClassroomModal" tabindex="-1" role="dialog" aria-labelledby="leaveClassroomModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="leaveClassroomModalLabel">Leave Classroom Confirmation</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="@Model.ImageUrl" class="img-fluid" alt="@Model.ChildFirstName">
-                    </div>
-                    <div class="col-md-8">
-                        <p>Are you sure you want to remove @Model.ChildFirstName from @Model.Name?</p>
+<div class="container">
+    <div class="card border-primary">
+        <div class="card-header bg-danger text-white">
+            <h5 class="card-title text-white display-5">Leave Classroom Confirmation</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="@Model.ImageUrl" class="img-fluid rounded" alt="@Model.ChildFirstName">
+                </div>
+                <div class="col-md-8">
+                    <p class="lead mb-4">Are you sure you want to remove @Model.ChildFirstName from @Model.Name?</p>
+                    <div class="text-left">
+                        <form method="post" asp-controller="Classroom" asp-action="LeaveClassroom" asp-route-id="@Model.Id" class="d-inline">
+                            <button type="submit" class="btn btn-danger mr-2">Confirm</button>
+                        </form>
+                        <a asp-controller="Child" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <form method="post" asp-controller="Classroom" asp-action="LeaveClassroom" asp-route-id="@Model.Id" class="d-inline">
-                    <button type="submit" class="btn btn-danger">Confirm</button>
-                </form>
             </div>
         </div>
     </div>

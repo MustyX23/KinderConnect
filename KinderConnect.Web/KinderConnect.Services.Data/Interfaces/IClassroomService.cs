@@ -8,6 +8,7 @@ namespace KinderConnect.Services.Data.Interfaces
         Task<JoinClassroomFormModel> GetJoinClassroomFormModelByIdAsync(string classroomId);
         Task<LeaveClassroomViewModel> GetLeaveClassroomViewModelByChildIdAsync(string childId);
         Task<bool> IsClassroomSeatsAvailableAsync(string classroomId);
+        Task<JoinClassroomViewModel> GetJoinClassroomViewModelAsync(string classroomId, string childId);
         //Task<ClassroomDto> GetClassroomByIdAsync(string clasroomId);
         //Task CreateClassroomAsync(ClassroomDto classroomDto);
         //Task UpdateClassroomAsync(string clasroomId, ClassroomDto classroomDto);

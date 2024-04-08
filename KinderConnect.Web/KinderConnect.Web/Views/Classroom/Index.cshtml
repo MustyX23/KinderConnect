@@ -1,6 +1,10 @@
 ﻿@using KinderConnect.Web.ViewModels.Classroom
 @model IEnumerable<AllClassroomViewModel>
 
+@{
+    var childId = ViewContext.RouteData.Values["id"]?.ToString();
+}
+
 <div class="container-fluid pt-5">
     <div class="container">
         <div class="text-center pb-2">
@@ -37,7 +41,7 @@
                         </div>
                         @if (classroom.SeatsAvailable)
                         {
-                            <a asp-action="JoinClassroom" asp-route-id="@classroom.Id" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+                            <a asp-action="JoinClassroom" asp-route-id="@classroom.Id" asp-route-childId="@childId" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
                         }
                         else
                         {
