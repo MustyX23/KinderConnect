@@ -3,7 +3,6 @@ using KinderConnect.Data.Models;
 using KinderConnect.Services.Data.Interfaces;
 using KinderConnect.Web.ViewModels.Child;
 using KinderConnect.Web.ViewModels.Classroom;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace KinderConnect.Services.Data
@@ -36,6 +35,15 @@ namespace KinderConnect.Services.Data
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task<Child?> GetChildByIdAsync(string childId)
+        {
+            var child = await dbContext
+                .Children
+                .FirstOrDefaultAsync(c => c.IsActive && c.Id.ToString() == childId);
+
+            return child;
+        }
+
         public async Task<ChildClassroomJoinViewModel> GetChildByParentIdAsync(string parentguardianId)
         {
             var child = await dbContext
@@ -63,7 +71,7 @@ namespace KinderConnect.Services.Data
                     Id= c.Id.ToString(),
                     Name = c.Name,
                 })
-                .FirstAsync();
+                .FirstOrDefaultAsync();
 
             var childForDetails = await dbContext
                 .Children
@@ -160,6 +168,20 @@ namespace KinderConnect.Services.Data
 
             await dbContext.Children.AddAsync(child);
             await dbContext.SaveChangesAsync();
+        }
+
+        public async Task LeaveClassroomByChildIdAsync(string id)
+        {
+            var child = await dbContext.Children
+                .Where(c => c.IsActive)
+                .FirstOrDefaultAsync(c => c.Id.ToString() == id);
+
+            if (child != null)
+            {
+                child.ClassroomId = null; 
+                await dbContext.SaveChangesAsync();
+            }
+
         }
     }
 }
