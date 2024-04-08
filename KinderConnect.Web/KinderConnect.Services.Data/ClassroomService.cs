@@ -76,6 +76,7 @@ namespace KinderConnect.Services.Data
                 .Where(c => c.IsActive && c.Id == classroomId)                
                 .Select (c => new LeaveClassroomViewModel()
                 {
+                    Id = childId,
                     ChildFirstName = childsFirstName,
                     Name = c.Name,
                     ImageUrl = c.ImageUrl,

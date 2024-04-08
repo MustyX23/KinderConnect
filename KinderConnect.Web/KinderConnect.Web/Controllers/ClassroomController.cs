@@ -93,10 +93,10 @@ namespace KinderConnect.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> LeaveClassroom(string childId)
+        public async Task<IActionResult> LeaveClassroom(string id)
         {
             LeaveClassroomViewModel viewModel
-                = await classroomService.GetLeaveClassroomViewModelByChildIdAsync(childId);
+                = await classroomService.GetLeaveClassroomViewModelByChildIdAsync(id);
 
             return View(viewModel);
         }
