@@ -50,9 +50,8 @@ namespace KinderConnect.Data.Models
 
         [Required]
         public ApplicationUser ParentGuardian { get; set; } = null!;
-
-        [Required]
-        public Guid ClassroomId { get; set; }
+        
+        public Guid? ClassroomId { get; set; }
 
         public Classroom Classroom { get; set; } = null!;
     }
