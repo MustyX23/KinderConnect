@@ -15,6 +15,7 @@ namespace KinderConnect.Services.Data.Interfaces
         Task<EditChildFormModel> GetChildForEditByIdAsync(string id);
         Task EditChildByIdAsync(string id, EditChildFormModel formModel);
         Task LeaveClassroomByChildIdAsync(string id);
+        Task JoinChildToClassroomByIdAsync(string id, string childId, string parentGuardianId);
         //Task<IEnumerable<ChildDto>> GetAllChildrenAsync();
         //Task<ChildDto> GetChildByIdAsync(string childId);
         //Task CreateChildAsync(ChildDto childDto);

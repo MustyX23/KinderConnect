@@ -170,6 +170,22 @@ namespace KinderConnect.Services.Data
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task JoinChildToClassroomByIdAsync(string id, string childId, string parentGuardianId)
+        {
+            var child = await dbContext
+                .Children
+                .FirstOrDefaultAsync(c => c.IsActive
+                && c.Id.ToString() == childId
+                && c.ParentGuardianId.ToString() == parentGuardianId);
+
+            if (child != null)
+            {
+                child.ClassroomId = Guid.Parse(id);
+                await dbContext.SaveChangesAsync();
+            }
+            
+        }
+
         public async Task LeaveClassroomByChildIdAsync(string id)
         {
             var child = await dbContext.Children
