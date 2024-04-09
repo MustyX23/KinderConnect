@@ -47,9 +47,9 @@ namespace KinderConnect.Web.Controllers
                 GeneralError();
             }
 
-            return RedirectToAction("Index", "Classroom");
-            
+            return RedirectToAction("Index", "Classroom");            
         }
+
         [HttpPost("JoinClassroom/{id}")]
         public async Task<IActionResult> JoinClassroom(JoinClassroomFormModel model)
         {
@@ -92,17 +92,23 @@ namespace KinderConnect.Web.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-        [HttpGet("JoinClassroom/{id}/{childId}")]
+        [HttpPost("JoinClassroom/{id}/{childId?}")]
         public async Task<IActionResult> JoinClassroom(string id, string childId)
         {
             string parentGuardianId = User.GetUserId();
 
+            var child 
+                = await childrenService.GetChildByIdAsync(childId);
+
+            if (child == null)
+            {
+                TempData[ErrorMessage] = "The Child doesn't exist in the system.";
+                return RedirectToAction("Index", "Classroom");
+            }
             try
             {
-                var formModel =
-                await classroomService.GetJoinClassroomViewModelAsync(id, childId);
-
-                return View("JoinClassroomByChildId", formModel);
+                await childrenService.JoinChildToClassroomByIdAsync(id, childId, parentGuardianId);
+                TempData[SuccessMessage] = $"You successfully added {child.FirstName} to the Kindergarden!";
             }
             catch (Exception)
             {
@@ -112,8 +118,6 @@ namespace KinderConnect.Web.Controllers
             return RedirectToAction("Index", "Classroom");
 
         }
-
-
         public async Task<IActionResult> LeaveClassroom(string id)
         {
             LeaveClassroomViewModel viewModel
