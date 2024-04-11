@@ -13,9 +13,12 @@ namespace KinderConnect.Services.Data.Interfaces
         Task<IEnumerable<MyChildrenIndexViewModel>> GetChildrenByParentIdAsync(string parentGuardianId);
         Task<ChildDetailsViewModel> GetChildForDetailsByIdAsync(string childId);
         Task<EditChildFormModel> GetChildForEditByIdAsync(string id);
+        Task<LeaveChildViewModel> GetLeaveChildViewModelByIdAsync(string id);
         Task EditChildByIdAsync(string id, EditChildFormModel formModel);
         Task LeaveClassroomByChildIdAsync(string id);
         Task JoinChildToClassroomByIdAsync(string id, string childId, string parentGuardianId);
+
+        Task<bool> IsChildAlreadyInAClassroomByIdAsync(string childId);
         //Task<IEnumerable<ChildDto>> GetAllChildrenAsync();
         //Task<ChildDto> GetChildByIdAsync(string childId);
         //Task CreateChildAsync(ChildDto childDto);

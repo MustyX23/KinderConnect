@@ -134,6 +134,20 @@ namespace KinderConnect.Services.Data
             return children;
         }
 
+        public async Task<LeaveChildViewModel> GetLeaveChildViewModelByIdAsync(string id)
+        {
+            var viewModel = await dbContext
+                .Children
+                .Where(c => c.Id.ToString() == id && c.IsActive)
+                .Select(c => new LeaveChildViewModel()
+                {
+                    FirstName = c.FirstName,
+                })
+                .FirstOrDefaultAsync();
+
+            return viewModel;
+        }
+
         public async Task<bool> IsChildAlreadyInAClassroomAsync(JoinClassroomFormModel model, string parentGuardianId)
         {
             bool isChildAlreadyInAClassroom = await dbContext.Children
@@ -146,7 +160,13 @@ namespace KinderConnect.Services.Data
             return isChildAlreadyInAClassroom;
         }
 
-        
+        public async Task<bool> IsChildAlreadyInAClassroomByIdAsync(string childId)
+        {
+            return await dbContext
+                .Children
+                .Where(c => c.Id.ToString() == childId)
+                .AnyAsync(c => c.IsActive && c.ClassroomId != null);
+        }
 
         public async Task JoinChildToClassroomAsync(JoinClassroomFormModel model, string parentGuardianId)
         {
