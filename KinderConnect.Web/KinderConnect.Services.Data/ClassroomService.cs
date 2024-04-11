@@ -14,14 +14,28 @@ namespace KinderConnect.Services.Data
         {
             this.dbContext = dbContext;
         }
+
+        public async Task DecreaseTotalSeatsByIdAsync(string classroomId)
+        {
+            var classroom = await dbContext
+                .Classrooms
+                .FirstOrDefaultAsync(c => c.IsActive && c.Id.ToString() == classroomId);
+
+            classroom.TotalSeats -= 1;
+
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<AllClassroomViewModel>> GetAllClassroomsAsync()
         {
-            var allClassrooms = await dbContext.Classrooms.ToListAsync(); 
+            var allClassrooms = await dbContext.Classrooms
+                .Include(c => c.Children)
+                .ToListAsync();
 
             var allClassroomsForView = new List<AllClassroomViewModel>();
 
             foreach (var classroom in allClassrooms)
-            {               
+            {
                 var seatsAvailable = await IsClassroomSeatsAvailableAsync(classroom.Id.ToString());
 
                 allClassroomsForView.Add(new AllClassroomViewModel
@@ -34,6 +48,7 @@ namespace KinderConnect.Services.Data
                     TotalSeats = classroom.TotalSeats,
                     TutionFee = classroom.TutionFee.ToString(),
                     ImageUrl = classroom.ImageUrl,
+                    TotalSeatsAvailable = classroom.TotalSeats - classroom.Children.Count,
                     SeatsAvailable = seatsAvailable
                 });
             }
@@ -41,9 +56,43 @@ namespace KinderConnect.Services.Data
             return allClassroomsForView;
         }
 
+        public async Task<ClassroomViewModel> GetClassroomViewModelByIdAsync(string classroomId)
+        {
+            var viewModel = await dbContext
+                .Classrooms
+                .Where(c => c.IsActive && c.Id.ToString() == classroomId)
+                .Select(c => new ClassroomViewModel()
+                {
+                    ClassroomName = c.Name,
+                    ClassroomImageUrl = c.ImageUrl,
+                    ClassroomMaximumAge = c.MaximumAge,
+                    ClassroomMinimumAge = c.MinimumAge,
+                })
+                .FirstOrDefaultAsync();
+
+            return viewModel;
+        }
+
+        public async Task<JoinClassroomByChildViewModel> GetJoinClassroomByChildViewModelByIdAsync(string id)
+        {
+            var viewModel = await dbContext
+                .Classrooms
+                .Where(c => c.IsActive && c.Id.ToString() == id)
+                .Select(c => new JoinClassroomByChildViewModel
+                {
+                    Id = c.Id.ToString(),
+                    Name = c.Name,
+                    ImageUrl = c.ImageUrl,
+                })
+                .FirstOrDefaultAsync();
+
+            return viewModel;
+        }
+
         public async Task<JoinClassroomFormModel> GetJoinClassroomFormModelByIdAsync(string classroomId)
         {
             var classroomFormModel = await dbContext.Classrooms
+                .Where(c => c.IsActive && c.Id.ToString() == classroomId)
                 .Select(c => new JoinClassroomFormModel()
                 {
                     ClassroomImageUrl = c.ImageUrl,
@@ -52,7 +101,7 @@ namespace KinderConnect.Services.Data
                     ClassroomMaximumAge = c.MaximumAge,
                     ClassroomMinimumAge = c.MinimumAge,
                 })
-                .FirstOrDefaultAsync(c => c.ClassroomId == classroomId);
+                .FirstOrDefaultAsync();
 
             return classroomFormModel;
                 
@@ -121,6 +170,7 @@ namespace KinderConnect.Services.Data
                 .Select (c => new LeaveClassroomViewModel()
                 {
                     Id = childId,
+                    ClassroomId = c.Id.ToString(),
                     ChildFirstName = childsFirstName,
                     Name = c.Name,
                     ImageUrl = c.ImageUrl,
@@ -128,6 +178,17 @@ namespace KinderConnect.Services.Data
                 .FirstAsync();
 
             return viewModel;
+        }
+
+        public async Task IncreaseTotalSeatsByIdAsync(string classroomId)
+        {
+            var classroom = await dbContext
+                .Classrooms
+                .FirstOrDefaultAsync(c => c.IsActive && c.Id.ToString() == classroomId);
+
+            classroom.TotalSeats += 1;
+
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<bool> IsClassroomSeatsAvailableAsync(string classroomId)
