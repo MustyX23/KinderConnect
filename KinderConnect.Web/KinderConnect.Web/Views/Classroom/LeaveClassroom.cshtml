@@ -14,7 +14,7 @@
                 <div class="col-md-8">
                     <p class="lead mb-4">Are you sure you want to remove @Model.ChildFirstName from @Model.Name?</p>
                     <div class="text-left">
-                        <form method="post" asp-controller="Classroom" asp-action="LeaveClassroom" asp-route-id="@Model.Id" class="d-inline">
+                        <form method="post" asp-controller="Classroom" asp-action="LeaveClassroom" asp-route-childId="@Model.Id" asp-route-classroomId="@Model.ClassroomId" class="d-inline">
                             <button type="submit" class="btn btn-danger mr-2">Confirm</button>
                         </form>
                         <a asp-controller="Child" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>

@@ -1,0 +1,21 @@
+﻿@using KinderConnect.Web.ViewModels.Classroom;
+@model JoinClassroomByChildViewModel
+
+<div class="row">
+    <div class="col-lg-6">
+        <h2>Join Your Child at the @Model.Name</h2>
+        <div class="col-lg-6">
+            <img src="@Model.ImageUrl" class="img-fluid mb-4" alt="ClassRoom Image" style="max-width: 100%; height: auto;">
+        </div>
+        <form method="post">
+            <input type="hidden" name="ParentGuardianId">
+            <input type="hidden" name="ClassroomId" value="@Model.Id">
+            <button type="submit" class="btn btn-primary btn-lg btn-block btn-rounded">Join</button>
+        </form>
+    </div>    
+</div>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

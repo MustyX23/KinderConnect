@@ -18,7 +18,7 @@
             @if (Model.Classroom != null)
             {
                 <p>Classroom: @Model.Classroom.Name</p>
-                <a asp-controller="Classroom" asp-action="LeaveClassroom" asp-route-id="@Model.Id" class="btn btn-danger btn-primary rounded">Leave Classroom</a>
+                <a asp-controller="Classroom" asp-action="LeaveClassroom" asp-route-childId="@Model.Id" class="btn btn-danger btn-primary rounded">Leave Classroom</a>
             }
             else
             {

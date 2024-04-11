@@ -4,6 +4,7 @@ using static KinderConnect.Common.NotificationMessagesConstants;
 using KinderConnect.Web.ViewModels.Classroom;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
 
 namespace KinderConnect.Web.Controllers
 {
@@ -47,9 +48,9 @@ namespace KinderConnect.Web.Controllers
                 GeneralError();
             }
 
-            return RedirectToAction("Index", "Classroom");            
+            return RedirectToAction("Index", "Classroom");
+            
         }
-
         [HttpPost("JoinClassroom/{id}")]
         public async Task<IActionResult> JoinClassroom(JoinClassroomFormModel model)
         {
@@ -83,6 +84,7 @@ namespace KinderConnect.Web.Controllers
             try
             {
                 await childrenService.JoinChildToClassroomAsync(model, parentguardianId);
+                await classroomService.DecreaseTotalSeatsByIdAsync(model.ClassroomId);
                 TempData[SuccessMessage] = $"You successfully added {model.FirstName} to the Kindergarden!";
             }
             catch (Exception)
@@ -92,23 +94,15 @@ namespace KinderConnect.Web.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-        [HttpPost("JoinClassroom/{id}/{childId?}")]
-        public async Task<IActionResult> JoinClassroom(string id, string childId)
+        [HttpGet]
+        public async Task<IActionResult> JoinClassroomByChild(string id)
         {
-            string parentGuardianId = User.GetUserId();
-
-            var child 
-                = await childrenService.GetChildByIdAsync(childId);
-
-            if (child == null)
-            {
-                TempData[ErrorMessage] = "The Child doesn't exist in the system.";
-                return RedirectToAction("Index", "Classroom");
-            }
             try
             {
-                await childrenService.JoinChildToClassroomByIdAsync(id, childId, parentGuardianId);
-                TempData[SuccessMessage] = $"You successfully added {child.FirstName} to the Kindergarden!";
+                var formModel =
+                await classroomService.GetJoinClassroomByChildViewModelByIdAsync(id);
+
+                return View(formModel);
             }
             catch (Exception)
             {
@@ -118,20 +112,83 @@ namespace KinderConnect.Web.Controllers
             return RedirectToAction("Index", "Classroom");
 
         }
-        public async Task<IActionResult> LeaveClassroom(string id)
+        [HttpPost]
+        public async Task<IActionResult> JoinClassroomByChild(string classroomId, string childId)
+        {
+            string parentGuardianId = User.GetUserId();
+
+            var child
+                = await childrenService.GetChildByIdAsync(childId);
+
+            var classroomViewModel
+                = await classroomService.GetClassroomViewModelByIdAsync(classroomId);
+
+            bool childIsAlreadyInAClassroom
+                = await childrenService.IsChildAlreadyInAClassroomByIdAsync(childId);
+
+            bool seatsAvailable
+                = await classroomService.IsClassroomSeatsAvailableAsync(classroomId);
+
+            if (!seatsAvailable)
+            {
+                ModelState.AddModelError(string.Empty, "Sorry, the classroom is already full.");
+                TempData[ErrorMessage] = $"The classroom {classroomViewModel.ClassroomName} is already full.";
+                return RedirectToAction("Index", "Classroom");
+            }
+            if (childIsAlreadyInAClassroom)
+            {
+                ModelState.AddModelError(string.Empty, "The child's already in a classroom.");
+                TempData[ErrorMessage] = $"Your child's already in a classroom.";
+                return RedirectToAction("Index", "Child");
+            }
+
+            if (!IsValidAgeForClassroom(child.DateOfBirth, classroomViewModel.ClassroomMinimumAge, classroomViewModel.ClassroomMaximumAge))
+            {
+                ModelState.AddModelError(string.Empty, "The child's age does not meet the classroom requirements.");
+                TempData[ErrorMessage] = $"Your child's age doesn't meet {classroomViewModel.ClassroomName} classroom requirements.";
+                return RedirectToAction("Index", "Classroom");
+            }
+            if (child == null)
+            {
+                TempData[ErrorMessage] = "The Child doesn't exist in the system.";
+                return RedirectToAction("Index", "Classroom");
+            }
+
+            try
+            {
+                await childrenService.JoinChildToClassroomByIdAsync(classroomId, childId, parentGuardianId);
+                await classroomService.DecreaseTotalSeatsByIdAsync(classroomId);
+
+                TempData[SuccessMessage] = $"You successfully added {child.FirstName} to the Kindergarden!";
+                return RedirectToAction("Index", "Child");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Classroom");
+            }
+        }
+        public async Task<IActionResult> LeaveClassroom(string childId)
         {
             LeaveClassroomViewModel viewModel
-                = await classroomService.GetLeaveClassroomViewModelByChildIdAsync(id);
+                = await classroomService.GetLeaveClassroomViewModelByChildIdAsync(childId);
 
             return View(viewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> LeaveClassroom(string id, LeaveClassroomViewModel model)
+        public async Task<IActionResult> LeaveClassroom(string childId, string classroomId)
         {
+            var childViewModel
+                = await childrenService.GetLeaveChildViewModelByIdAsync(childId);
+
+            var classroomViewModel
+                = await classroomService.GetClassroomViewModelByIdAsync(classroomId);
+
             try
             {
-                await childrenService.LeaveClassroomByChildIdAsync(id);
-                TempData[SuccessMessage] = $"You successfully removed {model.ChildFirstName} from the {model.Name}!";
+                await childrenService.LeaveClassroomByChildIdAsync(childId);
+                await classroomService.IncreaseTotalSeatsByIdAsync(classroomId);
+
+                TempData[SuccessMessage] = $"You successfully removed {childViewModel.FirstName} from the {classroomViewModel.ClassroomName}!";
                 return RedirectToAction("Index", "Child");
             }
             catch (Exception)

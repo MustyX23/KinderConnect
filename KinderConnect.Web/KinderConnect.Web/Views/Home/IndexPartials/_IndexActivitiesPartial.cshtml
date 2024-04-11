@@ -1,7 +1,11 @@
 ﻿@using KinderConnect.Web.ViewModels.Home;
 @model IndexViewModel
 
-<div class="container-fluid pt-5">    
+<div class="container-fluid pt-5">
+    <div class="text-center pb-2">
+        <p class="section-title px-5"><span class="px-2">Activities</span></p>
+        <h1 class="mb-4">Some of our Activities :)</h1>
+    </div>
     <div class="container pb-3">
         <div class="row">
             @foreach (var activity in Model.Activities)

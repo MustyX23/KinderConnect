@@ -30,6 +30,10 @@
                                 <div class="col-6 py-1 text-right border-right"><strong>Total Seats</strong></div>
                                 <div class="col-6 py-1">@classroom.TotalSeats Seats</div>
                             </div>
+                            <div class="row border-bottom">
+                                <div class="col-6 py-1 text-right border-right"><strong>Available Seats</strong></div>
+                                <div class="col-6 py-1 text-orange">@classroom.TotalSeatsAvailable Seats </div>
+                            </div>
                             @if (!classroom.SeatsAvailable)
                             {
                                 <div class="row border-bottom">
@@ -41,7 +45,14 @@
                         </div>
                         @if (classroom.SeatsAvailable)
                         {
-                            <a asp-action="JoinClassroom" asp-route-id="@classroom.Id" asp-route-childId="@childId" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+                            @if (!string.IsNullOrEmpty(childId))
+                            {
+                                <a asp-action="JoinClassroomByChild" asp-route-id="@classroom.Id" asp-route-childId="@childId" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+                            }
+                            else
+                            {
+                                <a asp-action="JoinClassroom" asp-route-id="@classroom.Id" class="btn btn-primary px-4 mx-auto mb-4">Join Now</a>
+                            }
                         }
                         else
                         {
