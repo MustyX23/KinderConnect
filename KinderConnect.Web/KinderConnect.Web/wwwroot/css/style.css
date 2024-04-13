@@ -5206,6 +5206,13 @@ a.badge-dark:focus, a.badge-dark.focus {
   margin-bottom: 0;
   border-radius: 5px;
 }
+.list-group-oval {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    border-radius: 2.27rem;
+}
 
 .list-group-item-action {
   width: 100%;
