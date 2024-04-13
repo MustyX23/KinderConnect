@@ -1,0 +1,27 @@
+﻿@using KinderConnect.Web.ViewModels.Teacher;
+@model IEnumerable<MyClassroomViewModel>
+@{
+    ViewData["Title"] = "My Classrooms";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+    <div class="list-group-oval">
+        @foreach (var classroom in Model)
+        {
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="@classroom.ClassroomImageUrl" alt="Classroom Image" class="img-fluid" />
+                    </div>
+                    <div class="col-md-9">
+                        <h4>@classroom.ClassroomName</h4>
+                        <a asp-controller="Attendance" asp-action="AttendanceRecords" asp-route-teacherId="@classroom.TeacherId" asp-route-classroomId="@classroom.ClassroomId" class="btn btn-primary">View Attendance</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
