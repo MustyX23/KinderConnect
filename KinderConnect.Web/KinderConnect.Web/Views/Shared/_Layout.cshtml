@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using KinderConnect.Services.Data.Interfaces;
+@using KinderConnect.Web.Infrastructure.Extensions;
+@inject ITeacherService TeacherService;
+
+@{
+    string userId = User.GetUserId();
+    bool isTeacher = await TeacherService.IsTeacherByUserIdAsync(userId);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -37,7 +46,11 @@
                         <a class="nav-item nav-link" asp-area="" asp-controller = "Home" asp-action="About">About</a>
                         <a class="nav-item nav-link" asp-area="" asp-controller="Classroom" asp-action="Index">Classrooms</a>
                         <a class="nav-item nav-link" asp-area="" asp-controller="Child" asp-action="Index">My Kids</a>
-                        @* <a class="nav-item nav-link" asp-area="" asp-controller="Teacher" asp-action="Index">Teachers</a> *@
+                        @if (isTeacher)
+                        {
+                            <a class="nav-item nav-link" asp-area="" asp-controller="Teacher" asp-action="MyClassrooms">My Classrooms</a>
+                        }
+                        
                         <a class="nav-item nav-link" asp-area="" asp-controller="Child" asp-action="Gallery">Gallery</a>
 @*                         <div class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
