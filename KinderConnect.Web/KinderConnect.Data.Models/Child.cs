@@ -32,6 +32,8 @@ namespace KinderConnect.Data.Models
 
         public bool IsActive { get; set; }
 
+        public bool IsPresent { get; set; }
+
         [Required]
         [RegularExpression(@"^(?:\+?\d{1,3}\s?)?(?:\d{3}(?:[-\s]?)\d{2,3}(?:[-\s]?)\d{4})$")]
         public string ParentGuardianContact { get; set; } = null!;
