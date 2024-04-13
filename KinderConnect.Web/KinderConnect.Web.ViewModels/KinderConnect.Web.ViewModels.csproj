@@ -10,8 +10,4 @@
     <ProjectReference Include="..\KinderConnect.Common\KinderConnect.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Attendance\" />
-  </ItemGroup>
-
 </Project>
