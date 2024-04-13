@@ -1,4 +1,6 @@
-﻿namespace KinderConnect.Services.Data.Interfaces
+﻿using KinderConnect.Web.ViewModels.Attendance;
+
+namespace KinderConnect.Services.Data.Interfaces
 {
     public interface IAttendanceService
     {
@@ -7,5 +9,7 @@
         //Task RecordAttendanceAsync(AttendanceRecordDto attendanceRecordDto);
         //Task UpdateAttendanceAsync(string id, AttendanceRecordDto attendanceRecordDto);
         //Task DeleteAttendanceAsync(string id);
+        Task<IEnumerable<AttendanceRecordFormModel>> GetAllAttendancesByTeacherAndClassroomIdAsync(string teacherId, string classroomId);
+        Task<AttendanceRecordFormModel> GetAttendanceRecordFormModelByClassroomIdAsync(string classroomId);
     }
 }
