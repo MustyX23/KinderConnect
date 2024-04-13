@@ -32,6 +32,36 @@ namespace KinderConnect.Services.Data
             };
         }
 
+        public async Task<IEnumerable<MyClassroomViewModel>> GetMyClassroomsByTeacherIdAsync(string teacherId)
+        {
+            var myClassrooms = await
+                dbContext
+                .ClassroomsTeachers
+                .Where(ct => ct.TeacherId.ToString() == teacherId)
+                .Select(ct => new MyClassroomViewModel 
+                {
+                    TeacherId = ct.Teacher.Id.ToString(),
+                    TeacherFirstName = ct.Teacher.TeacherUser.FirstName,
+                    ClassroomId = ct.ClassroomId.ToString(),
+                    ClassroomImageUrl = ct.Classroom.ImageUrl,
+                    ClassroomName = ct.Classroom.Name,
+                })
+                .ToArrayAsync();
+
+            return myClassrooms;
+        }
+
+        public async Task<string> GetTeacherIdByUserIdAsync(string userId)
+        {
+            string teacherId = await dbContext
+                .Teachers
+                .Where(t => t.TeacherUserId.ToString() == userId)
+                .Select(t => t.Id.ToString())
+                .FirstOrDefaultAsync();
+
+            return teacherId;
+        }
+
         public async Task<IEnumerable<AllTeacherViewModel>> GetTeachersForViewAsync()
         {
             var teachersForView = await dbContext.Teachers
@@ -45,6 +75,15 @@ namespace KinderConnect.Services.Data
                 .ToArrayAsync();
 
             return teachersForView;
+        }
+
+        public async Task<bool> IsTeacherByUserIdAsync(string userId)
+        {
+            bool isUser = await dbContext
+                .Teachers
+                .AnyAsync(t => t.TeacherUser.Id.ToString() == userId);
+
+            return isUser;
         }
     }
 }
