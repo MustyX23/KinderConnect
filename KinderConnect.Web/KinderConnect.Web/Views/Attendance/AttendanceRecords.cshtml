@@ -1,0 +1,52 @@
+﻿@using KinderConnect.Web.ViewModels.Attendance;
+@model IEnumerable<AttendanceRecordFormModel>
+
+@{
+    ViewData["Title"] = "Attendance Records";
+}
+
+<div class="container">
+    <h2>Attendance Records</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Activity</th>
+                <th>Comment</th>
+                <th>Children</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var attendance in Model)
+            {
+                <tr>
+                    <td>@attendance.Start</td>
+                    <td>@attendance.End</td>
+                    <td>@attendance.Actvity</td>
+                    <td>@attendance.Comment</td>
+                    <td>
+                        @foreach (var child in attendance.Children)
+                        {
+                            <span>@child.FirstName @child.LastName</span>
+                            @if (child.IsPresent)
+                            {
+                                <span class="badge bg-primary">Present</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Absent</span>
+                            }
+                            <br />
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <a asp-controller="Attendance" asp-action="Create" asp-route-classroomId="@attendance.ClassroomId" class="btn btn-primary">Add Attendance</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
