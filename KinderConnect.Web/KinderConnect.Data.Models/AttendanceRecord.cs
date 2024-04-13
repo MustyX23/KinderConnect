@@ -21,10 +21,13 @@ namespace KinderConnect.Data.Models
         public DateTime Start { get; set; }
 
         [Required]
-        public TimeSpan End { get; set; }
+        public DateTime End { get; set; }
 
         [Required]
-        public int ActivityId { get; set; }       
+        public int ActivityId { get; set; }
+
+        [Required]
+        public Guid ClassroomId { get; set; }
 
         public string? Comment { get; set; }
 
@@ -38,6 +41,9 @@ namespace KinderConnect.Data.Models
 
         [Required]
         public Activity Activity { get; set; } = null!;
+
+        [Required]
+        public Classroom Classroom { get; set; } = null!;
 
     }
 }
