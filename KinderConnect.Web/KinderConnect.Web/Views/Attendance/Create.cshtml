@@ -1,0 +1,60 @@
+﻿@using KinderConnect.Web.ViewModels.Attendance;
+@model AttendanceRecordFormModel
+
+<h2>Add Attendance Record</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Start"></label>
+        <input asp-for="Start" class="form-control" type="datetime-local" />
+        <span asp-validation-for="Start" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="End"></label>
+        <input asp-for="End" class="form-control" type="datetime-local" />
+        <span asp-validation-for="End" class="small text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Actvity"></label>
+        <select asp-for="ActivityId" class="form-control">
+            @foreach (var activity in Model.Activities)
+            {
+                <option value="@activity.Id">@activity.Name</option>
+            }
+        </select>
+        <span asp-validation-for="ActivityId" class="small text-danger"></span>
+    </div>
+    <h3>Add Children</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Child Name</th>
+                <th>Presence</th>
+                <th>Comment</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="children-table">
+            @foreach (var child in Model.Children)
+            {
+                <tr>
+                    <td>
+                        <label>@child.FullName</label>
+                        <input type="hidden" asp-for="@child.Id" />
+                    </td>
+                    <td>
+                        <input type="checkbox" asp-for="@child.IsPresent" />
+                    </td>
+                    <td>
+                        <input type="text" asp-for="@Model.Comment" class="form-control" placeholder="Enter comment" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
