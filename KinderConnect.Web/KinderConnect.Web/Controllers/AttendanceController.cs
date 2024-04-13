@@ -32,7 +32,8 @@ namespace KinderConnect.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AttendanceRecordFormModel model)
         {
-            return Ok();
+            await attendanceService.CreateAttendanceRecordAsync(model);
+            return RedirectToAction("AttendanceRecords", "Attendance");
         }
     }
 }

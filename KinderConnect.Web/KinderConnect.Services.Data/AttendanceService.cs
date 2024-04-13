@@ -5,7 +5,7 @@ using KinderConnect.Web.ViewModels.Activity;
 using KinderConnect.Web.ViewModels.Attendance;
 using KinderConnect.Web.ViewModels.Child;
 using Microsoft.EntityFrameworkCore;
-using static KinderConnect.Common.EntityValidationConstants;
+using System.Globalization;
 
 namespace KinderConnect.Services.Data
 {
@@ -16,6 +16,33 @@ namespace KinderConnect.Services.Data
         public AttendanceService(KinderConnectDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task CreateAttendanceRecordAsync(AttendanceRecordFormModel model)
+        {
+            //TODO: Implement later.
+            //Load: Children | Activity | List<Comment>
+            List<AttendanceRecord> attendanceRecords = new List<AttendanceRecord>();
+
+            foreach (var child in model.Children)
+            {
+                AttendanceRecord attendanceRecord = new AttendanceRecord()
+                {
+                    Start = DateTime.ParseExact(model.Start, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture),
+                    End = DateTime.ParseExact(model.End, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture),
+                    Comment = model.Comment,
+                    IsActive = true,
+                    ActivityId = model.ActivityId,
+                    ClassroomId = Guid.Parse(model.ClassroomId),
+                    TeacherId = Guid.Parse(model.TeacherId),
+                    ChildId = Guid.Parse(child.Id)
+                };
+
+                attendanceRecords.Add(attendanceRecord);
+            }
+
+            await dbContext.AttendanceRecords.AddRangeAsync(attendanceRecords);
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<AttendanceRecordFormModel>> GetAllAttendancesByTeacherAndClassroomIdAsync(string teacherId, string classroomId)

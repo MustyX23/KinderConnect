@@ -28,7 +28,7 @@
                     <td>
                         @foreach (var child in attendance.Children)
                         {
-                            <span>@child.FirstName @child.LastName</span>
+                            <span>@child.FullName</span>
                             @if (child.IsPresent)
                             {
                                 <span class="badge bg-primary">Present</span>
