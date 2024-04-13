@@ -4,6 +4,7 @@ using KinderConnect.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KinderConnect.Data.Migrations
 {
     [DbContext(typeof(KinderConnectDbContext))]
-    partial class KinderConnectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240413081750_AddIsPresentPropertyToChildEntity")]
+    partial class AddIsPresentPropertyToChildEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,7 +167,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("702de3dd-c1e7-4f40-9131-623aadb7e765"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "adaca371-6db3-4a36-bf50-533c998ee57c",
+                            ConcurrencyStamp = "dc101e20-3322-4f54-bf1e-3e00794949b0",
                             DateOfBirth = new DateTime(1972, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mrpopov@gmail.com",
                             EmailConfirmed = false,
@@ -185,7 +187,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b497920f-8dbb-4721-be2c-22890bf228b6",
+                            ConcurrencyStamp = "302960a4-e949-41a8-a621-b03f03d390ff",
                             DateOfBirth = new DateTime(1971, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mrbuhov@gmail.com",
                             EmailConfirmed = false,
@@ -205,7 +207,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("bbfe1b04-2741-4440-9334-595cb40a9f64"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c3ff89a4-c504-42b9-944b-c199a301b666",
+                            ConcurrencyStamp = "3554c174-2db7-4479-9fca-6f5fc6be9b8f",
                             DateOfBirth = new DateTime(1990, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "parent1@gmail.com",
                             EmailConfirmed = false,
@@ -225,7 +227,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("b785b0d0-3d8c-4c37-a304-e2c41dcab31a"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8121cdeb-35ec-400a-ab1e-e5f8ef128cd5",
+                            ConcurrencyStamp = "95710875-d465-4ee0-8de7-d9bcc8854754",
                             DateOfBirth = new DateTime(1992, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "parent2@gmail.com",
                             EmailConfirmed = false,
@@ -255,9 +257,6 @@ namespace KinderConnect.Data.Migrations
                     b.Property<Guid>("ChildId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ClassroomId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
@@ -280,8 +279,6 @@ namespace KinderConnect.Data.Migrations
                     b.HasIndex("ActivityId");
 
                     b.HasIndex("ChildId");
-
-                    b.HasIndex("ClassroomId");
 
                     b.HasIndex("TeacherId");
 
@@ -419,7 +416,7 @@ namespace KinderConnect.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("67a7a1c4-c442-4467-ac63-04915c5d7645"),
+                            Id = new Guid("c7ad8ae2-5aed-4299-bd35-2ef5cbb57333"),
                             Age = 3,
                             ClassroomId = new Guid("632bc679-3cc2-45b7-971b-6a92105321de"),
                             DateOfBirth = new DateTime(2021, 3, 3, 18, 30, 0, 0, DateTimeKind.Unspecified),
@@ -434,7 +431,7 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c1210abd-832a-40b1-80dd-be3a9c9c453f"),
+                            Id = new Guid("66aaa458-82c8-4f08-a02f-1d9d3631987a"),
                             Age = 4,
                             ClassroomId = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"),
                             DateOfBirth = new DateTime(2020, 3, 10, 19, 0, 0, 0, DateTimeKind.Unspecified),
@@ -615,7 +612,7 @@ namespace KinderConnect.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c7cdeb33-e13d-408a-bced-8e20a573ca37"),
+                            Id = new Guid("3e9d2729-2400-4570-9fb3-e86be47f3e04"),
                             ImageUrl = "https://i.guim.co.uk/img/media/b897974dce4559ebe02af27e10c475068ead46a8/0_0_4000_2400/master/4000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=a53a3c7714a215af7051daea5b14971c",
                             QualificationId = 1,
                             Summary = "Inspires young minds in the kindergarten classroom with his passion for storytelling and language. With a nurturing and supportive approach, Lyubomir guides children on a journey of exploration and discovery through the world of writing. He encourages creativity and self-expression, helping students develop foundational writing skills such as letter formation, phonics, and basic sentence structure.",
@@ -623,7 +620,7 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8bd5766b-87ec-4f4c-a50c-545d0a192793"),
+                            Id = new Guid("d51163db-f9bf-4232-acb8-d5073e4497d4"),
                             ImageUrl = "https://img.freepik.com/premium-photo/old-male-teacher-portrait-closeup-face-professor-teacher-blackboard-isolated_265223-53892.jpg",
                             QualificationId = 1,
                             Summary = "A dedicated drawing teacher, brings creativity and warmth to the kindergarten classroom as he introduces young children to the world of artistic expression through drawing. With a gentle and encouraging approach, Mustafa fosters the development of fine motor skills, creativity, and self-expression in his students. He designs engaging drawing activities tailored to the unique interests and abilities of each child, from exploring simple shapes to creating imaginative scenes.",
@@ -795,12 +792,6 @@ namespace KinderConnect.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("KinderConnect.Data.Models.Classroom", "Classroom")
-                        .WithMany("AttendanceRecords")
-                        .HasForeignKey("ClassroomId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("KinderConnect.Data.Models.Teacher", "Teacher")
                         .WithMany("AttendanceRecords")
                         .HasForeignKey("TeacherId")
@@ -810,8 +801,6 @@ namespace KinderConnect.Data.Migrations
                     b.Navigation("Activity");
 
                     b.Navigation("Child");
-
-                    b.Navigation("Classroom");
 
                     b.Navigation("Teacher");
                 });
@@ -943,8 +932,6 @@ namespace KinderConnect.Data.Migrations
 
             modelBuilder.Entity("KinderConnect.Data.Models.Classroom", b =>
                 {
-                    b.Navigation("AttendanceRecords");
-
                     b.Navigation("Children");
 
                     b.Navigation("ClassroomsTeachers");
