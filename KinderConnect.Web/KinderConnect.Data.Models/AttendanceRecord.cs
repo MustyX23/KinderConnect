@@ -7,12 +7,10 @@ namespace KinderConnect.Data.Models
         public AttendanceRecord()
         {
             Id = Guid.NewGuid();
+            AttendanceChildren = new HashSet<AttendanceChild>();
         }
 
         public Guid Id { get; set; }
-
-        [Required]
-        public Guid ChildId { get; set; }
 
         [Required]
         public Guid TeacherId { get; set; }
@@ -34,9 +32,6 @@ namespace KinderConnect.Data.Models
         public bool IsActive {  get; set; }
 
         [Required]
-        public Child Child { get; set; } = null!;
-
-        [Required]
         public Teacher Teacher { get; set; } = null!;
 
         [Required]
@@ -44,6 +39,8 @@ namespace KinderConnect.Data.Models
 
         [Required]
         public Classroom Classroom { get; set; } = null!;
+
+        public ICollection<AttendanceChild> AttendanceChildren { get; set; }
 
     }
 }

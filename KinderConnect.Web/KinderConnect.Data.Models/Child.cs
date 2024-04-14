@@ -7,7 +7,8 @@ namespace KinderConnect.Data.Models
     {
         public Child()
         {
-            Id = Guid.NewGuid();    
+            Id = Guid.NewGuid();
+            AttendanceChildren = new HashSet<AttendanceChild>();
         }
 
         public Guid Id { get; set; }
@@ -32,8 +33,6 @@ namespace KinderConnect.Data.Models
 
         public bool IsActive { get; set; }
 
-        public bool IsPresent { get; set; }
-
         [Required]
         [RegularExpression(@"^(?:\+?\d{1,3}\s?)?(?:\d{3}(?:[-\s]?)\d{2,3}(?:[-\s]?)\d{4})$")]
         public string ParentGuardianContact { get; set; } = null!;
@@ -56,5 +55,7 @@ namespace KinderConnect.Data.Models
         public Guid? ClassroomId { get; set; }
 
         public Classroom Classroom { get; set; } = null!;
+
+        public ICollection<AttendanceChild> AttendanceChildren { get; set; }
     }
 }
