@@ -18,48 +18,70 @@ namespace KinderConnect.Services.Data
             this.dbContext = dbContext;
         }
 
-        public async Task CreateAttendanceRecordAsync(AttendanceRecordFormModel model)
+        public async Task CreateAttendanceRecordAsync(AttendanceRecordFormModel model, string teacherId)
         {
-            //TODO: Implement later.
-            //Load: Children | Activity | List<Comment>
-            List<AttendanceRecord> attendanceRecords = new List<AttendanceRecord>();
+            var children = await dbContext
+                .Children
+                .Where(c => c.ClassroomId.ToString() == model.ClassroomId && c.IsActive)
+                .ToListAsync();
+
+            var childrenViewModel 
+                = children.Select(c => new ChildForAttendanceViewModel()
+            {
+                Id = c.Id.ToString(),
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                FullName = c.FirstName + " " + c.LastName,
+                IsPresent = true
+            })
+            .ToList();
+
+            model.Children = childrenViewModel;
+
+            var attendanceRecord = new AttendanceRecord
+            {
+                ClassroomId = Guid.Parse(model.ClassroomId),
+                TeacherId = Guid.Parse(teacherId),
+                Start = DateTime.Parse(model.Start),
+                End = DateTime.Parse(model.End),
+                ActivityId = model.ActivityId,
+            };
+
+            dbContext.AttendanceRecords.Add(attendanceRecord);
 
             foreach (var child in model.Children)
             {
-                AttendanceRecord attendanceRecord = new AttendanceRecord()
+                var attendanceChild = new AttendanceChild
                 {
-                    Start = DateTime.ParseExact(model.Start, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture),
-                    End = DateTime.ParseExact(model.End, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture),
-                    Comment = model.Comment,
-                    IsActive = true,
-                    ActivityId = model.ActivityId,
-                    ClassroomId = Guid.Parse(model.ClassroomId),
-                    TeacherId = Guid.Parse(model.TeacherId),
-                    ChildId = Guid.Parse(child.Id)
+                    AttendanceRecordId = attendanceRecord.Id,
+                    ChildId = Guid.Parse(child.Id),
+                    IsPresent = child.IsPresent,
+                    Comment = child.Comment
                 };
 
-                attendanceRecords.Add(attendanceRecord);
+                dbContext.AttendanceChildren.Add(attendanceChild);
+                await dbContext.SaveChangesAsync();
             }
+        }
 
-            await dbContext.AttendanceRecords.AddRangeAsync(attendanceRecords);
-            await dbContext.SaveChangesAsync();
+        public async Task EditPresenceAsync(string attendanceId, string childId)
+        {
+            var attendance = await dbContext
+                .AttendanceChildren
+                .FirstOrDefaultAsync(ac =>
+                ac.AttendanceRecordId.ToString() == attendanceId
+                && ac.ChildId.ToString() == childId
+                && ac.AttendanceRecord.IsActive);
+
+            if (attendance != null)
+            {
+                attendance.IsPresent = !attendance.IsPresent;
+                await dbContext.SaveChangesAsync();
+            }            
         }
 
         public async Task<IEnumerable<AttendanceRecordFormModel>> GetAllAttendancesByTeacherAndClassroomIdAsync(string teacherId, string classroomId)
         {
-            var childrenViewModel = await dbContext
-                .Children
-                .Where(c => c.ClassroomId.ToString() == classroomId && c.IsActive)
-                .Select(
-                c => new ChildForAttendanceViewModel()
-                {
-                    Id = c.Id.ToString(),
-                    FirstName = c.FirstName,
-                    LastName = c.LastName,
-                    IsPresent = c.IsPresent,
-                })
-                .ToListAsync();
-
             var allAttendances = await dbContext
                 .AttendanceRecords
                 .Where(a => a.IsActive)
@@ -73,7 +95,17 @@ namespace KinderConnect.Services.Data
                     Start = a.Start.ToString("dd/MM/yyyy HH:mm"),
                     End = a.End.ToString("dd/MM/yyyy HH:mm"),
                     Comment = a.Comment,
-                    Children = childrenViewModel
+                    Children = a.AttendanceChildren
+                    .Select(ac => new ChildForAttendanceViewModel()
+                    {
+                        Id = ac.ChildId.ToString(),
+                        FirstName = ac.Child.FirstName,
+                        LastName = ac.Child.LastName,
+                        FullName = ac.Child.FirstName + " " + ac.Child.LastName,
+                        Comment = ac.Comment,
+                        IsPresent = ac.IsPresent
+                    })
+                    .ToList()
                 })
                 .ToArrayAsync();
 
@@ -82,8 +114,7 @@ namespace KinderConnect.Services.Data
 
         public async Task<AttendanceRecordFormModel> GetAttendanceRecordFormModelByClassroomIdAsync(string classroomId)
         {
-            var activitiesViewModel = await
-                dbContext
+            var activitiesViewModel = await dbContext
                 .Activities
                 .Where(a => a.IsActive)
                 .Select(a => new ActivityViewModel()
@@ -93,28 +124,41 @@ namespace KinderConnect.Services.Data
                 })
                 .ToListAsync();
 
-            var childrenViewModel = await dbContext
+            var children = await dbContext
                 .Children
                 .Where(c => c.ClassroomId.ToString() == classroomId && c.IsActive)
-                .Select(
-                c => new ChildForAttendanceViewModel()
+                .ToListAsync();
+
+            var childrenWithAttendance = children
+                .Select(c => new ChildForAttendanceViewModel()
                 {
                     Id = c.Id.ToString(),
                     FirstName = c.FirstName,
                     LastName = c.LastName,
-                    FullName = c.FirstName + " " + c.LastName, 
-                    IsPresent = c.IsPresent,
+                    FullName = c.FirstName + " " + c.LastName,
                 })
-                .ToListAsync();
+                .ToList();
 
             var formModel = new AttendanceRecordFormModel()
             {
                 Activities = activitiesViewModel,
                 ClassroomId = classroomId,
-                Children = childrenViewModel
+                Children = childrenWithAttendance
             };
 
             return formModel;
+        }
+
+        public async Task<string> GetClassroomIdByAttendancyIdAsync(string attendancyId)
+        {
+            string? classroomId = await dbContext
+                .AttendanceRecords
+                .Where(a => a.Id.ToString() == attendancyId)
+                .Select(a => a.ClassroomId.ToString())
+                .FirstOrDefaultAsync();
+
+
+            return classroomId;
         }
     }
 }
