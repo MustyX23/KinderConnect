@@ -1,19 +1,11 @@
-﻿@using KinderConnect.Web.ViewModels.Attendance;
-@model IEnumerable<AttendanceRecordFormModel>
-
-@{
-    ViewData["Title"] = "Attendance Records";
-}
-
-<div class="container">
+﻿<div class="container">
     <h2>Attendance Records</h2>
-    <table class="table">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Activity</th>
-                <th>Comment</th>
                 <th>Children</th>
             </tr>
         </thead>
@@ -24,29 +16,32 @@
                     <td>@attendance.Start</td>
                     <td>@attendance.End</td>
                     <td>@attendance.Actvity</td>
-                    <td>@attendance.Comment</td>
                     <td>
                         @foreach (var child in attendance.Children)
                         {
-                            <span>@child.FullName</span>
-                            @if (child.IsPresent)
-                            {
-                                <span class="badge bg-primary">Present</span>
-                            }
-                            else
-                            {
-                                <span class="badge bg-danger">Absent</span>
-                            }
+                            <div class="d-flex">
+                                @if (child.IsPresent)
+                                {
+                                    <form asp-controller="Attendance" asp-action="EditPresence" asp-route-attendanceId="@attendance.Id" asp-route-childId="@child.Id" method="post" class="me-2">
+                                        <button type="submit" class="badge bg-success">Present</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <form asp-controller="Attendance" asp-action="EditPresence" asp-route-attendanceId="@attendance.Id" asp-route-childId="@child.Id" method="post" class="me-2">
+                                        <button type="submit" class="badge bg-danger">Absent</button>
+                                    </form>
+                                }
+                                <span class="badge bg-primary me-1">@child.FullName</span>
+                            </div>
                             <br />
                         }
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="5">
-                        <a asp-controller="Attendance" asp-action="Create" asp-route-classroomId="@attendance.ClassroomId" class="btn btn-primary">Add Attendance</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+    <div class="text-center">
+        <a asp-controller="Attendance" asp-action="Create" asp-route-classroomId="@ViewBag.ClassroomId" class="btn btn-primary">Add Attendance</a>
+    </div>
 </div>
