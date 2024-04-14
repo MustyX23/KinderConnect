@@ -27,26 +27,30 @@ namespace KinderConnect.Web.Controllers
             string userId = User.GetUserId();
 
             bool isTeacher = await teacherService.IsTeacherByUserIdAsync(userId);
-            bool isTeacherLeader = await teacherService.IsTeacherLeaderOfClassroomByIdAndClassroomIdAsync(teacherId, classroomId);
 
+            if (teacherId != null && classroomId != null)
+            {
+                bool isTeacherLeader = await teacherService.IsTeacherLeaderOfClassroomByIdAndClassroomIdAsync(teacherId, classroomId);
+
+                if (!isTeacherLeader)
+                {
+                    ModelState.AddModelError(string.Empty, "You don't have permission to access this page.");
+                    TempData[ErrorMessage] = $"You don't have permission to access this page.";
+                    return RedirectToAction("Index", "Home");
+                }
+            }           
             if (!isTeacher)
             {
                 ModelState.AddModelError(string.Empty, "You don't have permission to access this page.");
                 TempData[ErrorMessage] = $"You don't have permission to access this page.";
                 return RedirectToAction("Index", "Home");
             }
-            if (teacherId == null)
+            if (userId == null)
             {
                 ModelState.AddModelError(string.Empty, "You don't have permission to access this page.");
                 TempData[ErrorMessage] = $"You don't have permission to access this page.";
                 return RedirectToAction("Index", "Home");
-            }
-            if (!isTeacherLeader)
-            {
-                ModelState.AddModelError(string.Empty, "You don't have permission to access this page.");
-                TempData[ErrorMessage] = $"You don't have permission to access this page.";
-                return RedirectToAction("Index", "Home");
-            }
+            }            
             IEnumerable<AttendanceRecordFormModel> attendanceRecords
                 = await attendanceService.GetAllAttendancesByTeacherAndClassroomIdAsync(teacherId, classroomId);
 
@@ -87,7 +91,7 @@ namespace KinderConnect.Web.Controllers
 
 
             await attendanceService.CreateAttendanceRecordAsync(model, teacherId);
-            return RedirectToAction("AttendanceRecords", "Attendance");
+            return RedirectToAction("AttendanceRecords", "Attendance" , new { teacherId, model.ClassroomId });
         }
         [HttpPost]
         public async Task<IActionResult> EditPresence(string attendanceId, string childId)

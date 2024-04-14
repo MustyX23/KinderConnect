@@ -84,7 +84,7 @@ namespace KinderConnect.Services.Data
         {
             var allAttendances = await dbContext
                 .AttendanceRecords
-                .Where(a => a.IsActive)
+                .Where(a => a.IsActive && a.ClassroomId.ToString() == classroomId)
                 .Select(a => new AttendanceRecordFormModel()
                 {
                     Id = a.Id.ToString(),
