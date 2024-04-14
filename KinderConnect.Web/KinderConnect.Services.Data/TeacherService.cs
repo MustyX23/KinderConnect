@@ -53,7 +53,7 @@ namespace KinderConnect.Services.Data
 
         public async Task<string> GetTeacherIdByUserIdAsync(string userId)
         {
-            string teacherId = await dbContext
+            string? teacherId = await dbContext
                 .Teachers
                 .Where(t => t.TeacherUserId.ToString() == userId)
                 .Select(t => t.Id.ToString())
@@ -85,5 +85,18 @@ namespace KinderConnect.Services.Data
 
             return isUser;
         }
+
+        public async Task<bool> IsTeacherLeaderOfClassroomByIdAndClassroomIdAsync(string teacherId, string classroomId)
+        {
+            var classroom = await dbContext.Classrooms
+                .Include(c => c.ClassroomsTeachers)
+                .FirstOrDefaultAsync(c => c.Id.ToString() == classroomId);
+
+            // Check if the teacher is a leader of the classroom
+            bool isLeader = classroom.ClassroomsTeachers.Any(ct => ct.TeacherId.ToString() == teacherId);
+
+            return isLeader;
+        }
+
     }
 }
