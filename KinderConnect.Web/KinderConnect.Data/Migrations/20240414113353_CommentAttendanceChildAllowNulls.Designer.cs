@@ -4,6 +4,7 @@ using KinderConnect.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KinderConnect.Data.Migrations
 {
     [DbContext(typeof(KinderConnectDbContext))]
-    partial class KinderConnectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240414113353_CommentAttendanceChildAllowNulls")]
+    partial class CommentAttendanceChildAllowNulls
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,7 +167,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("702de3dd-c1e7-4f40-9131-623aadb7e765"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7685a59a-a911-4db5-8465-1fe8a51099c1",
+                            ConcurrencyStamp = "4169b418-f7d1-443a-9a99-a93907b1e7ad",
                             DateOfBirth = new DateTime(1972, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mrpopov@gmail.com",
                             EmailConfirmed = false,
@@ -185,7 +187,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f401fbdb-0db6-452e-8ae7-3d68a6b0c81e",
+                            ConcurrencyStamp = "8938166c-1a99-4df6-8b7b-cad7eb0091eb",
                             DateOfBirth = new DateTime(1971, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mrbuhov@gmail.com",
                             EmailConfirmed = false,
@@ -205,7 +207,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("bbfe1b04-2741-4440-9334-595cb40a9f64"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "016415bf-8a83-4174-a097-6733cd032395",
+                            ConcurrencyStamp = "362582b0-8b7f-46de-862e-97a681b14ada",
                             DateOfBirth = new DateTime(1990, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "parent1@gmail.com",
                             EmailConfirmed = false,
@@ -225,7 +227,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("b785b0d0-3d8c-4c37-a304-e2c41dcab31a"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d70f836f-0e32-4dc9-b167-8469020c91e5",
+                            ConcurrencyStamp = "68d1cf00-fddb-4b3a-8fa9-0f2d1775afcb",
                             DateOfBirth = new DateTime(1992, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "parent2@gmail.com",
                             EmailConfirmed = false,
@@ -405,6 +407,9 @@ namespace KinderConnect.Data.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
+                    b.Property<bool>("IsPresent")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -432,7 +437,7 @@ namespace KinderConnect.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7a5a98fa-f0d6-4ba6-b698-3e9d3c68e8f8"),
+                            Id = new Guid("793e29be-bdb3-4c90-8537-d7524369e2c8"),
                             Age = 3,
                             ClassroomId = new Guid("632bc679-3cc2-45b7-971b-6a92105321de"),
                             DateOfBirth = new DateTime(2021, 3, 3, 18, 30, 0, 0, DateTimeKind.Unspecified),
@@ -440,13 +445,14 @@ namespace KinderConnect.Data.Migrations
                             Gender = "male",
                             ImageUrl = "https://onebighappyphoto.com/wp-content/uploads/2-year-old-boy-and-family-photoshoot-2951-One-Big-Happy-Photo.jpg",
                             IsActive = false,
+                            IsPresent = false,
                             LastName = "Little",
                             ParentGuardianContact = "+1987654321",
                             ParentGuardianId = new Guid("bbfe1b04-2741-4440-9334-595cb40a9f64")
                         },
                         new
                         {
-                            Id = new Guid("58dcb73a-3906-460e-b28d-2f33a53b7e31"),
+                            Id = new Guid("7856f32d-87e0-43ba-9ead-0b308cd36778"),
                             Age = 4,
                             ClassroomId = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"),
                             DateOfBirth = new DateTime(2020, 3, 10, 19, 0, 0, 0, DateTimeKind.Unspecified),
@@ -454,6 +460,7 @@ namespace KinderConnect.Data.Migrations
                             Gender = "female",
                             ImageUrl = "https://previews.123rf.com/images/mashiki/mashiki1802/mashiki180200333/96303002-close-up-indoor-portrait-of-cute-happy-2-years-old-baby-girl-in-pink-sweater.jpg",
                             IsActive = false,
+                            IsPresent = false,
                             LastName = "Malinkova",
                             ParentGuardianContact = "+1234567890",
                             ParentGuardianId = new Guid("b785b0d0-3d8c-4c37-a304-e2c41dcab31a")
@@ -626,7 +633,7 @@ namespace KinderConnect.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bc666f64-8447-4f23-bd7d-cac14a5f751c"),
+                            Id = new Guid("000a93c1-f4ab-4a92-a58f-02d9578096a6"),
                             ImageUrl = "https://i.guim.co.uk/img/media/b897974dce4559ebe02af27e10c475068ead46a8/0_0_4000_2400/master/4000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=a53a3c7714a215af7051daea5b14971c",
                             QualificationId = 1,
                             Summary = "Inspires young minds in the kindergarten classroom with his passion for storytelling and language. With a nurturing and supportive approach, Lyubomir guides children on a journey of exploration and discovery through the world of writing. He encourages creativity and self-expression, helping students develop foundational writing skills such as letter formation, phonics, and basic sentence structure.",
@@ -634,7 +641,7 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ad7a08e2-b4e4-4f25-990f-8e57f51a8f2c"),
+                            Id = new Guid("8d28762c-5d00-4c5e-85f5-8e94229ca614"),
                             ImageUrl = "https://img.freepik.com/premium-photo/old-male-teacher-portrait-closeup-face-professor-teacher-blackboard-isolated_265223-53892.jpg",
                             QualificationId = 1,
                             Summary = "A dedicated drawing teacher, brings creativity and warmth to the kindergarten classroom as he introduces young children to the world of artistic expression through drawing. With a gentle and encouraging approach, Mustafa fosters the development of fine motor skills, creativity, and self-expression in his students. He designs engaging drawing activities tailored to the unique interests and abilities of each child, from exploring simple shapes to creating imaginative scenes.",
