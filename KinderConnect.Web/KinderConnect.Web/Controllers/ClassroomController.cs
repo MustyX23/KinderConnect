@@ -185,7 +185,7 @@ namespace KinderConnect.Web.Controllers
             try
             {
                 await childrenService.LeaveClassroomByChildIdAsync(childId);
-                await classroomService.IncreaseTotalSeatsByIdAsync(classroomId);
+                await classroomService.DecreaseTotalSeatsByIdAsync(classroomId);
 
                 TempData[SuccessMessage] = $"You successfully removed {childViewModel.FirstName} from the {classroomViewModel.ClassroomName}!";
                 return RedirectToAction("Index", "Child");

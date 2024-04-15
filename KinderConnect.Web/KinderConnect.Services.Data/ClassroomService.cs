@@ -62,7 +62,6 @@ namespace KinderConnect.Services.Data
                     TotalSeats = c.TotalSeats,
                     TutionFee = c.TutionFee.ToString(),
                     ImageUrl = c.ImageUrl,
-                    TotalSeatsAvailable = c.TotalSeats - c.Children.Count,
                     SeatsAvailable = c.Children.Count < c.TotalSeats
                 })
                 .ToArrayAsync();
@@ -108,7 +107,6 @@ namespace KinderConnect.Services.Data
                     TotalSeats = classroom.TotalSeats,
                     TutionFee = classroom.TutionFee.ToString(),
                     ImageUrl = classroom.ImageUrl,
-                    TotalSeatsAvailable = classroom.TotalSeats - classroom.Children.Count,
                     SeatsAvailable = seatsAvailable
                 });
             }
