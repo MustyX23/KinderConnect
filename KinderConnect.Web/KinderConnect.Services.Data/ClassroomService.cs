@@ -1,7 +1,9 @@
 ﻿using KinderConnect.Data;
+using KinderConnect.Data.Models;
 using KinderConnect.Services.Data.Interfaces;
 using KinderConnect.Web.ViewModels.Child;
 using KinderConnect.Web.ViewModels.Classroom;
+using KinderConnect.Web.ViewModels.Classroom.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace KinderConnect.Services.Data
@@ -13,6 +15,64 @@ namespace KinderConnect.Services.Data
         public ClassroomService(KinderConnectDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<AllClassroomsQueryModel> AllAsync(AllClassroomsQueryModel queryModel)
+        {
+            IQueryable<Classroom> classroomsQuery = dbContext
+                .Classrooms
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(queryModel.SearchString))
+            {
+                string wildCard = $"%{queryModel.SearchString.ToLower()}%";
+
+                classroomsQuery = classroomsQuery
+                    .Where(c => EF.Functions.Like(c.Name, wildCard)
+                    || EF.Functions.Like(c.Information, wildCard));
+            }
+
+            classroomsQuery = queryModel.ClassroomSorting switch
+            {
+                ClassroomSorting.Newest => classroomsQuery
+                .OrderByDescending(c => c.CreatedOn),
+
+                ClassroomSorting.Oldest => classroomsQuery
+                .OrderBy(c => c.CreatedOn),
+
+                ClassroomSorting.ElderAge => classroomsQuery
+                .OrderByDescending(c => c.MaximumAge),
+
+                ClassroomSorting.YoungerAge => classroomsQuery
+                .OrderBy(c => c.MaximumAge),
+
+                _ => classroomsQuery.OrderByDescending(c => c.Id),
+            };
+
+            IEnumerable<AllClassroomViewModel> allClassrooms = await classroomsQuery
+                .Skip((queryModel.CurrentPage - 1) * queryModel.ClassesPerPage)
+                .Take(queryModel.ClassesPerPage)
+                .Select(c => new AllClassroomViewModel()
+                {
+                    Id = c.Id.ToString(),
+                    Name = c.Name,
+                    Information = c.Information,
+                    MinimumAge = c.MinimumAge,
+                    MaximumAge = c.MaximumAge,
+                    TotalSeats = c.TotalSeats,
+                    TutionFee = c.TutionFee.ToString(),
+                    ImageUrl = c.ImageUrl,
+                    TotalSeatsAvailable = c.TotalSeats - c.Children.Count,
+                    SeatsAvailable = c.Children.Count < c.TotalSeats
+                })
+                .ToArrayAsync();
+
+            int totalClasses = classroomsQuery.Count();
+
+            queryModel.TotalClasses = totalClasses;
+            queryModel.Classes = allClassrooms;
+
+            return queryModel;
         }
 
         public async Task DecreaseTotalSeatsByIdAsync(string classroomId)

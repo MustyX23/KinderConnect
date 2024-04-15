@@ -6,6 +6,7 @@ namespace KinderConnect.Services.Data.Interfaces
     public interface IClassroomService
     {
         Task<IEnumerable<AllClassroomViewModel>> GetAllClassroomsAsync();
+        Task<AllClassroomsQueryModel> AllAsync(AllClassroomsQueryModel queryModel);
         Task<JoinClassroomFormModel> GetJoinClassroomFormModelByIdAsync(string classroomId);
         Task<LeaveClassroomViewModel> GetLeaveClassroomViewModelByChildIdAsync(string childId);
         Task<JoinClassroomByChildViewModel> GetJoinClassroomByChildViewModelByIdAsync(string id);

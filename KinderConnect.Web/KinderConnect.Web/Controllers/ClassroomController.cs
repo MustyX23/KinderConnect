@@ -23,10 +23,10 @@ namespace KinderConnect.Web.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromQuery]AllClassroomsQueryModel queryModel)
         {
             var allClassrooms
-                = await classroomService.GetAllClassroomsAsync();
+                = await classroomService.AllAsync(queryModel);
 
             return View(allClassrooms);
         }
