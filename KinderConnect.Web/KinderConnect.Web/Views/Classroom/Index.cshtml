@@ -4,46 +4,47 @@
 @{
     var childId = ViewContext.RouteData.Values["id"]?.ToString();
 }
-<form method="get">
-    <div class="row">
-        <div class="form-group col-md-3 d-flex justify-content-between">            
-            <div class="form-group">
-                <label asp-for="ClassesPerPage"></label>
-                <select asp-for="ClassesPerPage" class="form-control">
-                    <option value="3">3</option>
-                    <option value="6">6</option>
-                    <option value="9">9</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group col-md-3">
-            <label asp-for="SearchString"></label>
-            <input asp-for="SearchString" class="form-control" placeholder="...">
-        </div>
-        <div class="form-group col-md-3">
-            <div class="form-group">
-                <label asp-for="ClassroomSorting"></label>
-                <select asp-for="ClassroomSorting" class="form-control">
-                    <option value="0">Newest</option>
-                    <option value="1">Oldest</option>
-                    <option value="2">Elder Age</option>
-                    <option value="3">Younger Age</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="form-group mt-4 p-2">
-                <input type="submit" value="Search" class="btn btn-primary" />
-            </div>
-        </div>
-    </div>
-</form>
 <div class="container-fluid pt-5">
     <div class="container">
         <div class="text-center pb-2">
             <p class="section-title px-5"><span class="px-2">Popular Classes</span></p>
             <h1 class="mb-4">Classes for Your Kids</h1>
         </div>
+        <form method="get">
+            <div class="row">
+                <div class="form-group col-md-3 d-flex justify-content-between">
+                    <div class="form-group">
+                        <label asp-for="ClassesPerPage"></label>
+                        <select asp-for="ClassesPerPage" class="form-control">
+                            <option value="1">1</option>
+                            <option value="3">3</option>
+                            <option value="6">6</option>
+                            <option value="9">9</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="SearchString"></label>
+                    <input asp-for="SearchString" class="form-control" placeholder="...">
+                </div>
+                <div class="form-group col-md-3">
+                    <div class="form-group">
+                        <label asp-for="ClassroomSorting"></label>
+                        <select asp-for="ClassroomSorting" class="form-control">
+                            <option value="0">Newest</option>
+                            <option value="1">Oldest</option>
+                            <option value="2">Elder Age</option>
+                            <option value="3">Younger Age</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group mt-4 p-2">
+                        <input type="submit" value="Search" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </form>
         <div class="row">
             @foreach (var classroom in Model.Classes)
             {
@@ -110,6 +111,7 @@
                        asp-controller="Classroom"
                        asp-action="Index"
                        asp-route-currentPage="@previousPage"
+                       asp-route-classesPerPage="@Model.ClassesPerPage"
                        asp-route-searchTerm="@Model.SearchString"
                        asp-route-sorting="@((int)Model.ClassroomSorting)"><<</a>
                 </div>
@@ -123,6 +125,7 @@
                        asp-controller="Classroom"
                        asp-action="Index"
                        asp-route-currentPage="@(Model.CurrentPage + 1)"
+                       asp-route-classesPerPage="@Model.ClassesPerPage"
                        asp-route-searchTerm="@Model.SearchString"
                        asp-route-sorting="@((int)Model.ClassroomSorting)">>></a>
                 </div>
