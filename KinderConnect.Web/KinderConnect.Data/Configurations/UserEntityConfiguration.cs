@@ -85,6 +85,21 @@ namespace KinderConnect.Data.Configurations
 
             users.Add(user);
 
+            user = new ApplicationUser()
+            {
+                FirstName = "Emily",
+                LastName = "Cankova",
+                UserName = "Parent3",
+                DateOfBirth = DateTime.Parse("2000/2/10"),
+                Gender = "female",
+                NormalizedUserName = "PARENT3",
+                Email = "parent3@gmail.com",
+                NormalizedEmail = "PARENT3@GMAIL.COM",
+                PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
+            };
+
+            users.Add(user);
+
             return users.ToArray();
         }
     }
