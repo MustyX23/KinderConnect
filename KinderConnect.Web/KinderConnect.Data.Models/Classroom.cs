@@ -40,6 +40,8 @@ namespace KinderConnect.Data.Models
         [Required]
         public decimal TutionFee { get; set; }
 
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
+
         public bool IsActive { get; set; }
 
         public ICollection<Child> Children { get; set; }
