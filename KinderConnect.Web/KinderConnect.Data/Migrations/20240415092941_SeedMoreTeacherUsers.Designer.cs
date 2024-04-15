@@ -4,6 +4,7 @@ using KinderConnect.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KinderConnect.Data.Migrations
 {
     [DbContext(typeof(KinderConnectDbContext))]
-    partial class KinderConnectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240415092941_SeedMoreTeachers")]
+    partial class SeedMoreTeachers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,7 +167,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("702de3dd-c1e7-4f40-9131-623aadb7e765"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c00fb6d6-1543-4a76-98d6-00af28a871af",
+                            ConcurrencyStamp = "6199ec75-40c5-4057-824e-b280185f49c9",
                             DateOfBirth = new DateTime(1972, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mrpopov@gmail.com",
                             EmailConfirmed = false,
@@ -185,7 +187,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b2586438-b5c2-4796-ac7c-769e3b509207",
+                            ConcurrencyStamp = "fe039e88-dbba-45b3-8726-73037298e626",
                             DateOfBirth = new DateTime(1971, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mrbuhov@gmail.com",
                             EmailConfirmed = false,
@@ -205,7 +207,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("bbfe1b04-2741-4440-9334-595cb40a9f64"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f2b92784-6dea-4023-af48-1a8ed9a36e16",
+                            ConcurrencyStamp = "5e275e81-8ba0-4a09-9cb1-46e9af158276",
                             DateOfBirth = new DateTime(1990, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "parent1@gmail.com",
                             EmailConfirmed = false,
@@ -225,7 +227,7 @@ namespace KinderConnect.Data.Migrations
                         {
                             Id = new Guid("b785b0d0-3d8c-4c37-a304-e2c41dcab31a"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1c69d04c-dc5b-4cbd-bea0-cb3ad7dd8cf6",
+                            ConcurrencyStamp = "a48ceaeb-ff86-4ebd-860b-958b51abe5e7",
                             DateOfBirth = new DateTime(1992, 4, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "parent2@gmail.com",
                             EmailConfirmed = false,
@@ -243,9 +245,9 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f466a2e7-1991-4eb3-9068-f570246980c6"),
+                            Id = new Guid("3851aad2-a5a3-462d-bf39-d8b0b41f0ad6"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8bed3df3-1d6a-477c-94d9-3e1ca296d757",
+                            ConcurrencyStamp = "ef0de57e-05e3-4dba-995d-b3b667bb8b08",
                             DateOfBirth = new DateTime(2000, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "parent3@gmail.com",
                             EmailConfirmed = false,
@@ -263,9 +265,9 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("17181199-77e2-4a2f-a7e7-6bea876428fb"),
+                            Id = new Guid("47d28c7b-a4fc-4617-bbbd-60b05a0bfd45"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bf4e3fde-af55-48f1-ab76-5c388b6b74f9",
+                            ConcurrencyStamp = "e3a94711-6c6c-4a92-8031-7ee82410a322",
                             DateOfBirth = new DateTime(2000, 4, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mrsamelia@gmail.com",
                             EmailConfirmed = false,
@@ -284,9 +286,9 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8ad8425b-a45e-40bd-a6f8-fd59ff754a39"),
+                            Id = new Guid("37ed60d0-efe7-4d5a-89c1-8169c7ae008f"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7f2f7466-cdf3-4331-afdc-ed0ef6e31ed6",
+                            ConcurrencyStamp = "d07244b0-5114-4d7a-899e-75a23d555041",
                             DateOfBirth = new DateTime(1999, 3, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mrsava@gmail.com",
                             EmailConfirmed = false,
@@ -305,9 +307,9 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f6052501-3099-48e3-80ff-31470f70a4e9"),
+                            Id = new Guid("ffa6f8eb-02f7-4246-aa59-f7ce6d2be5ff"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "501effd6-ecea-4732-ac26-4c6648cf2afa",
+                            ConcurrencyStamp = "0835fcc4-1495-4b70-bdda-8a259a865f92",
                             DateOfBirth = new DateTime(1998, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mrsaurora@gmail.com",
                             EmailConfirmed = false,
@@ -326,9 +328,9 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1788033d-08cb-42b2-96c5-905dc73ebcce"),
+                            Id = new Guid("31c9d7c4-5b0e-46b5-a6db-0ed766d6b563"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "67ddc52a-dcdd-4896-99f6-ad6e068c4dc8",
+                            ConcurrencyStamp = "1b6bbafc-e1e1-4bca-91cb-36f29c303502",
                             DateOfBirth = new DateTime(2001, 9, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "mrssavka@gmail.com",
                             EmailConfirmed = false,
@@ -536,7 +538,7 @@ namespace KinderConnect.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f935f9d8-8444-4511-8333-435db1abc14e"),
+                            Id = new Guid("5c90cfb4-b710-4a9b-b2a6-9f7880152388"),
                             Age = 4,
                             ClassroomId = new Guid("632bc679-3cc2-45b7-971b-6a92105321de"),
                             DateOfBirth = new DateTime(2020, 5, 5, 10, 15, 0, 0, DateTimeKind.Unspecified),
@@ -550,7 +552,7 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("234a4234-d465-4cfd-935f-73c1a87682b4"),
+                            Id = new Guid("b868a0a1-c4d6-48c7-86df-312985816bf1"),
                             Age = 3,
                             ClassroomId = new Guid("632bc679-3cc2-45b7-971b-6a92105321de"),
                             DateOfBirth = new DateTime(2021, 3, 3, 18, 30, 0, 0, DateTimeKind.Unspecified),
@@ -564,7 +566,7 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8e37a7e7-b2f5-48d2-a1fc-0c0d12ad1f3a"),
+                            Id = new Guid("362c8db9-7cb1-46e9-9f08-f754eeeace63"),
                             Age = 4,
                             ClassroomId = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"),
                             DateOfBirth = new DateTime(2020, 3, 10, 19, 0, 0, 0, DateTimeKind.Unspecified),
@@ -578,7 +580,7 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9267a020-9a3a-4eb1-a4aa-d93111fb5934"),
+                            Id = new Guid("a9362115-d090-466d-96b3-7857b0af9bad"),
                             Age = 5,
                             ClassroomId = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"),
                             DateOfBirth = new DateTime(2019, 6, 15, 14, 45, 0, 0, DateTimeKind.Unspecified),
@@ -592,7 +594,7 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("65e2aec5-af22-4867-9590-9dfb34279ba3"),
+                            Id = new Guid("e0e47953-506b-4ee8-ae9d-b312519ccf10"),
                             Age = 4,
                             ClassroomId = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"),
                             DateOfBirth = new DateTime(2020, 3, 10, 19, 0, 0, 0, DateTimeKind.Unspecified),
@@ -606,7 +608,7 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("13ef78fb-6ff9-43f3-bfe9-648cb57a8499"),
+                            Id = new Guid("82c893d9-2e52-4fd0-8cbb-ffb2af76e323"),
                             Age = 6,
                             ClassroomId = new Guid("c12f8035-d854-4cdc-bad7-489237b10fdf"),
                             DateOfBirth = new DateTime(2018, 1, 20, 9, 30, 0, 0, DateTimeKind.Unspecified),
@@ -620,7 +622,7 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("120be096-8a40-432c-a153-e9bc04ce88a1"),
+                            Id = new Guid("3bd8a6fc-afd7-4b65-b208-751cfc41433c"),
                             Age = 7,
                             ClassroomId = new Guid("c12f8035-d854-4cdc-bad7-489237b10fdf"),
                             DateOfBirth = new DateTime(2017, 4, 25, 11, 45, 0, 0, DateTimeKind.Unspecified),
@@ -634,7 +636,7 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a936476b-b5c8-4635-b389-b01d092c68ef"),
+                            Id = new Guid("cf4e2dba-2617-4274-b6ad-2e5ba08354e3"),
                             Age = 10,
                             ClassroomId = new Guid("4faa63ab-f5f8-45ae-bdc4-2eb42ca9b266"),
                             DateOfBirth = new DateTime(2013, 8, 12, 13, 0, 0, 0, DateTimeKind.Unspecified),
@@ -648,7 +650,7 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d3732d29-5491-4ed4-b1ab-91a3f79e449f"),
+                            Id = new Guid("f6bc6e8c-4e55-4f75-b18c-8d5b9c2d720b"),
                             Age = 11,
                             ClassroomId = new Guid("4faa63ab-f5f8-45ae-bdc4-2eb42ca9b266"),
                             DateOfBirth = new DateTime(2012, 11, 8, 15, 30, 0, 0, DateTimeKind.Unspecified),
@@ -710,7 +712,7 @@ namespace KinderConnect.Data.Migrations
                         new
                         {
                             Id = new Guid("632bc679-3cc2-45b7-971b-6a92105321de"),
-                            CreatedOn = new DateTime(2024, 4, 15, 16, 1, 3, 862, DateTimeKind.Local).AddTicks(4840),
+                            CreatedOn = new DateTime(2024, 4, 15, 12, 29, 40, 711, DateTimeKind.Local).AddTicks(8337),
                             ImageUrl = "https://pbs.twimg.com/profile_images/557241923597914112/wuYMY-Sj_400x400.png",
                             Information = "Nature walks.Sensory play with natural materials.Learning about different animals and habitats.Creative storytelling sessions",
                             IsActive = false,
@@ -723,7 +725,7 @@ namespace KinderConnect.Data.Migrations
                         new
                         {
                             Id = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"),
-                            CreatedOn = new DateTime(2024, 4, 15, 16, 1, 3, 862, DateTimeKind.Local).AddTicks(4895),
+                            CreatedOn = new DateTime(2024, 4, 15, 12, 29, 40, 711, DateTimeKind.Local).AddTicks(8415),
                             ImageUrl = "https://www.abnewswire.com/uploads/1692132999.jpeg",
                             Information = "Art studio with easels and drawing tables.Variety of art supplies and materials.Display area for showcasing student artwork.Cozy reading corner for inspiration",
                             IsActive = false,
@@ -735,8 +737,8 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("57dde484-6e0a-4874-b22c-35d481400afe"),
-                            CreatedOn = new DateTime(2024, 4, 15, 16, 1, 3, 862, DateTimeKind.Local).AddTicks(4903),
+                            Id = new Guid("5f740711-79e5-457f-81a7-c73557d0074f"),
+                            CreatedOn = new DateTime(2024, 4, 15, 12, 29, 40, 711, DateTimeKind.Local).AddTicks(8424),
                             ImageUrl = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjy2CRd52Daq6LiABMz5N0pCnh9Ac9o4ccMvXoxUPmMPMyF9zhxcywuRhwWc2JA6NFcyrDc_j79bmvDk3V15JwmEuJ0v6LVC1bE_0V9W0WSOGs7nwDwyIJ707ej3Kz4QiAdw9ufVec4GAF18Cm5D-UJufeUzMIkqnaOVYWHrk44DbfkaDgKJIto6T02/s1748/teacher%20teaching%20math.png",
                             Information = "Hands-on math activities.Problem-solving challenges.Introduction to basic math concepts.Fun math games.",
                             IsActive = false,
@@ -748,8 +750,8 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("abe0b306-e763-4278-950c-f0293518ff65"),
-                            CreatedOn = new DateTime(2024, 4, 15, 16, 1, 3, 862, DateTimeKind.Local).AddTicks(4910),
+                            Id = new Guid("60cff593-6660-4a7f-8c09-e02a5c209821"),
+                            CreatedOn = new DateTime(2024, 4, 15, 12, 29, 40, 711, DateTimeKind.Local).AddTicks(8430),
                             ImageUrl = "https://www.nationalgeographic.org/wp-content/uploads/2021/10/Explorer-Classroom-Ryan-Carney_National-Geographic-scaled.jpeg",
                             Information = "Basic coding for kids.Robotics and engineering projects.Introduction to technology.Creative digital art.",
                             IsActive = false,
@@ -761,8 +763,8 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("772d7b09-b60a-465d-af9c-619fadad69bb"),
-                            CreatedOn = new DateTime(2024, 4, 15, 16, 1, 3, 862, DateTimeKind.Local).AddTicks(4925),
+                            Id = new Guid("7f624c7e-f824-417c-9c3b-7ae366918397"),
+                            CreatedOn = new DateTime(2024, 4, 15, 12, 29, 40, 711, DateTimeKind.Local).AddTicks(8439),
                             ImageUrl = "https://beauvoirmusic.com/wp-content/uploads/2022/08/BMMClass.ILA0070edit1-1024x768.jpg",
                             Information = "Introduction to musical instruments.Music theory basics.Group singing and performances.Fun rhythm and melody activities.",
                             IsActive = false,
@@ -774,8 +776,8 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("dfc3ac41-a6a8-4259-8e06-abe66d33a4d5"),
-                            CreatedOn = new DateTime(2024, 4, 15, 16, 1, 3, 862, DateTimeKind.Local).AddTicks(4931),
+                            Id = new Guid("0101ab59-602e-44ac-8ba8-c79fb24ac7ba"),
+                            CreatedOn = new DateTime(2024, 4, 15, 12, 29, 40, 711, DateTimeKind.Local).AddTicks(8445),
                             ImageUrl = "https://scienceexplorers.com/wp-content/uploads/2023/09/Academic-Overview-Science-Explorers-01.jpg",
                             Information = "Hands-on science experiments.Discovering nature and the universe.Introduction to scientific concepts.Creative science projects.",
                             IsActive = false,
@@ -787,8 +789,8 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("dc9165b8-af82-4a5d-ac8f-18fe0c86f2ea"),
-                            CreatedOn = new DateTime(2024, 4, 15, 16, 1, 3, 862, DateTimeKind.Local).AddTicks(4938),
+                            Id = new Guid("fdf1e5c7-a73a-4d08-aaf1-944d4393c411"),
+                            CreatedOn = new DateTime(2024, 4, 15, 12, 29, 40, 711, DateTimeKind.Local).AddTicks(8457),
                             ImageUrl = "https://ksspreschool.com/wp-content/uploads/2021/12/KSS-Preschool-English-Skills-and-Language-Immersion.jpeg",
                             Information = "Introduction to new languages.Interactive language games.Cultural learning experiences.Basic vocabulary and phrases.",
                             IsActive = false,
@@ -800,8 +802,8 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("83daca84-0c31-40c1-bf90-0fd2960924d9"),
-                            CreatedOn = new DateTime(2024, 4, 15, 16, 1, 3, 862, DateTimeKind.Local).AddTicks(4944),
+                            Id = new Guid("2f342a1c-72d6-4b2f-b5b0-4ddcf33f1d2f"),
+                            CreatedOn = new DateTime(2024, 4, 15, 12, 29, 40, 711, DateTimeKind.Local).AddTicks(8462),
                             ImageUrl = "https://i.ytimg.com/vi/fIZR5Ib1p_w/maxresdefault.jpg",
                             Information = "Introduction to various sports.Physical fitness activities.Team-building exercises.Healthy competition and fun.",
                             IsActive = false,
@@ -826,68 +828,6 @@ namespace KinderConnect.Data.Migrations
                     b.HasIndex("ClassroomId");
 
                     b.ToTable("ClassroomsTeachers");
-
-                    b.HasData(
-                        new
-                        {
-                            TeacherId = new Guid("f51fd481-6ca4-45b8-9848-304132b479f8"),
-                            ClassroomId = new Guid("632bc679-3cc2-45b7-971b-6a92105321de")
-                        },
-                        new
-                        {
-                            TeacherId = new Guid("f51fd481-6ca4-45b8-9848-304132b479f8"),
-                            ClassroomId = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329")
-                        },
-                        new
-                        {
-                            TeacherId = new Guid("32521de9-eb61-49d9-b81f-b3dc5467fb4c"),
-                            ClassroomId = new Guid("958b5667-9055-40a7-b7b2-81c19afe3329")
-                        },
-                        new
-                        {
-                            TeacherId = new Guid("32521de9-eb61-49d9-b81f-b3dc5467fb4c"),
-                            ClassroomId = new Guid("632bc679-3cc2-45b7-971b-6a92105321de")
-                        },
-                        new
-                        {
-                            TeacherId = new Guid("a5738953-616e-448c-8d2d-c1eb5921f6ba"),
-                            ClassroomId = new Guid("c12f8035-d854-4cdc-bad7-489237b10fdf")
-                        },
-                        new
-                        {
-                            TeacherId = new Guid("a5738953-616e-448c-8d2d-c1eb5921f6ba"),
-                            ClassroomId = new Guid("4faa63ab-f5f8-45ae-bdc4-2eb42ca9b266")
-                        },
-                        new
-                        {
-                            TeacherId = new Guid("32521de9-eb61-49d9-b81f-b3dc5467fb4c"),
-                            ClassroomId = new Guid("c12f8035-d854-4cdc-bad7-489237b10fdf")
-                        },
-                        new
-                        {
-                            TeacherId = new Guid("32521de9-eb61-49d9-b81f-b3dc5467fb4c"),
-                            ClassroomId = new Guid("4faa63ab-f5f8-45ae-bdc4-2eb42ca9b266")
-                        },
-                        new
-                        {
-                            TeacherId = new Guid("c8a7e14b-6543-47e9-bead-0e19f3a199c6"),
-                            ClassroomId = new Guid("f9451730-fa24-466b-b852-4fa8d6eb1dfc")
-                        },
-                        new
-                        {
-                            TeacherId = new Guid("c8a7e14b-6543-47e9-bead-0e19f3a199c6"),
-                            ClassroomId = new Guid("47196d67-0a98-4305-9e08-d8a2e1ae22c8")
-                        },
-                        new
-                        {
-                            TeacherId = new Guid("365d5460-43bb-4094-bd01-46f0c3197590"),
-                            ClassroomId = new Guid("a92ed02a-bbf0-426b-b0f5-4bd8b89c33ea")
-                        },
-                        new
-                        {
-                            TeacherId = new Guid("365d5460-43bb-4094-bd01-46f0c3197590"),
-                            ClassroomId = new Guid("8375650a-e0a4-4eb4-a5ab-849b955c79da")
-                        });
                 });
 
             modelBuilder.Entity("KinderConnect.Data.Models.Qualification", b =>
@@ -973,15 +913,7 @@ namespace KinderConnect.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8adb0cd3-815a-4151-82fd-88b50173f266"),
-                            ImageUrl = "https://img.freepik.com/premium-photo/old-male-teacher-portrait-closeup-face-professor-teacher-blackboard-isolated_265223-53892.jpg",
-                            QualificationId = 1,
-                            Summary = "A dedicated drawing teacher, brings creativity and warmth to the kindergarten classroom as he introduces young children to the world of artistic expression through drawing. With a gentle and encouraging approach, Mustafa fosters the development of fine motor skills, creativity, and self-expression in his students. He designs engaging drawing activities tailored to the unique interests and abilities of each child, from exploring simple shapes to creating imaginative scenes.",
-                            TeacherUserId = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f")
-                        },
-                        new
-                        {
-                            Id = new Guid("9e9f704d-2684-480a-be38-b2885c067f8e"),
+                            Id = new Guid("fe9af2e3-22af-4583-84f0-11a19bb08533"),
                             ImageUrl = "https://i.guim.co.uk/img/media/b897974dce4559ebe02af27e10c475068ead46a8/0_0_4000_2400/master/4000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=a53a3c7714a215af7051daea5b14971c",
                             QualificationId = 1,
                             Summary = "Inspires young minds in the kindergarten classroom with his passion for storytelling and language. With a nurturing and supportive approach, Lyubomir guides children on a journey of exploration and discovery through the world of writing. He encourages creativity and self-expression, helping students develop foundational writing skills such as letter formation, phonics, and basic sentence structure.",
@@ -989,35 +921,11 @@ namespace KinderConnect.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f013f0ac-443e-4d2e-92e5-68fc06bcc190"),
-                            ImageUrl = "https://www.shutterstock.com/image-photo/profile-picture-smiling-millennial-asian-600nw-1836020740.jpg",
-                            QualificationId = 2,
-                            Summary = "Savka's dedication, creativity, and compassionate nature make her an exceptional kindergarten teacher. Her unwavering commitment to nurturing the whole child, coupled with her innovative teaching methods and collaborative spirit, positions her as a valued and inspiring educator in the early childhood education community.",
-                            TeacherUserId = new Guid("31c9d7c4-5b0e-46b5-a6db-0ed766d6b563")
-                        },
-                        new
-                        {
-                            Id = new Guid("7442af74-f277-4242-84e0-4aa9a9db329b"),
-                            ImageUrl = "https://img.freepik.com/premium-photo/bright-picture-happy-smiling-woman_380164-16026.jpg?size=626&ext=jpg",
-                            QualificationId = 3,
-                            Summary = "Committed to continuous growth and learning, Amelia actively seeks opportunities to enhance her skills and knowledge in early childhood education. She engages in professional development workshops, conferences, and training sessions to stay updated with the latest trends and best practices in the field.",
-                            TeacherUserId = new Guid("47d28c7b-a4fc-4617-bbbd-60b05a0bfd45")
-                        },
-                        new
-                        {
-                            Id = new Guid("f0970b9e-fb6e-4874-8f30-a297be071e4f"),
-                            ImageUrl = "https://img.freepik.com/premium-photo/close-up-face-young-female-teacher-near-chalkboard-digital-screen-classroom-headshot-positive-female-educator_116407-12458.jpg",
-                            QualificationId = 2,
-                            Summary = "Ava embraces a child-centered approach to education, focusing on nurturing the whole child's development. She incorporates play-based learning, hands-on activities, and interactive experiences to engage her students and make learning fun and meaningful.",
-                            TeacherUserId = new Guid("37ed60d0-efe7-4d5a-89c1-8169c7ae008f")
-                        },
-                        new
-                        {
-                            Id = new Guid("c9197417-fc5d-49f4-90be-63767b003cc3"),
-                            ImageUrl = "https://photos.demandstudios.com/getty/article/251/198/86806725.jpg",
+                            Id = new Guid("70f60860-e15e-4756-978e-e620b0f69775"),
+                            ImageUrl = "https://img.freepik.com/premium-photo/old-male-teacher-portrait-closeup-face-professor-teacher-blackboard-isolated_265223-53892.jpg",
                             QualificationId = 1,
-                            Summary = "Aurora is a dedicated and passionate kindergarten teacher committed to fostering a nurturing and educational environment for young learners. With her warm personality and innovative teaching methods, she creates an engaging classroom atmosphere where students feel motivated to learn and explore.",
-                            TeacherUserId = new Guid("ffa6f8eb-02f7-4246-aa59-f7ce6d2be5ff")
+                            Summary = "A dedicated drawing teacher, brings creativity and warmth to the kindergarten classroom as he introduces young children to the world of artistic expression through drawing. With a gentle and encouraging approach, Mustafa fosters the development of fine motor skills, creativity, and self-expression in his students. He designs engaging drawing activities tailored to the unique interests and abilities of each child, from exploring simple shapes to creating imaginative scenes.",
+                            TeacherUserId = new Guid("c3010f38-ec8b-4c80-9599-e8fdada9299f")
                         });
                 });
 

@@ -100,6 +100,70 @@ namespace KinderConnect.Data.Configurations
 
             users.Add(user);
 
+            user = new ApplicationUser()
+            {
+                FirstName = "Amelia",
+                LastName = "Avita",
+                DateOfBirth = DateTime.Parse("2000/04/27"),
+                Gender = "female",
+                UserName = "Mrs.Amelia",
+                NormalizedUserName = "MRS.AMELIA",
+                Email = "mrsamelia@gmail.com",
+                NormalizedEmail = "MRSAMELIA@GMAIL.COM",
+                SecurityStamp = "Z9Y8X7W6V5U4T3S2R1Q0P9O8N7M6L5K",
+                PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
+            };
+
+            users.Add(user);
+
+            user = new ApplicationUser()
+            {
+                FirstName = "Ava",
+                LastName = "Alita",
+                DateOfBirth = DateTime.Parse("1999/03/25"),
+                Gender = "female",
+                UserName = "Mrs.Ava",
+                NormalizedUserName = "MRS.AVA",
+                Email = "mrsava@gmail.com",
+                NormalizedEmail = "MRSAVA@GMAIL.COM",
+                SecurityStamp = "H2G3F4E5D6C7B8A9Z0Y1X2W3V4U5T6S",
+                PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
+            };
+
+            users.Add(user);
+
+            user = new ApplicationUser()
+            {
+                FirstName = "Aurora",
+                LastName = "Gastambide",
+                DateOfBirth = DateTime.Parse("1998/02/12"),
+                Gender = "female",
+                UserName = "Mrs.Aurora",
+                NormalizedUserName = "MRS.AURORA",
+                Email = "mrsaurora@gmail.com",
+                NormalizedEmail = "MRSAURORA@GMAIL.COM",
+                SecurityStamp = "M1N2O3P4Q5R6S7T8U9V0A1B2C3D4E5F",
+                PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
+            };
+
+            users.Add(user);
+
+            user = new ApplicationUser()
+            {
+                FirstName = "Savka",
+                LastName = "Ivanovich",
+                DateOfBirth = DateTime.Parse("2001/09/26"),
+                Gender = "female",
+                UserName = "Mrs.Savka",
+                NormalizedUserName = "MRS.SAVKA",
+                Email = "mrssavka@gmail.com",
+                NormalizedEmail = "MRSSAVKA@GMAIL.COM",
+                SecurityStamp = "J9K8L7M6N5O4P3Q2R1S0T9U8V7W6X5Y",
+                PasswordHash = "AQAAAAEAACcQAAAAEKD7ue2lT9/3kT1BsIV9uXwJgQ+j1atLihMxsAncN8qXuiOy5j7pTDYoKPLiS3Sslg==",
+            };
+
+            users.Add(user);
+
             return users.ToArray();
         }
     }

@@ -9,7 +9,6 @@ namespace KinderConnect.Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            // Update Teacher ImageUrls
             migrationBuilder.UpdateData(
                 table: "Teachers",
                 keyColumn: "Id",
@@ -38,7 +37,6 @@ namespace KinderConnect.Data.Migrations
                 column: "Summary",
                 value: "A dedicated drawing teacher, brings creativity and warmth to the kindergarten classroom as she introduces young children to the world of artistic expression through drawing. With a gentle and encouraging approach, Mustafa fosters the development of fine motor skills, creativity, and self-expression in his students. She designs engaging drawing activities tailored to the unique interests and abilities of each child, from exploring simple shapes to creating imaginative scenes.");
 
-            // Update ApplicationUser records
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
