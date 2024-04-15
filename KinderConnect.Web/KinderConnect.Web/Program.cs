@@ -3,6 +3,7 @@ using KinderConnect.Data.Models;
 using KinderConnect.Services.Data.Interfaces;
 using KinderConnect.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace KinderConnect.Web
@@ -30,7 +31,12 @@ namespace KinderConnect.Web
             })
                 .AddEntityFrameworkStores<KinderConnectDbContext>();
 
-            builder.Services.AddControllersWithViews();
+            builder.Services
+                .AddControllersWithViews()
+                .AddMvcOptions(options =>
+                {
+                    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+                });
 
             builder.Services.AddApplicationServices(typeof(ITeacherService));
 
