@@ -25,6 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{BD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{72A893FF-2F8F-4613-B85B-483604D7B7C1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{74A5FE1F-70FC-46F3-82F9-781C1C4265CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinderConnect.Services.Tests", "KinderConnect.Services.Tests\KinderConnect.Services.Tests.csproj", "{0930CDBA-F725-4793-BEB8-F79486EB7622}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,10 @@ Global
 		{86D119B5-1C47-4EBE-9B8D-BB47646127EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86D119B5-1C47-4EBE-9B8D-BB47646127EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86D119B5-1C47-4EBE-9B8D-BB47646127EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0930CDBA-F725-4793-BEB8-F79486EB7622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0930CDBA-F725-4793-BEB8-F79486EB7622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0930CDBA-F725-4793-BEB8-F79486EB7622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0930CDBA-F725-4793-BEB8-F79486EB7622}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +83,7 @@ Global
 		{92DDF95B-DAB5-4395-8F0D-EA2CC7E9E8B5} = {BD89011C-A486-45FE-940B-BBE718991289}
 		{B9DA3A8F-22E2-4D4D-8B63-92E5FBAE2A90} = {72A893FF-2F8F-4613-B85B-483604D7B7C1}
 		{BC180190-CAAC-4AA0-BFF0-E43F755F76C9} = {72A893FF-2F8F-4613-B85B-483604D7B7C1}
+		{0930CDBA-F725-4793-BEB8-F79486EB7622} = {74A5FE1F-70FC-46F3-82F9-781C1C4265CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27E4C2EC-0522-42C8-833E-D9CF41AFB878}
