@@ -15,8 +15,8 @@ namespace KinderConnect.Data.Migrations
                 values: new object[,]
                 {
                     { new Guid("4faa63ab-f5f8-45ae-bdc4-2eb42ca9b266"), new Guid("32521de9-eb61-49d9-b81f-b3dc5467fb4c") },
-                    { new Guid("632bc679-3cc2-45b7-971b-6a92105321de"), new Guid("32521de9-eb61-49d9-b81f-b3dc5467fb4c") },
-                    { new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"), new Guid("32521de9-eb61-49d9-b81f-b3dc5467fb4c") },
+                    { new Guid("632bc679-3cc2-45b7-971b-6a92105321de"), new Guid("715C4EB6-ACA1-4864-B04A-396E8F16EE7C") },
+                    { new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"), new Guid("715C4EB6-ACA1-4864-B04A-396E8F16EE7C") },
                     { new Guid("c12f8035-d854-4cdc-bad7-489237b10fdf"), new Guid("32521de9-eb61-49d9-b81f-b3dc5467fb4c") },
                     { new Guid("8375650a-e0a4-4eb4-a5ab-849b955c79da"), new Guid("365d5460-43bb-4094-bd01-46f0c3197590") },
                     { new Guid("a92ed02a-bbf0-426b-b0f5-4bd8b89c33ea"), new Guid("365d5460-43bb-4094-bd01-46f0c3197590") },
@@ -39,12 +39,12 @@ namespace KinderConnect.Data.Migrations
             migrationBuilder.DeleteData(
                 table: "ClassroomsTeachers",
                 keyColumns: new[] { "ClassroomId", "TeacherId" },
-                keyValues: new object[] { new Guid("632bc679-3cc2-45b7-971b-6a92105321de"), new Guid("32521de9-eb61-49d9-b81f-b3dc5467fb4c") });
+                keyValues: new object[] { new Guid("632bc679-3cc2-45b7-971b-6a92105321de"), new Guid("715C4EB6-ACA1-4864-B04A-396E8F16EE7C") });
 
             migrationBuilder.DeleteData(
                 table: "ClassroomsTeachers",
                 keyColumns: new[] { "ClassroomId", "TeacherId" },
-                keyValues: new object[] { new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"), new Guid("32521de9-eb61-49d9-b81f-b3dc5467fb4c") });
+                keyValues: new object[] { new Guid("958b5667-9055-40a7-b7b2-81c19afe3329"), new Guid("715C4EB6-ACA1-4864-B04A-396E8F16EE7C") });
 
             migrationBuilder.DeleteData(
                 table: "ClassroomsTeachers",

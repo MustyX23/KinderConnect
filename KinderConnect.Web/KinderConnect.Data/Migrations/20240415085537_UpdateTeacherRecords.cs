@@ -41,15 +41,15 @@ namespace KinderConnect.Data.Migrations
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: new Guid("702DE3DD-C1E7-4F40-9131-623AADB7E765"),
-                columns: new[] { "FirstName", "LastName", "Gender" },
-                values: new object[] { "Lyubliana", "Popova", "female" });
+                columns: new[] { "FirstName", "LastName", "Gender", "UserName", "NormalizedUserName", "Email", "NormalizedEmail" },
+                values: new object[] { "Lyubliana", "Popova", "female", "MrsLyubliana", "MRSLYUBLIANA", "mrslyubliana@gmail.com", "MRSLYUBLIANA@GMAIL.COM" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: new Guid("C3010F38-EC8B-4C80-9599-E8FDADA9299F"),
-                columns: new[] { "FirstName", "LastName", "Gender" },
-                values: new object[] { "Milena", "Benkova", "female" });
+                columns: new[] { "FirstName", "LastName", "Gender", "UserName", "NormalizedUserName", "Email", "NormalizedEmail" },
+                values: new object[] { "Milena", "Benkova", "female", "MrsBenkova", "MRSBENKOVA", "mrsbenkova@gmail.com", "MRSBENKOVA@GMAIL.COM" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
