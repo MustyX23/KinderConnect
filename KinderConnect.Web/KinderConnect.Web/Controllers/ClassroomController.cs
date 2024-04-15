@@ -4,7 +4,6 @@ using static KinderConnect.Common.NotificationMessagesConstants;
 using KinderConnect.Web.ViewModels.Classroom;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.CompilerServices;
 
 namespace KinderConnect.Web.Controllers
 {
