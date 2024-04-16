@@ -30,4 +30,8 @@
     <ProjectReference Include="..\KinderConnect.Web.ViewModels\KinderConnect.Web.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Models\" />
+  </ItemGroup>
+
 </Project>

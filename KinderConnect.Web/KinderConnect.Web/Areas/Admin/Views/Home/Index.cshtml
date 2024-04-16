@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="mt-4 p-6 bg-light text-center">
+    <h2 class="display-4">Hello, Admin!</h2>
+    <p class="lead mb-1 mt-3">
+        This is your administrator area - you can <b>read</b>, <b>create</b>,
+        <b>delete</b> and <b>edit</b> classrooms, activities also teachers.
+    </p>
+    <p class="lead mt-1">
+        You can also see <b>all parents, children, teachers</b>, <b>all classrooms and activities</b> in the
+        system.
+    </p>
+    <hr class="my-4">
+    <a asp-area="Admin" asp-controller="Activity" asp-action="Create"
+       class="btn btn-primary btn-lg">All Activities</a>
+    <a asp-area="Admin" asp-controller="Activity" asp-action="Create"
+       class="btn btn-primary btn-lg">Add Activity</a>
+    <span> | </span>
+    <a asp-area="Admin" asp-controller="Classroom" asp-action="All"
+       class="btn btn-primary btn-lg">All Classrooms</a>
+    <a asp-area="Admin" asp-controller="Classroom" asp-action="Create"
+       class="btn btn-primary btn-lg">Add Classroom</a>
+    <span> | </span>
+    <a asp-area="Admin" asp-controller="Teacher" asp-action="All"
+       class="btn btn-primary btn-lg">All Teachers</a>
+    <a asp-area="Admin" asp-controller="Teacher" asp-action="Create"
+       class="btn btn-primary btn-lg">Add Teachers</a>
+    <span> | </span>
+    <a asp-area="Admin" asp-controller="User" asp-action="All"
+       class="btn btn-primary btn-lg">All Users</a>
+</div>

@@ -5,6 +5,8 @@ using KinderConnect.Web.ViewModels.Teacher;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
+using static KinderConnect.Common.GeneralApplicationConstants;
+
 namespace KinderConnect.Web.Controllers
 {
     public class HomeController : Controller
@@ -26,6 +28,11 @@ namespace KinderConnect.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return this.RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+            }
+
             var activitiesViewModel
                 = await activityService.GetAllActivitiesAsync();
 
