@@ -2,6 +2,8 @@
 using KinderConnect.Data.Models;
 using KinderConnect.Services.Data.Interfaces;
 using KinderConnect.Web.ViewModels.Teacher;
+using KinderConnect.Web.ViewModels.Teacher.Enums;
+using KinderConnect.Web.Views.Teacher;
 using Microsoft.EntityFrameworkCore;
 
 namespace KinderConnect.Services.Data
@@ -13,6 +15,64 @@ namespace KinderConnect.Services.Data
         public TeacherService(KinderConnectDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task<AllTeachersQueryModel> AllAsync(AllTeachersQueryModel queryModel)
+        {
+            IQueryable<Teacher> teachersQuery = dbContext
+                .Teachers
+                .Include(tU => tU.TeacherUser)
+                .Where(t => t.TeacherUser.IsActive)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(queryModel.SearchString))
+            {
+                string wildCard = $"%{queryModel.SearchString.ToLower()}%";
+
+                teachersQuery = teachersQuery
+                    .Where(t => EF.Functions.Like(t.TeacherUser.FirstName, wildCard)
+                    || EF.Functions.Like(t.TeacherUser.LastName, wildCard));
+            }
+
+            teachersQuery = queryModel.TeacherSorting switch
+            {
+                TeacherSorting.ByFirstNameAZ => teachersQuery
+                .OrderBy(t => t.TeacherUser.FirstName),
+
+                TeacherSorting.ByFirstNameZA => teachersQuery
+                .OrderByDescending(t => t.TeacherUser.FirstName),
+
+                TeacherSorting.ByLastNameAZ => teachersQuery
+                .OrderBy(t => t.TeacherUser.LastName),
+
+                TeacherSorting.ByLastNameZA => teachersQuery
+                .OrderByDescending(t => t.TeacherUser.LastName),
+
+                _ => teachersQuery.OrderByDescending(t => t.Id),
+            };
+
+            IEnumerable<AllTeachersViewModel> allTeachers = await teachersQuery
+                .Skip((queryModel.CurrentPage - 1) * queryModel.TeachersPerPage)
+                .Take(queryModel.TeachersPerPage)
+                .Select(t => new AllTeachersViewModel()
+                {
+                    FirstName = t.TeacherUser.FirstName,
+                    LastName = t.TeacherUser.LastName,
+                    DateOfBirth = t.TeacherUser.DateOfBirth.ToString("yyyy/MM/dd HH:mm"),
+                    IsActive = t.TeacherUser.IsActive,
+                    PhoneNumber = t.TeacherUser.PhoneNumber,
+                    Email = t.TeacherUser.Email,
+                    ImageUrl = t.ImageUrl,
+                    QualificationId = t.QualificationId
+                })
+                .ToArrayAsync();
+
+            int totalTeachers = teachersQuery.Count();
+
+            queryModel.TotalTeachers = totalTeachers;
+            queryModel.Teachers = allTeachers;
+
+            return queryModel;
         }
 
         public async Task<TeacherDetailsViewModel> GetDetailsByIdAsync(string id)

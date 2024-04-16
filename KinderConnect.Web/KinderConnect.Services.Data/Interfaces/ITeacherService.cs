@@ -1,10 +1,12 @@
 ﻿using KinderConnect.Web.ViewModels.Classroom;
 using KinderConnect.Web.ViewModels.Teacher;
+using KinderConnect.Web.Views.Teacher;
 
 namespace KinderConnect.Services.Data.Interfaces
 {
     public interface ITeacherService
     {
+        Task<AllTeachersQueryModel> AllAsync(AllTeachersQueryModel queryModel);
         Task<TeacherDetailsViewModel> GetDetailsByIdAsync(string id);
         Task<IEnumerable<MyClassroomViewModel>> GetMyClassroomsByTeacherIdAsync(string teacherId);
         Task<string> GetTeacherIdByUserIdAsync(string userId);
