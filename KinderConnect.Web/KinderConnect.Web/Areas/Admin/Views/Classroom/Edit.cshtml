@@ -1,0 +1,55 @@
+﻿@using KinderConnect.Web.ViewModels.Classroom
+@model EditClassroomFormModel
+
+<h2>Edit Classroom</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" name="classroomId" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" required />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Information" class="form-label"></label>
+        <textarea asp-for="Information" class="form-control" rows="4" required></textarea>
+        <span asp-validation-for="Information" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ImageUrl" class="form-label"></label>
+        <input asp-for="ImageUrl" class="form-control" required />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label asp-for="MinimumAge" class="form-label"></label>
+            <input asp-for="MinimumAge" class="form-control" type="number" required min="0" />
+            <span asp-validation-for="MinimumAge" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="MaximumAge" class="form-label"></label>
+            <input asp-for="MaximumAge" class="form-control" type="number" required min="3" />
+            <span asp-validation-for="MaximumAge" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label asp-for="TotalSeats" class="form-label"></label>
+            <input asp-for="TotalSeats" class="form-control" type="number" required min="2" />
+            <span asp-validation-for="TotalSeats" class="text-danger"></span>
+        </div>
+        <div class="col-md-6">
+            <label asp-for="TutionFee" class="form-label"></label>
+            <input asp-for="TutionFee" class="form-control" type="number" step="0.01" required min="0" />
+            <span asp-validation-for="TutionFee" class="text-danger"></span>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a asp-area="Admin" asp-action="All" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,54 @@
+﻿@using KinderConnect.Web.ViewModels.Classroom
+@model CreateClassroomFormModel
+
+<h2>Create Classroom</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Name">Name:</label>
+        <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Information">Information:</label>
+        <textarea class="form-control" id="Information" name="Information" rows="4" required>@Model.Information</textarea>
+        <span asp-validation-for="Information" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="ImageUrl">Image URL:</label>
+        <input type="text" class="form-control" id="ImageUrl" name="ImageUrl" value="@Model.ImageUrl" required>
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="MinimumAge">Minimum Age:</label>
+        <input type="number" class="form-control" id="MinimumAge" name="MinimumAge" value="@Model.MinimumAge" required min="0">
+        <span asp-validation-for="MinimumAge" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="MaximumAge">Maximum Age:</label>
+        <input type="number" class="form-control" id="MaximumAge" name="MaximumAge" value="@Model.MaximumAge" required min="3">
+        <span asp-validation-for="MaximumAge" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="TotalSeats">Total Seats:</label>
+        <input type="number" class="form-control" id="TotalSeats" name="TotalSeats" value="@Model.TotalSeats" required min="2">
+        <span asp-validation-for="TotalSeats" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="TutionFee">Tution Fee:</label>
+        <input type="number" step="0.01" class="form-control" id="TutionFee" name="TutionFee" value="@Model.TutionFee" required>
+        <span asp-validation-for="TutionFee" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Classroom</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

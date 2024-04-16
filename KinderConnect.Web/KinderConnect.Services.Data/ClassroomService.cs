@@ -4,7 +4,9 @@ using KinderConnect.Services.Data.Interfaces;
 using KinderConnect.Web.ViewModels.Child;
 using KinderConnect.Web.ViewModels.Classroom;
 using KinderConnect.Web.ViewModels.Classroom.Enums;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 
 namespace KinderConnect.Services.Data
 {
@@ -21,6 +23,7 @@ namespace KinderConnect.Services.Data
         {
             IQueryable<Classroom> classroomsQuery = dbContext
                 .Classrooms
+                .Where(c => c.IsActive)
                 .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(queryModel.SearchString))
@@ -74,6 +77,23 @@ namespace KinderConnect.Services.Data
             return queryModel;
         }
 
+        public async Task CreateAsync(CreateClassroomFormModel model)
+        {
+            Classroom classroom = new Classroom() 
+            {
+                Name = model.Name,
+                Information = model.Information,
+                ImageUrl = model.ImageUrl,
+                MinimumAge = model.MinimumAge,
+                MaximumAge = model.MaximumAge,
+                TotalSeats = model.TotalSeats,
+                TutionFee = model.TutionFee,
+            };
+
+            dbContext.Classrooms.Add(classroom);
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task DecreaseTotalSeatsByIdAsync(string classroomId)
         {
             var classroom = await dbContext
@@ -81,6 +101,22 @@ namespace KinderConnect.Services.Data
                 .FirstOrDefaultAsync(c => c.IsActive && c.Id.ToString() == classroomId);
 
             classroom.TotalSeats -= 1;
+
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task EditAsync(string classroomId, EditClassroomFormModel formModel)
+        {
+            var classroom = await dbContext
+                .Classrooms
+                .FirstOrDefaultAsync(c => c.IsActive && c.Id.ToString() == classroomId);
+
+            classroom.Name = formModel.Name;
+            classroom.Information = formModel.Information;
+            classroom.TutionFee = formModel.TutionFee;
+            classroom.ImageUrl = formModel.ImageUrl;
+            classroom.MinimumAge = formModel.MinimumAge;
+            classroom.MaximumAge = formModel.MaximumAge;
 
             await dbContext.SaveChangesAsync();
         }
@@ -112,6 +148,32 @@ namespace KinderConnect.Services.Data
             }
 
             return allClassroomsForView;
+        }
+
+        public async Task<EditClassroomFormModel> GetClassroomForEditByIdAsync(string classroomId)
+        {
+            var classroom = await dbContext
+                .Classrooms
+                .FirstOrDefaultAsync(c => c.IsActive && c.Id.ToString() == classroomId);
+
+            if (classroom != null)
+            {
+                EditClassroomFormModel classroomViewModel = new EditClassroomFormModel
+                {
+                    Id = classroomId,
+                    Name = classroom.Name,
+                    Information = classroom.Information,
+                    ImageUrl = classroom.ImageUrl,
+                    MinimumAge = classroom.MinimumAge,
+                    MaximumAge = classroom.MaximumAge,
+                    TotalSeats = classroom.TotalSeats,
+                    TutionFee = classroom.TutionFee,                    
+                };
+
+                return classroomViewModel;
+            }
+
+            return null;
         }
 
         public async Task<ClassroomViewModel> GetClassroomViewModelByIdAsync(string classroomId)
@@ -257,6 +319,21 @@ namespace KinderConnect.Services.Data
             var classroom = await dbContext.Classrooms.FindAsync(Guid.Parse(classroomId));
 
             return currentSeats < classroom!.TotalSeats;
+        }
+
+        [HttpPost]
+        public async Task SoftRemoveClassroomByIdAsync(string id)
+        {
+            var classroom = await dbContext
+                .Classrooms
+                .FirstOrDefaultAsync(c => c.IsActive && c.Id.ToString() == id);
+
+            if (classroom != null)
+            {
+                classroom.IsActive = false;
+
+                await dbContext.SaveChangesAsync();
+            }            
         }
     }
 }

@@ -15,6 +15,10 @@ namespace KinderConnect.Services.Data.Interfaces
         Task<ClassroomViewModel> GetClassroomViewModelByIdAsync(string classroomId);
         Task IncreaseTotalSeatsByIdAsync(string classroomId);
         Task DecreaseTotalSeatsByIdAsync(string classroomId);
+        Task CreateAsync(CreateClassroomFormModel model);
+        Task<EditClassroomFormModel> GetClassroomForEditByIdAsync(string classroomId);
+        Task EditAsync(string classroomId, EditClassroomFormModel formModel);
+        Task SoftRemoveClassroomByIdAsync(string id);
         //Task<ClassroomDto> GetClassroomByIdAsync(string clasroomId);
         //Task CreateClassroomAsync(ClassroomDto classroomDto);
         //Task UpdateClassroomAsync(string clasroomId, ClassroomDto classroomDto);
