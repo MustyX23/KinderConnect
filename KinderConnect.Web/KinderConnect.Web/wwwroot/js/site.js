@@ -20,3 +20,21 @@
         $(this).siblings('.toggle-content').toggle();
     });
 });
+
+function confirmRemove(id) {
+    var result = confirm("Are you sure you want to remove this classroom?");
+    if (result) {
+        var form = document.createElement('form');
+        form.method = 'post';
+        form.action = '/Admin/Classroom/SoftRemove';
+
+        var hiddenField = document.createElement('input');
+        hiddenField.type = 'hidden';
+        hiddenField.name = 'id';
+        hiddenField.value = id;
+
+        form.appendChild(hiddenField);
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
