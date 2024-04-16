@@ -26,9 +26,5 @@ namespace KinderConnect.Web.Areas.Admin.Controllers
             }
             return View(allTeachers);
         }
-        public async Task<IActionResult> Create()
-        {
-            return View();
-        }
     }
 }

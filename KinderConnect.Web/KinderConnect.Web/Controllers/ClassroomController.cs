@@ -1,9 +1,11 @@
 ﻿using KinderConnect.Services.Data.Interfaces;
 using KinderConnect.Web.Infrastructure.Extensions;
-using static KinderConnect.Common.NotificationMessagesConstants;
 using KinderConnect.Web.ViewModels.Classroom;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using static KinderConnect.Common.NotificationMessagesConstants;
+using static KinderConnect.Common.GeneralApplicationConstants;
 
 namespace KinderConnect.Web.Controllers
 {
@@ -24,6 +26,11 @@ namespace KinderConnect.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index([FromQuery]AllClassroomsQueryModel queryModel)
         {
+            if (this.User.IsInRole(AdminRoleName))
+            {
+                return this.RedirectToAction("All", "Classroom", new { Area = AdminAreaName });
+            }
+
             var allClassrooms
                 = await classroomService.AllAsync(queryModel);
 

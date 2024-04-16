@@ -56,14 +56,15 @@ namespace KinderConnect.Services.Data
                 .Take(queryModel.TeachersPerPage)
                 .Select(t => new AllTeachersViewModel()
                 {
+                    Id = t.Id.ToString(), //TeacherId
                     FirstName = t.TeacherUser.FirstName,
                     LastName = t.TeacherUser.LastName,
-                    DateOfBirth = t.TeacherUser.DateOfBirth.ToString("yyyy/MM/dd HH:mm"),
+                    DateOfBirth = t.TeacherUser.DateOfBirth.ToString("yyyy/MM/dd"),
                     IsActive = t.TeacherUser.IsActive,
                     PhoneNumber = t.TeacherUser.PhoneNumber,
                     Email = t.TeacherUser.Email,
                     ImageUrl = t.ImageUrl,
-                    QualificationId = t.QualificationId
+                    Qualification = t.Qualification.Name,
                 })
                 .ToArrayAsync();
 

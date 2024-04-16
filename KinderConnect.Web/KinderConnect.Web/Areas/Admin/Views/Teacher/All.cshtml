@@ -1,18 +1,17 @@
-﻿@using KinderConnect.Web.ViewModels.Classroom
-@model AllClassroomsQueryModel
+﻿@using KinderConnect.Web.Views.Teacher
+@model AllTeachersQueryModel
 
 <div class="container-fluid pt-5">
     <div class="container">
         <div class="text-center pb-2">
-            <p class="section-title px-5"><span class="px-2">Popular Classes</span></p>
-            <h1 class="mb-4">Classes for Your Kids</h1>
+            <h1 class="mb-4">All the teachers in the system</h1>
         </div>
         <form method="get">
             <div class="row">
                 <div class="form-group col-md-3 d-flex justify-content-between">
                     <div class="form-group">
-                        <label asp-for="ClassesPerPage"></label>
-                        <select asp-for="ClassesPerPage" class="form-control">
+                        <label asp-for="TeachersPerPage"></label>
+                        <select asp-for="TeachersPerPage" class="form-control">
                             <option value="1">1</option>
                             <option value="3">3</option>
                             <option value="6">6</option>
@@ -26,12 +25,13 @@
                 </div>
                 <div class="form-group col-md-3">
                     <div class="form-group">
-                        <label asp-for="ClassroomSorting"></label>
-                        <select asp-for="ClassroomSorting" class="form-control">
-                            <option value="0">Newest</option>
-                            <option value="1">Oldest</option>
-                            <option value="2">Elder Age</option>
-                            <option value="3">Younger Age</option>
+                        <label asp-for="TeacherSorting"></label>
+                        <select asp-for="TeacherSorting" class="form-control">
+                            <option value="0">By First Name (A-Z)</option>
+                            <option value="1">By First Name (Z-A)</option>
+                            <option value="2">By Last Name (A-Z)</option>
+                            <option value="3">By Last Name (Z-A)</option>
+
                         </select>
                     </div>
                 </div>
@@ -43,32 +43,36 @@
             </div>
         </form>
         <div class="row">
-            @foreach (var classroom in Model.Classes)
+            @foreach (var teacher in Model.Teachers)
             {
                 <div class="col-lg-4 mb-5">
                     <div class="card border-0 bg-light shadow-sm pb-2">
-                        <img class="card-img-top mb-2" src="@classroom.ImageUrl" alt="">
+                        <img class="card-img-top mb-2" src="@teacher.ImageUrl" alt="">
                         <div class="card-body text-center">
-                            <h4 class="card-title">@classroom.Name</h4>
-                            <p class="card-text">@classroom.Information</p>
+                            <h4 class="card-title">@teacher.FirstName @teacher.LastName</h4>
+                            <p class="card-text">Email: @teacher.Email</p>
                         </div>
                         <div class="card-footer bg-transparent py-4 px-5">
                             <div class="row border-bottom">
-                                <div class="col-6 py-1 text-right border-right"><strong>Age of Kids</strong></div>
-                                <div class="col-6 py-1">@classroom.MinimumAge - @classroom.MaximumAge Years</div>
+                                <div class="col-6 py-1 text-right border-right"><strong>Date of Birth</strong></div>
+                                <div class="col-6 py-1">@teacher.DateOfBirth</div>
                             </div>
                             <div class="row border-bottom">
-                                <div class="col-6 py-1 text-center border-right"><strong>Available Seats</strong></div>
-                                <div class="col-6 py-1">@classroom.TotalSeats Seats</div>
+                                <div class="col-6 py-1 text-center border-right"><strong>Phone Number</strong></div>
+                                <div class="col-6 py-1">@teacher.PhoneNumber</div>
+                            </div>
+                            <div class="row border-bottom">
+                                <div class="col-6 py-1 text-center border-right"><strong>Phone Number</strong></div>
+                                <div class="col-6 py-1">Qualification: @teacher.Qualification</div>
                             </div>
                         </div>
                         <div class="card-footer bg-transparent py-2 px-5">
                             <div class="row">
                                 <div class="col-6 text-end">
-                                    <a asp-action="Edit" asp-route-id="@classroom.Id" class="btn btn-secondary btn-sm px-4">Edit</a>
+                                    <a asp-action="Edit" asp-route-id="@teacher.Id" class="btn btn-secondary btn-sm px-4">Edit</a>
                                 </div>
                                 <div class="col-6 text-start">
-                                    <form asp-action="SoftRemove" asp-route-id="@classroom.Id" method="post" class="me-2">
+                                    <form asp-action="SoftRemove" asp-route-id="@teacher.Id" method="post" class="me-2">
                                         <button type="submit" class="btn btn-danger btn-sm px-4">Remove</button>
                                     </form>
                                 </div>
@@ -84,32 +88,32 @@
                     {
                         previousPage = 1;
                     }
-                    int maxPage = (int)Math.Ceiling((double)Model.TotalClasses / Model.ClassesPerPage);
+                    int maxPage = (int)Math.Ceiling((double)Model.TotalTeachers / Model.TeachersPerPage);
                 }
 
                 <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start">
                     <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
                        asp-area="Admin"
-                       asp-controller="Classroom"
-                       asp-action="Index"
+                       asp-controller="Teacher"
+                       asp-action="All"
                        asp-route-currentPage="@previousPage"
-                       asp-route-classesPerPage="@Model.ClassesPerPage"
+                       asp-route-teachersPerPage="@Model.TeachersPerPage"
                        asp-route-searchTerm="@Model.SearchString"
-                       asp-route-classroomSorting="@((int)Model.ClassroomSorting)"><<</a>
+                       asp-route-teacherSorting="@((int)Model.TeacherSorting)"><<</a>
                 </div>
 
                 @{
-                    bool shouldNextPageBeDisabled = Model.CurrentPage >= maxPage || !Model.Classes.Any();
+                    bool shouldNextPageBeDisabled = Model.CurrentPage >= maxPage || !Model.Teachers.Any();
                 }
 
                 <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end">
                     <a class="btn btn-primary @(shouldNextPageBeDisabled ? "disabled" : string.Empty)"
-                       asp-controller="Classroom"
+                       asp-controller="Teacher"
                        asp-action="All"
                        asp-route-currentPage="@(Model.CurrentPage + 1)"
-                       asp-route-classesPerPage="@Model.ClassesPerPage"
+                       asp-route-classesPerPage="@Model.TeachersPerPage"
                        asp-route-searchTerm="@Model.SearchString"
-                       asp-route-classroomSorting="@((int)Model.ClassroomSorting)">>></a>
+                       asp-route-teacherSorting="@((int)Model.TeacherSorting)">>></a>
                 </div>
             </div>
         </div>
