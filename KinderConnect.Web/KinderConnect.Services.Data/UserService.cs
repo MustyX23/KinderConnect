@@ -65,7 +65,10 @@ namespace KinderConnect.Services.Data
                 .Users
                 .FirstOrDefaultAsync(u => u.IsActive && u.Id.ToString() == userId);
 
-
+            if (user == null)
+            {
+                return null;
+            }
             var viewModel = new UserViewModel()
             {
                 Id= userId,
