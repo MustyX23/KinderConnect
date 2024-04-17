@@ -7,6 +7,10 @@
 <div class="container">
     <h2>@ViewData["Title"]</h2>
     <div class="list-group-oval">
+        @if (Model.Count() <= 0)
+        {
+            <h1 class="h2">You don't lead any classes at the moment.</h1>            
+        }
         @foreach (var classroom in Model)
         {
             <div class="list-group-item">
