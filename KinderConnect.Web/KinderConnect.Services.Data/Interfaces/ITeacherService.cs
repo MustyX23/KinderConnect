@@ -13,6 +13,7 @@ namespace KinderConnect.Services.Data.Interfaces
         Task<IEnumerable<AllTeacherViewModel>> GetTeachersForViewAsync();
         Task<bool> IsTeacherByUserIdAsync(string userId);
         Task<bool> IsTeacherLeaderOfClassroomByIdAndClassroomIdAsync(string teacherId, string classroomId);
+        Task UpgradeToTeacherByUserIdAsync(string userId, CreateTeacherFormModel formModel);
         //Task<TeacherDto> GetTeacherByIdAsync(string teacherId);
         //Task CreateTeacherAsync(TeacherDto teacherDto);
         //Task EditTeacherByIdAsync(string teacherId, TeacherDto teacherDto);

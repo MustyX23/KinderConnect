@@ -159,5 +159,25 @@ namespace KinderConnect.Services.Data
             return isLeader;
         }
 
+        public async Task UpgradeToTeacherByUserIdAsync(string userId, CreateTeacherFormModel formModel)
+        {
+            var user = await dbContext
+                .Users
+                .FirstOrDefaultAsync(u => u.IsActive && u.Id.ToString() == userId);
+
+            if (user != null)
+            {
+                Teacher teacher = new Teacher()
+                {
+                    ImageUrl = formModel.ImageURl,
+                    QualificationId = formModel.QualificationId,
+                    Summary = formModel.Summary,
+                    TeacherUserId = user.Id,
+                };
+
+                dbContext.Teachers.Add(teacher);
+                await dbContext.SaveChangesAsync();
+            }            
+        }
     }
 }

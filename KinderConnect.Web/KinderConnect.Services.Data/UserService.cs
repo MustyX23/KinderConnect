@@ -32,7 +32,7 @@ namespace KinderConnect.Services.Data
         {
             ApplicationUser? user = await this.dbContext
                 .Users
-                .FirstOrDefaultAsync(u => u.Id.ToString() == userId);
+                .FirstOrDefaultAsync(u => u.IsActive && u.Id.ToString() == userId);
             if (user == null)
             {
                 return string.Empty;
@@ -45,6 +45,7 @@ namespace KinderConnect.Services.Data
         {
             List<UserViewModel> allUsers = await this.dbContext
                 .Users
+                .Where(u => u.IsActive)
                 .Select(u => new UserViewModel()
                 {
                     Id = u.Id.ToString(),
@@ -56,6 +57,25 @@ namespace KinderConnect.Services.Data
                 .ToListAsync();
 
             return allUsers;
+        }
+
+        public async Task<UserViewModel> GetUserViewModelByIdAsync(string userId)
+        {
+            ApplicationUser? user = await this.dbContext
+                .Users
+                .FirstOrDefaultAsync(u => u.IsActive && u.Id.ToString() == userId);
+
+
+            var viewModel = new UserViewModel()
+            {
+                Id= userId,
+                Email = user.Email,
+                FullName= user.FirstName + " " + user.LastName,
+                PhoneNumber= user.PhoneNumber,
+            };
+
+            return viewModel;
+
         }
     }
 }
