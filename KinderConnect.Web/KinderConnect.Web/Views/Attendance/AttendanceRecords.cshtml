@@ -1,4 +1,6 @@
-﻿<div class="container">
+﻿@using KinderConnect.Web.ViewModels.Attendance;
+@model IEnumerable<AttendanceRecordFormModel>
+<div class="container">
     <h2>Attendance Records</h2>
     <table class="table table-bordered table-striped">
         <thead>
@@ -17,6 +19,10 @@
                     <td>@attendance.End</td>
                     <td>@attendance.Actvity</td>
                     <td>
+                        @if (attendance.Children.Count <= 0)
+                        {
+                            <p>There are no children for this classroom.</p>
+                        }
                         @foreach (var child in attendance.Children)
                         {
                             <div class="d-flex">

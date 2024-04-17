@@ -48,6 +48,7 @@ namespace KinderConnect.Services.Data
             };
 
             dbContext.AttendanceRecords.Add(attendanceRecord);
+            await dbContext.SaveChangesAsync();
 
             foreach (var child in model.Children)
             {
