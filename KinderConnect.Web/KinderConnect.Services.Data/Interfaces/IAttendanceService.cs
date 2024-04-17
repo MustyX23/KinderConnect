@@ -9,6 +9,7 @@ namespace KinderConnect.Services.Data.Interfaces
         //Task RecordAttendanceAsync(AttendanceRecordDto attendanceRecordDto);
         //Task UpdateAttendanceAsync(string id, AttendanceRecordDto attendanceRecordDto);
         //Task DeleteAttendanceAsync(string id);
+
         Task<IEnumerable<AttendanceRecordFormModel>> GetAllAttendancesByTeacherAndClassroomIdAsync(string teacherId, string classroomId);
         Task<AttendanceRecordFormModel> GetAttendanceRecordFormModelByClassroomIdAsync(string classroomId);
         Task CreateAttendanceRecordAsync(AttendanceRecordFormModel model, string teacherId);

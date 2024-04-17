@@ -5,6 +5,7 @@
 @{
     string userId = User.GetUserId();
     bool isTeacher = await TeacherService.IsTeacherByUserIdAsync(userId);
+    bool isAdmin = User.IsAdmin();
 }
 
 <!DOCTYPE html>
@@ -37,6 +38,10 @@
                         <a class="nav-item nav-link" asp-area="" asp-controller = "Home" asp-action="About">About</a>
                         <a class="nav-item nav-link" asp-area="" asp-controller="Classroom" asp-action="Index">Classrooms</a>
                         <a class="nav-item nav-link" asp-area="" asp-controller="Child" asp-action="Index">My Kids</a>
+                        @if (isAdmin)
+                        {
+                            <a class="nav-item nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
+                        }
                         @if (isTeacher)
                         {
                             <a class="nav-item nav-link" asp-area="" asp-controller="Teacher" asp-action="MyClassrooms">My Classrooms</a>
@@ -79,8 +84,6 @@
             </div>
         </div>
     </footer>
-
-    <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>

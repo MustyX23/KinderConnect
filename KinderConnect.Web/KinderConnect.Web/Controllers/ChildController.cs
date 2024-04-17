@@ -22,17 +22,34 @@ namespace KinderConnect.Web.Controllers
         {
             string parentGuardianId = User.GetUserId();
 
-            IEnumerable<MyChildrenIndexViewModel> myChildren =
+            try
+            {
+                IEnumerable<MyChildrenIndexViewModel> myChildren =
                 await childrenService.GetChildrenByParentIdAsync(parentGuardianId);
 
-            return View(myChildren);
+                return View(myChildren);
+            }
+            catch (Exception)
+            {
+                GeneralError();
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
         public async Task<IActionResult> Edit(string id)
         {
-            EditChildFormModel formModel
-                = await childrenService.GetChildForEditByIdAsync(id);
+            try
+            {
+                EditChildFormModel formModel
+                    = await childrenService.GetChildForEditByIdAsync(id);
 
-            return View(formModel);
+                return View(formModel);
+            }
+            catch (Exception)
+            {
+                GeneralError();
+                return RedirectToAction("Index", "Home");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Edit(string id, EditChildFormModel formModel)
@@ -52,10 +69,24 @@ namespace KinderConnect.Web.Controllers
         }
         public async Task<IActionResult> Details(string id)
         {
-            var viewModel
+            try
+            {
+                var viewModel
                 = await childrenService.GetChildForDetailsByIdAsync(id);
 
-            return View(viewModel);
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                GeneralError();
+                return RedirectToAction("Index", "Home");
+            }
+            
+        }
+        private IActionResult GeneralError()
+        {
+            TempData[ErrorMessage] = "Unexpected Error occured. Please try again later :(";
+            return RedirectToAction("Index", "Home");
         }
     }
 }

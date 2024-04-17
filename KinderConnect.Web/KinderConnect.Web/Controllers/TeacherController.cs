@@ -17,38 +17,71 @@ namespace KinderConnect.Web.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var allTeachers
+            try
+            {
+                var allTeachers
                 = await teacherService.GetTeachersForViewAsync();
 
-            return View(allTeachers);
+                return View(allTeachers);
+            }
+            catch (Exception)
+            {
+                GeneralError();
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
         
         public async Task<IActionResult> MyClassrooms()
         {
             string userId = User.GetUserId();
 
-            bool isTeacher 
+            try
+            {
+                bool isTeacher
                 = await teacherService.IsTeacherByUserIdAsync(userId);
 
-            if (!isTeacher)
-            {               
-                return NotFound();
+                if (!isTeacher)
+                {
+                    return NotFound();
+                }
+
+                string teacherId
+                    = await teacherService.GetTeacherIdByUserIdAsync(userId);
+
+                IEnumerable<MyClassroomViewModel> myClassrooms
+                    = await teacherService.GetMyClassroomsByTeacherIdAsync(teacherId);
+
+                return View(myClassrooms);
+            }
+            catch (Exception)
+            {
+                GeneralError();
+                return RedirectToAction("Index", "Home");
             }
 
-            string teacherId 
-                = await teacherService.GetTeacherIdByUserIdAsync(userId);          
-
-            IEnumerable<MyClassroomViewModel> myClassrooms
-                = await teacherService.GetMyClassroomsByTeacherIdAsync(teacherId);
-
-            return View(myClassrooms);
+            
         }
         public async Task<IActionResult> Details(string id)
         {
-            TeacherDetailsViewModel viewModel
+            try
+            {
+                TeacherDetailsViewModel viewModel
                 = await teacherService.GetDetailsByIdAsync(id);
 
-            return View(viewModel);
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                GeneralError();
+                return RedirectToAction("Index", "Home");
+            }
+            
+        }
+        private IActionResult GeneralError()
+        {
+            TempData[ErrorMessage] = "Unexpected Error occured. Please try again later :(";
+            return RedirectToAction("Index", "Home");
         }
     }
 }

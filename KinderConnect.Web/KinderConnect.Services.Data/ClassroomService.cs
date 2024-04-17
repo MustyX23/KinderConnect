@@ -323,7 +323,6 @@ namespace KinderConnect.Services.Data
             return currentSeats < classroom!.TotalSeats;
         }
 
-        [HttpPost]
         public async Task SoftRemoveClassroomByIdAsync(string id)
         {
             var classroom = await dbContext

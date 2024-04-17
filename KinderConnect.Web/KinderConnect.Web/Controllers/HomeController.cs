@@ -1,10 +1,9 @@
 ﻿using KinderConnect.Services.Data.Interfaces;
-using KinderConnect.Web.Models;
 using KinderConnect.Web.ViewModels.Home;
 using KinderConnect.Web.ViewModels.Teacher;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+
+using static KinderConnect.Common.NotificationMessagesConstants;
 
 using static KinderConnect.Common.GeneralApplicationConstants;
 
@@ -34,32 +33,50 @@ namespace KinderConnect.Web.Controllers
                 return this.RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
 
-            var activitiesViewModel
+            try
+            {
+                var activitiesViewModel
                 = await activityService.GetAllActivitiesAsync();
 
-            var blogViewModel
-                = await blogPostService.GetThreeLastBlogPostsAsync();
+                var blogViewModel
+                    = await blogPostService.GetThreeLastBlogPostsAsync();
 
-            var indexViewModel = new IndexViewModel
+                var indexViewModel = new IndexViewModel
+                {
+                    Activities = activitiesViewModel,
+                    BlogPosts = blogViewModel
+                };
+
+                return View(indexViewModel);
+            }
+            catch (Exception)
             {
-                Activities = activitiesViewModel,
-                BlogPosts = blogViewModel
-            };
-
-            return View(indexViewModel);
+                GeneralError();
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         public async Task<IActionResult> About()
         {
-            IEnumerable<AllTeacherViewModel> teachersForView
+            try
+            {
+                IEnumerable<AllTeacherViewModel> teachersForView
                 = await teacherService.GetTeachersForViewAsync();
 
-            var aboutViewModel = new AboutViewModel
-            {
-                Teachers = teachersForView
-            };
+                var aboutViewModel = new AboutViewModel
+                {
+                    Teachers = teachersForView
+                };
 
-            return View(aboutViewModel);
+                return View(aboutViewModel);
+            }
+            catch (Exception)
+            {
+                GeneralError();
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
         public IActionResult Privacy()
@@ -85,6 +102,11 @@ namespace KinderConnect.Web.Controllers
             }
 
             return View();
+        }
+        private IActionResult GeneralError()
+        {
+            TempData[ErrorMessage] = "Unexpected Error occured. Please try again later :(";
+            return RedirectToAction("Index", "Home");
         }
     }
 }

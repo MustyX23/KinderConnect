@@ -31,10 +31,19 @@ namespace KinderConnect.Web.Controllers
                 return this.RedirectToAction("All", "Classroom", new { Area = AdminAreaName });
             }
 
-            var allClassrooms
-                = await classroomService.AllAsync(queryModel);
+            try
+            {
+                var allClassrooms
+                    = await classroomService.AllAsync(queryModel);
 
-            return View(allClassrooms);
+                return View(allClassrooms);
+            }
+            catch (Exception)
+            {
+                GeneralError();
+                return RedirectToAction("Index", "Classroom");
+            }
+
         }
 
         [HttpGet("JoinClassroom/{id}")]

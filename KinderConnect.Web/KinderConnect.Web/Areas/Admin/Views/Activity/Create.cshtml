@@ -1,0 +1,31 @@
+﻿@model ActivityFormModel
+
+<h2 class="text-center mb-4">Create Activity</h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <form method="post" class="border p-4 rounded">
+
+            <div class="mb-3">
+                <label class="form-label">Activity Name:</label>
+                <input type="text" asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Description:</label>
+                <input type="text" asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

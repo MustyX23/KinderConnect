@@ -57,16 +57,42 @@ namespace KinderConnect.Web.Controllers
             if (classroomId != null)
             {
                 ViewBag.ClassroomId = classroomId;
-            }           
+            }
+            
             return View(attendanceRecords);
         }
         public async Task<IActionResult> Create(string classroomId)
         {
-            var viewModel
-                = await attendanceService
-                .GetAttendanceRecordFormModelByClassroomIdAsync(classroomId);
+            try
+            {
+                string userId = User.GetUserId();
 
-            return View(viewModel);
+                var viewModel = await attendanceService
+                    .GetAttendanceRecordFormModelByClassroomIdAsync(classroomId);
+
+                bool isTeacher = await teacherService.IsTeacherByUserIdAsync(userId);
+                string teacherId = await teacherService.GetTeacherIdByUserIdAsync(userId);
+
+                if (!isTeacher)
+                {
+                    ModelState.AddModelError(string.Empty, "You don't have permission to access this page.");
+                    TempData[ErrorMessage] = $"You don't have permission to access this page.";
+                    return RedirectToAction("Index", "Home");
+                }
+                if (teacherId == null)
+                {
+                    ModelState.AddModelError(string.Empty, "You don't have permission to access this page.");
+                    TempData[ErrorMessage] = $"You don't have permission to access this page.";
+                    return RedirectToAction("Index", "Home");
+                }
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                GeneralError();
+                return RedirectToAction("Index", "Home");
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Create(AttendanceRecordFormModel model)
@@ -75,7 +101,17 @@ namespace KinderConnect.Web.Controllers
 
             bool isTeacher = await teacherService.IsTeacherByUserIdAsync(userId);
             string teacherId = await teacherService.GetTeacherIdByUserIdAsync(userId);
+            bool isTeacherLeader = await teacherService.IsTeacherLeaderOfClassroomByIdAndClassroomIdAsync(teacherId, model.ClassroomId);
 
+
+            if (model == null)
+            {
+                return BadRequest();
+            }
+            if (!isTeacherLeader) 
+            {
+                return Unauthorized();
+            }
             if (!isTeacher)
             {
                 ModelState.AddModelError(string.Empty, "You don't have permission to access this page.");
@@ -125,6 +161,11 @@ namespace KinderConnect.Web.Controllers
             await attendanceService.EditPresenceAsync(attendanceId, childId);
             TempData[SuccessMessage] = $"You have succesfully changed child's presence";
             return RedirectToAction("AttendanceRecords", "Attendance" ,new {teacherId, classroomId });
+        }
+        private IActionResult GeneralError()
+        {
+            TempData[ErrorMessage] = "Unexpected Error occured. Please try again later :(";
+            return RedirectToAction("Index", "Home");
         }
     }
 }

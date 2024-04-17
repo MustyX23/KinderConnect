@@ -1,0 +1,36 @@
+﻿@model IEnumerable<AllActivitiesViewModel>
+
+<div class="container-fluid pt-5">
+    <div class="text-center pb-2">
+        <p class="section-title px-5"><span class="px-2">Activities</span></p>
+        <h1 class="mb-4">Some of our Activities :)</h1>
+    </div>
+    <div class="container pb-3">
+        <div class="row">
+            @foreach (var activity in Model)
+            {
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4" style="padding: 30px;">
+                        <i class="flaticon-048-paper-plane h1 font-weight-normal text-primary mb-3"></i>
+                        <div class="pl-4 flex-grow-1">
+                            <h4>@activity.Name</h4>
+                            <p class="m-0">@activity.Description</p>
+                        </div>
+                        <div class="ml-auto">
+                            <a asp-controller="Activity" asp-action="Edit" asp-route-id="@activity.Id" class="btn btn-sm btn-primary mr-2" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form asp-controller="Activity" asp-action="SoftRemove" asp-route-id="@activity.Id" method="post" class="me-2">
+                                <button type="submit" class="btn btn-danger btn-sm px-4">Remove</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
