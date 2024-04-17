@@ -4,7 +4,7 @@ using KinderConnect.Web.ViewModels.Classroom;
 
 namespace KinderConnect.Services.Data.Interfaces
 {
-    public interface IChildrenService
+    public interface IChildService
     {
         Task JoinChildToClassroomAsync(JoinClassroomFormModel model, string parentGuardianId);
         Task<bool> IsChildAlreadyInAClassroomAsync(JoinClassroomFormModel model, string parentGuardianId);

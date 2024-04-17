@@ -13,11 +13,11 @@ namespace KinderConnect.Web.Controllers
     public class ClassroomController : Controller
     {
         private IClassroomService classroomService;
-        private IChildrenService childrenService;
+        private IChildService childrenService;
 
         public ClassroomController(
             IClassroomService classroomService,
-            IChildrenService childrenService)
+            IChildService childrenService)
         {
             this.classroomService = classroomService;
             this.childrenService = childrenService;

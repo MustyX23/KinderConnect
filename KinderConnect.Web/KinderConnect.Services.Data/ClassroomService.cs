@@ -123,7 +123,9 @@ namespace KinderConnect.Services.Data
 
         public async Task<IEnumerable<AllClassroomViewModel>> GetAllClassroomsAsync()
         {
-            var allClassrooms = await dbContext.Classrooms
+            var allClassrooms = await dbContext
+                .Classrooms
+                .Where(c => c.IsActive)
                 .Include(c => c.Children)
                 .ToListAsync();
 

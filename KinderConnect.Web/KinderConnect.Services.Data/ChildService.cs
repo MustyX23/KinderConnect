@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KinderConnect.Services.Data
 {
-    public class ChildrenService : IChildrenService
+    public class ChildService : IChildService
     {
         private readonly KinderConnectDbContext dbContext;
 
-        public ChildrenService(KinderConnectDbContext dbContext)
+        public ChildService(KinderConnectDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
@@ -155,7 +155,7 @@ namespace KinderConnect.Services.Data
                     && c.LastName == model.LastName
                     && c.DateOfBirth == model.DateOfBirth
                     && c.ParentGuardianId.ToString() == parentGuardianId
-                    && c.ClassroomId != null);
+                    && model.ClassroomId != null);
 
             return isChildAlreadyInAClassroom;
         }

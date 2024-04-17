@@ -11,9 +11,9 @@ namespace KinderConnect.Web.Controllers
     [Authorize]
     public class ChildController : Controller
     {
-        private IChildrenService childrenService;
+        private IChildService childrenService;
 
-        public ChildController(IChildrenService childrenService)
+        public ChildController(IChildService childrenService)
         {
             this.childrenService = childrenService;
         }
