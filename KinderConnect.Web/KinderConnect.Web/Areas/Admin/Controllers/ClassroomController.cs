@@ -41,6 +41,7 @@ namespace KinderConnect.Web.Areas.Admin.Controllers
             }
             
             await classroomService.CreateAsync(model);
+            TempData[SuccessMessage] = "You successfully created a new classroom!";
             return RedirectToAction("All", "Classroom", new {Area = "Admin"});
         }
         public async Task<IActionResult> Edit(string id)
@@ -67,6 +68,7 @@ namespace KinderConnect.Web.Areas.Admin.Controllers
             }
 
             await classroomService.EditAsync(id, formModel);
+            TempData[SuccessMessage] = $"You successfully editted the {formModel.Name} classroom!";
             return RedirectToAction("All", "Classroom");
         }
 
@@ -84,6 +86,7 @@ namespace KinderConnect.Web.Areas.Admin.Controllers
                 return RedirectToAction("All", "Classroom");                
             }
             await classroomService.SoftRemoveClassroomByIdAsync(id);
+            TempData[WarningMessage] = $"You successfully removed the classroom!";
             return RedirectToAction("All", "Classroom");
         }
     }

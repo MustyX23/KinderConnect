@@ -20,6 +20,7 @@
             <th><label>Phone Number</label></th>
             <th><label>User Is Teacher</label></th>
             <th><label>User Is Online</label></th>
+            <th><label>Actions</label></th> <!-- New column for Actions -->
         </tr>
     </thead>
     <tbody>
@@ -47,6 +48,12 @@
                     else
                     {
                         <label class="text-center">❌</label>
+                    }
+                </td>
+                <td>
+                    @if (!user.IsTeacher)
+                    {
+                        <a asp-area="Admin" asp-controller="Teacher" asp-action="Create" asp-route-userId="@user.Id" class="btn btn-primary btn-sm">Upgrade to Teacher</a>
                     }
                 </td>
             </tr>

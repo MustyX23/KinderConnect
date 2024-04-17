@@ -1,0 +1,58 @@
+﻿@using KinderConnect.Web.ViewModels.Teacher;
+@model CreateTeacherFormModel
+
+<h2 class="text-center mb-4">Create Teacher</h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <form method="post" class="border p-4 rounded">
+
+            <div class="mb-3">
+                <label class="form-label">Full Name:</label>
+                <input type="text" class="form-control" value="@Model.User.FullName" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email:</label>
+                <input type="email" class="form-control" value="@Model.User.Email" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Phone Number:</label>
+                <input type="text" class="form-control" value="@Model.User.PhoneNumber" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Image Url:</label>
+                <input type="text" asp-for="ImageURl" class="form-control" />
+                <span asp-validation-for="ImageURl" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Summary:</label>
+                <textarea asp-for="Summary" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Summary" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Qualification:</label>
+                <select asp-for="QualificationId" class="form-control">
+                    @foreach (var qualification in Model.Qualifications)
+                    {
+                        <option value="@qualification.Id">@qualification.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="QualificationId" class="small text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Upgrade</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
