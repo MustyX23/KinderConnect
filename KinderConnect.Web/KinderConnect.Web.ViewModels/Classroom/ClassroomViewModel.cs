@@ -2,6 +2,7 @@
 {
     public class ClassroomViewModel
     {
+        public Guid Id { get; set; }
         public string ClassroomName { get; set; } = null!;
 
         public string ClassroomImageUrl { get; set; } = null!;

@@ -68,13 +68,16 @@
                         </div>
                         <div class="card-footer bg-transparent py-2 px-5">
                             <div class="row">
-                                <div class="col-6 text-end">
+                                <div class="col-4 text-center">
                                     <a asp-action="Edit" asp-route-id="@teacher.Id" class="btn btn-secondary btn-sm px-4">Edit</a>
                                 </div>
-                                <div class="col-6 text-start">
+                                <div class="col-4 text-center">
                                     <form asp-action="SoftRemove" asp-route-id="@teacher.Id" method="post" class="me-2">
-                                        <button type="submit" class="btn btn-danger btn-sm px-4">Remove</button>
+                                        <button type="submit" class="btn btn-danger btn-sm px-2 mx-1">Remove</button>
                                     </form>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <a asp-action="AssignClassrooms" asp-route-teacherId="@teacher.Id" class="btn btn-success btn-sm px-2 mx-1">Assign Classrooms</a>
                                 </div>
                             </div>
                         </div>

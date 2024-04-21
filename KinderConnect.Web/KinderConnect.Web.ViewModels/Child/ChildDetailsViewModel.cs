@@ -23,6 +23,7 @@ namespace KinderConnect.Web.ViewModels.Child
         public string? Allergies { get; set; }
 
         public string DateOfBirth { get; set; } = null!;
+        public string ParentGuardianId { get; set; } = null!;
 
         public DetailsClassroomViewModel Classroom { get; set; } = null!;
     }

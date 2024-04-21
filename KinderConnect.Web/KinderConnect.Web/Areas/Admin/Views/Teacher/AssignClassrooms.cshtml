@@ -1,0 +1,46 @@
+﻿@using KinderConnect.Web.ViewModels.Classroom;
+@model AssignClassroomsViewModel
+
+<h2>Assign Classrooms to Teacher</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label for="teacher">Teacher: @Model.TeacherName</label>
+        <input type="hidden" name="teacherId" value="@Model.TeacherId" />
+    </div>
+
+    <div class="form-group">
+        <label>Already assigned Classrooms:</label>
+        <div class="form-control">
+            @foreach (var classroom in Model.AssignedClassrooms)
+            {
+                <span class="badge bg-success">@classroom.Name</span>
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="classrooms">Classrooms</label>
+        <select id="classrooms" multiple class="form-control">
+            @foreach (var classroom in Model.Classrooms)
+            {
+                <option value="@classroom.Id" data-img="@classroom.ClassroomImageUrl" data-min-age="@classroom.ClassroomMinimumAge" data-max-age="@classroom.ClassroomMaximumAge">@classroom.ClassroomName</option>
+            }
+        </select>
+    </div>
+
+    <div id="selectedClassrooms" class="row">
+        <!-- Selected classrooms will be displayed here -->
+    </div>
+
+    <div id="hiddenFields">
+        <!-- Hidden fields for selected classrooms will be added here -->
+    </div>
+
+    <button type="button" id="addClassroom" class="btn btn-primary">Add Classroom</button>
+    <input type="submit" value="Save" class="btn btn-success" />
+</form>
+
+@section Scripts {
+    <script src="~/js/addClassroom.js"></script>
+}

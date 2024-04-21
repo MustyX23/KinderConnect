@@ -3,7 +3,9 @@ using KinderConnect.Web.Infrastructure.Extensions;
 using KinderConnect.Web.ViewModels.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+
 using static KinderConnect.Common.GeneralApplicationConstants;
+using static KinderConnect.Common.NotificationMessagesConstants;
 
 namespace KinderConnect.Web.Areas.Admin.Controllers
 {
@@ -21,24 +23,38 @@ namespace KinderConnect.Web.Areas.Admin.Controllers
         [ResponseCache(Duration = 30, Location = ResponseCacheLocation.Client, NoStore = false)]
         public async Task<IActionResult> All()
         {
-            if (!User.IsAdmin())
+            try
             {
-                return Unauthorized();
+                if (!User.IsAdmin())
+                {
+                    return Unauthorized();
+                }
+                IEnumerable<UserViewModel> users =
+                    this.memoryCache.Get<IEnumerable<UserViewModel>>(UsersCacheKey);
+                if (users == null)
+                {
+                    users = await this.userService.AllAsync();
+
+                    MemoryCacheEntryOptions cacheOptions = new MemoryCacheEntryOptions()
+                        .SetAbsoluteExpiration(TimeSpan
+                            .FromMinutes(UsersCacheDurationMinutes));
+
+                    this.memoryCache.Set(UsersCacheKey, users, cacheOptions);
+                }
+
+                return View(users);
             }
-            IEnumerable<UserViewModel> users =
-                this.memoryCache.Get<IEnumerable<UserViewModel>>(UsersCacheKey);
-            if (users == null)
+            catch (Exception)
             {
-                users = await this.userService.AllAsync();
-
-                MemoryCacheEntryOptions cacheOptions = new MemoryCacheEntryOptions()
-                    .SetAbsoluteExpiration(TimeSpan
-                        .FromMinutes(UsersCacheDurationMinutes));
-
-                this.memoryCache.Set(UsersCacheKey, users, cacheOptions);
+                GeneralError();
+                return RedirectToAction("Index", "Home");
             }
-
-            return View(users);
+            
+        }
+        private IActionResult GeneralError()
+        {
+            TempData[ErrorMessage] = "Unexpected Error occured. Please try again later :(";
+            return RedirectToAction("Index", "Home");
         }
     }
 }
