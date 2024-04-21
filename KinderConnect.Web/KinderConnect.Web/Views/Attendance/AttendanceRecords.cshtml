@@ -5,6 +5,7 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
+                <th>Teacher</th>
                 <th>Start Time</th>
                 <th>End Time</th>
                 <th>Activity</th>
@@ -15,6 +16,7 @@
             @foreach (var attendance in Model)
             {
                 <tr>
+                    <td>@attendance.TeacherName</td>
                     <td>@attendance.Start</td>
                     <td>@attendance.End</td>
                     <td>@attendance.Actvity</td>

@@ -17,6 +17,11 @@ namespace KinderConnect.Web.Areas.Admin.Controllers
         {
             try
             {
+                if (!User.IsAdmin())
+                {
+                    return Unauthorized();
+                }
+
                 var allActivities
                     = await activityService.GetAllActivitiesAsync();
 

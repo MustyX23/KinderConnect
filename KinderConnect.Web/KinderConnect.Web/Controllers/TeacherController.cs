@@ -22,6 +22,11 @@ namespace KinderConnect.Web.Controllers
                 var allTeachers
                 = await teacherService.GetTeachersForViewAsync();
 
+                if (allTeachers == null)
+                {
+                    return BadRequest();
+                }
+
                 return View(allTeachers);
             }
             catch (Exception)
@@ -39,15 +44,21 @@ namespace KinderConnect.Web.Controllers
             try
             {
                 bool isTeacher
-                = await teacherService.IsTeacherByUserIdAsync(userId);
-
-                if (!isTeacher)
-                {
-                    return NotFound();
-                }
+                    = await teacherService.IsTeacherByUserIdAsync(userId);
 
                 string teacherId
                     = await teacherService.GetTeacherIdByUserIdAsync(userId);
+
+                if (!isTeacher)
+                {
+                    TempData[ErrorMessage] = "You don't have permissions for this page.";
+                    ModelState.AddModelError(string.Empty, "You don't have permissions for this page.");
+                    return RedirectToAction("Index", "Home");
+                }
+                if (teacherId == null)
+                {
+                    return Unauthorized();
+                }
 
                 IEnumerable<MyClassroomViewModel> myClassrooms
                     = await teacherService.GetMyClassroomsByTeacherIdAsync(teacherId);
@@ -68,6 +79,11 @@ namespace KinderConnect.Web.Controllers
             {
                 TeacherDetailsViewModel viewModel
                 = await teacherService.GetDetailsByIdAsync(id);
+
+                if (viewModel == null)
+                {
+                    return BadRequest();
+                }
 
                 return View(viewModel);
             }

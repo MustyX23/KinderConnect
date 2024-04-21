@@ -5,7 +5,6 @@
 @{
     string userId = User.GetUserId();
     bool isTeacher = await TeacherService.IsTeacherByUserIdAsync(userId);
-    bool isAdmin = User.IsAdmin();
 }
 
 <!DOCTYPE html>
@@ -27,7 +26,7 @@
     <header>
         <div class="container-fluid bg-light position-relative shadow">
             <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
-                <a asp-controller="Home" asp-action="Index" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px;">
                     <i class="flaticon-043-teddy-bear"></i>
                     <span class="text-primary">KinderConnect</span>
                 </a>
@@ -40,10 +39,6 @@
                         <a class="nav-item nav-link" asp-area="" asp-controller = "Home" asp-action="About">About</a>
                         <a class="nav-item nav-link" asp-area="" asp-controller="Classroom" asp-action="Index">Classrooms</a>
                         <a class="nav-item nav-link" asp-area="" asp-controller="Child" asp-action="Index">My Kids</a>
-                        @if (isAdmin)
-                        {
-                            <a class="nav-item nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
-                        }
                         @if (isTeacher)
                         {
                             <a class="nav-item nav-link" asp-area="" asp-controller="Teacher" asp-action="MyClassrooms">My Classrooms</a>

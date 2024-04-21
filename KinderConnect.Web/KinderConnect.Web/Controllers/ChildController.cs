@@ -38,10 +38,21 @@ namespace KinderConnect.Web.Controllers
         }
         public async Task<IActionResult> Edit(string id)
         {
+            string parentGuardianId = User.GetUserId();
+
             try
             {
                 EditChildFormModel formModel
                     = await childrenService.GetChildForEditByIdAsync(id);
+
+                if (formModel == null) 
+                {
+                    return BadRequest();
+                }
+                if (formModel.ParentGuardianId.ToLower() != parentGuardianId) 
+                {
+                    return Unauthorized();
+                }
 
                 return View(formModel);
             }
@@ -54,8 +65,20 @@ namespace KinderConnect.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(string id, EditChildFormModel formModel)
         {
+            string parentGuardianId = User.GetUserId();
+            var child = await childrenService.GetChildForEditByIdAsync(id);
+
             try
             {
+                if (child == null)
+                {
+                    return BadRequest();
+                }
+                if (child.ParentGuardianId.ToLower() != parentGuardianId)
+                {
+                    return Unauthorized();
+                }
+
                 await childrenService.EditChildByIdAsync(id, formModel);
                 TempData[SuccessMessage] = $"You successfully edited {formModel.FirstName}!";
             }
@@ -69,10 +92,20 @@ namespace KinderConnect.Web.Controllers
         }
         public async Task<IActionResult> Details(string id)
         {
+            string parentGuardian = User.GetUserId();
             try
             {
                 var viewModel
                 = await childrenService.GetChildForDetailsByIdAsync(id);
+
+                if (viewModel == null)
+                {
+                    return BadRequest();
+                }
+                if (viewModel.ParentGuardianId.ToLower() != parentGuardian)
+                {
+                    return Unauthorized();
+                }
 
                 return View(viewModel);
             }

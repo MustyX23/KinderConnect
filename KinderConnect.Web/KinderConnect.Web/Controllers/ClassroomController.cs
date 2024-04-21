@@ -14,13 +14,16 @@ namespace KinderConnect.Web.Controllers
     {
         private IClassroomService classroomService;
         private IChildService childrenService;
+        private IUserService userService;
 
         public ClassroomController(
             IClassroomService classroomService,
-            IChildService childrenService)
+            IChildService childrenService,
+            IUserService userService)
         {
             this.classroomService = classroomService;
             this.childrenService = childrenService;
+            this.userService = userService;
         }
 
         [AllowAnonymous]
@@ -51,10 +54,17 @@ namespace KinderConnect.Web.Controllers
         {
             string parentGuardianId = User.GetUserId();
 
+            string phoneNumber = await userService.GetPhoneNumberByIdAsync(parentGuardianId);
+
             try
             {
                 var formModel =
                 await classroomService.GetJoinClassroomFormModelByIdAsync(id);
+
+                if (phoneNumber != null)
+                {
+                    formModel.ParentGuardianContact = phoneNumber;
+                }
 
                 return View(formModel);
             }
@@ -112,10 +122,16 @@ namespace KinderConnect.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> JoinClassroomByChild(string id)
         {
+            string parentGuardianId = User.GetUserId();
             try
             {
                 var formModel =
                 await classroomService.GetJoinClassroomByChildViewModelByIdAsync(id);
+
+                if (formModel == null)
+                {
+                    return BadRequest();
+                }
 
                 return View(formModel);
             }
@@ -144,6 +160,14 @@ namespace KinderConnect.Web.Controllers
             bool seatsAvailable
                 = await classroomService.IsClassroomSeatsAvailableAsync(classroomId);
 
+            if (child == null)
+            {
+                return BadRequest();
+            }
+            if (child.ParentGuardianId != Guid.Parse(parentGuardianId))
+            {
+                return Unauthorized();
+            }
             if (!seatsAvailable)
             {
                 ModelState.AddModelError(string.Empty, "Sorry, the classroom is already full.");
@@ -184,22 +208,56 @@ namespace KinderConnect.Web.Controllers
         }
         public async Task<IActionResult> LeaveClassroom(string childId)
         {
-            LeaveClassroomViewModel viewModel
-                = await classroomService.GetLeaveClassroomViewModelByChildIdAsync(childId);
+            string parentGuardianId = User.GetUserId();
 
-            return View(viewModel);
+            try
+            {
+                var child
+                    = await childrenService.GetChildByIdAsync(childId);
+
+                if (child == null)
+                {
+                    return BadRequest();
+                }
+                if (child.ParentGuardianId != Guid.Parse(parentGuardianId))
+                {
+                    return Unauthorized();
+                }
+
+                LeaveClassroomViewModel viewModel
+                    = await classroomService.GetLeaveClassroomViewModelByChildIdAsync(childId);
+
+                return View(viewModel);
+
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Classroom");
+            }
+            
         }
         [HttpPost]
         public async Task<IActionResult> LeaveClassroom(string childId, string classroomId)
         {
-            var childViewModel
-                = await childrenService.GetLeaveChildViewModelByIdAsync(childId);
-
-            var classroomViewModel
-                = await classroomService.GetClassroomViewModelByIdAsync(classroomId);
+            string parentGuardianId = User.GetUserId();
 
             try
             {
+                var childViewModel
+                    = await childrenService.GetLeaveChildViewModelByIdAsync(childId);
+
+                var classroomViewModel
+                    = await classroomService.GetClassroomViewModelByIdAsync(classroomId);
+
+                if (childViewModel == null || classroomViewModel == null)
+                {
+                    return BadRequest();
+                }
+                if (childViewModel.ParentGuardianId.ToLower() != parentGuardianId)
+                {
+                    return Unauthorized();
+                }
+
                 await childrenService.LeaveClassroomByChildIdAsync(childId);
                 await classroomService.DecreaseTotalSeatsByIdAsync(classroomId);
 
@@ -214,7 +272,6 @@ namespace KinderConnect.Web.Controllers
         private bool IsValidAgeForClassroom(DateTime dateOfBirth, int minAge, int maxAge)
         {
             int childAge = DateTime.Now.Year - dateOfBirth.Year;
-
             return childAge >= minAge && childAge <= maxAge;
         }
         private IActionResult GeneralError()

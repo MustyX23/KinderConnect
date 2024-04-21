@@ -36,10 +36,15 @@ namespace KinderConnect.Web.Controllers
             try
             {
                 var activitiesViewModel
-                = await activityService.GetAllActivitiesAsync();
+                    = await activityService.GetThreeActivitiesAsync();
 
                 var blogViewModel
                     = await blogPostService.GetThreeLastBlogPostsAsync();
+
+                if (activitiesViewModel == null || blogViewModel == null)
+                {
+                    return BadRequest();
+                }
 
                 var indexViewModel = new IndexViewModel
                 {
@@ -62,7 +67,12 @@ namespace KinderConnect.Web.Controllers
             try
             {
                 IEnumerable<AllTeacherViewModel> teachersForView
-                = await teacherService.GetTeachersForViewAsync();
+                    = await teacherService.GetTeachersForViewAsync();
+
+                if (teachersForView == null)
+                {
+                    return BadRequest();
+                }
 
                 var aboutViewModel = new AboutViewModel
                 {
