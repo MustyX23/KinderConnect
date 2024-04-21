@@ -89,6 +89,7 @@ namespace KinderConnect.Services.Data
                     IsActive = c.IsActive,
                     MedicalInformation = c.MedicalInformation,
                     ParentGuardianContact = c.ParentGuardianContact,
+                    ParentGuardianId = c.ParentGuardianId.ToString(),
                     Classroom = classroom,
                 })
                 .FirstOrDefaultAsync(c => c.Id == childId);
@@ -110,7 +111,8 @@ namespace KinderConnect.Services.Data
                     Allergies = c.Allergies,
                     MedicalInformation = c.MedicalInformation,
                     ParentGuardianContact = c.ParentGuardianContact,
-                    ImageUrl = c.ImageUrl
+                    ImageUrl = c.ImageUrl,
+                    ParentGuardianId = c.ParentGuardianId.ToString()
                 })
                 .FirstOrDefaultAsync();
 
@@ -142,6 +144,7 @@ namespace KinderConnect.Services.Data
                 .Select(c => new LeaveChildViewModel()
                 {
                     FirstName = c.FirstName,
+                    ParentGuardianId= c.ParentGuardianId.ToString()
                 })
                 .FirstOrDefaultAsync();
 
@@ -176,7 +179,7 @@ namespace KinderConnect.Services.Data
                 LastName = model.LastName,
                 DateOfBirth = model.DateOfBirth,
                 Age = DateTime.Now.Year - model.DateOfBirth.Year,
-                Allergies = model.Allergies,
+                Allergies = model.Allergies,               
                 MedicalInformation = model.MedicalInformation,
                 ClassroomId = Guid.Parse(model.ClassroomId),
                 ImageUrl = model.ImageUrl,
@@ -185,6 +188,15 @@ namespace KinderConnect.Services.Data
                 ParentGuardianId = Guid.Parse(parentGuardianId),
                 ParentGuardianContact = model.ParentGuardianContact,                
             };
+
+            var parentGuardian = await dbContext
+                .Users
+                .FirstOrDefaultAsync(u => u.IsActive && u.Id.ToString() == parentGuardianId);
+
+            if (parentGuardian != null)
+            {
+                parentGuardian.PhoneNumber = model.ParentGuardianContact;
+            }
 
             await dbContext.Children.AddAsync(child);
             await dbContext.SaveChangesAsync();

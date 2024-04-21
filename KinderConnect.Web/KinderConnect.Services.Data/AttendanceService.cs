@@ -86,6 +86,7 @@ namespace KinderConnect.Services.Data
             var allAttendances = await dbContext
                 .AttendanceRecords
                 .Where(a => a.IsActive && a.ClassroomId.ToString() == classroomId)
+                .OrderByDescending(a => a.Start)
                 .Select(a => new AttendanceRecordFormModel()
                 {
                     Id = a.Id.ToString(),
@@ -93,6 +94,7 @@ namespace KinderConnect.Services.Data
                     ActivityId = a.ActivityId,
                     Actvity = a.Activity.Name,
                     TeacherId = a.TeacherId.ToString(),
+                    TeacherName = a.Teacher.TeacherUser.FirstName + " " + a.Teacher.TeacherUser.LastName,
                     Start = a.Start.ToString("dd/MM/yyyy HH:mm"),
                     End = a.End.ToString("dd/MM/yyyy HH:mm"),
                     Comment = a.Comment,
@@ -107,7 +109,7 @@ namespace KinderConnect.Services.Data
                         IsPresent = ac.IsPresent
                     })
                     .ToList()
-                })
+                })                
                 .ToArrayAsync();
 
             return allAttendances;

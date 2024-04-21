@@ -10,5 +10,6 @@ namespace KinderConnect.Services.Data.Interfaces
         Task<string> GetFullNameByIdAsync(string userId);
 
         Task<IEnumerable<UserViewModel>> AllAsync();
+        Task<string> GetPhoneNumberByIdAsync(string parentGuardianId);
     }
 }

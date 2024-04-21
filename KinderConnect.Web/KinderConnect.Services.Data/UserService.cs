@@ -80,5 +80,19 @@ namespace KinderConnect.Services.Data
             return viewModel;
 
         }
+
+        public async Task<string> GetPhoneNumberByIdAsync(string parentGuardianId)
+        {
+            ApplicationUser? user = await this.dbContext
+                .Users
+                .FirstOrDefaultAsync(u => u.IsActive && u.Id.ToString() == parentGuardianId);
+
+            if (user == null)
+            {
+                return string.Empty;
+            }
+
+            return user.PhoneNumber;
+        }
     }
 }

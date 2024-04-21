@@ -77,6 +77,21 @@ namespace KinderConnect.Services.Data
             return queryModel;
         }
 
+        public async Task AssignClassroomsToTeacherAsync(Guid teacherId, List<Guid> classroomIds)
+        {
+            foreach (var classroomId in classroomIds)
+            {
+                var assignment = new ClassroomTeacher
+                {
+                    TeacherId = teacherId,
+                    ClassroomId = classroomId
+                };
+                dbContext.ClassroomsTeachers.Add(assignment);
+            }
+
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task CreateAsync(CreateClassroomFormModel model)
         {
             Classroom classroom = new Classroom() 
@@ -114,6 +129,7 @@ namespace KinderConnect.Services.Data
             classroom.Name = formModel.Name;
             classroom.Information = formModel.Information;
             classroom.TutionFee = formModel.TutionFee;
+            classroom.TotalSeats = formModel.TotalSeats;
             classroom.ImageUrl = formModel.ImageUrl;
             classroom.MinimumAge = formModel.MinimumAge;
             classroom.MaximumAge = formModel.MaximumAge;
@@ -150,6 +166,50 @@ namespace KinderConnect.Services.Data
             }
 
             return allClassroomsForView;
+        }
+
+        public async Task<AssignClassroomsViewModel> GetAssignClassroomsViewModelByTeacherIdAsync(string teacherId)
+        {
+            string teacherName = await dbContext
+                .Teachers
+                .Include(t => t.TeacherUser)
+                .Where(t => t.TeacherUser.IsActive && t.Id.ToString() == teacherId)
+                .Select(t => t.TeacherUser.FirstName + " " + t.TeacherUser.LastName)
+                .FirstAsync();
+
+
+            var classrooms = await dbContext.Classrooms
+                .Where(c => c.IsActive)
+                .Select(c => new ClassroomViewModel
+                {
+                    Id = c.Id,
+                    ClassroomName = c.Name,
+                    ClassroomImageUrl = c.ImageUrl,
+                    ClassroomMinimumAge = c.MinimumAge,
+                    ClassroomMaximumAge = c.MaximumAge
+                })
+                .ToListAsync();
+
+
+            var alreadyAssignedClassrooms = await dbContext
+                .ClassroomsTeachers
+                .Where(ct => ct.TeacherId == Guid.Parse(teacherId))
+                .Select(ct => new AssignedClassroomViewModel()
+                {
+                    Id = ct.ClassroomId,
+                    Name = ct.Classroom.Name,
+                })
+                .ToListAsync();
+            
+            var viewModel = new AssignClassroomsViewModel
+            {
+                TeacherId = Guid.Parse(teacherId),
+                TeacherName = teacherName,
+                Classrooms = classrooms,
+                AssignedClassrooms = alreadyAssignedClassrooms
+            };
+            
+            return viewModel;
         }
 
         public async Task<EditClassroomFormModel> GetClassroomForEditByIdAsync(string classroomId)
@@ -321,6 +381,23 @@ namespace KinderConnect.Services.Data
             var classroom = await dbContext.Classrooms.FindAsync(Guid.Parse(classroomId));
 
             return currentSeats < classroom!.TotalSeats;
+        }
+
+        public async Task<bool> IsTeacherAlreadyLeadingClassesAsync(Guid teacherId, List<Guid> classroomIds)
+        {
+            var existingClassrooms = await dbContext.ClassroomsTeachers
+                    .Where(ct => ct.TeacherId == teacherId)
+                    .Select(ct => ct.ClassroomId)
+                    .ToListAsync();
+
+            var alreadyAssigned = classroomIds.Intersect(existingClassrooms).ToList();
+
+            if (alreadyAssigned.Any())
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public async Task SoftRemoveClassroomByIdAsync(string id)

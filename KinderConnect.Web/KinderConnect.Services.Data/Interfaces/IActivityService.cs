@@ -8,7 +8,7 @@ namespace KinderConnect.Services.Data.Interfaces
         Task EditByIdAsync(int id, ActivityFormModel model);
         Task<ActivityFormModel> GetActivityForEditByIdAsync(int id);
         Task<IEnumerable<AllActivitiesViewModel>> GetAllActivitiesAsync();
-
+        Task<IEnumerable<AllActivitiesViewModel>> GetThreeActivitiesAsync();
         Task SoftRemoveByIdAsync(int id);
         //Task<ActivityDto> GetActivityByIdAsync(string activityId);
         //Task CreateActivityAsync(ActivityDto activityDto);

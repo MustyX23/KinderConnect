@@ -74,6 +74,23 @@ namespace KinderConnect.Services.Data
             return activities;
         }
 
+        public async Task<IEnumerable<AllActivitiesViewModel>> GetThreeActivitiesAsync()
+        {
+            var lastThreeActivities = await dbContext
+                .Activities
+                .Where(a => a.IsActive)
+                .Select(a => new AllActivitiesViewModel()
+                {
+                    Name = a.Name,
+                    Description = a.Description,
+                })
+                .OrderByDescending(a => a.Name)
+                .Take(3)
+                .ToArrayAsync();
+
+            return lastThreeActivities;
+        }
+
         public async Task SoftRemoveByIdAsync(int id)
         {
             var activity = await dbContext
