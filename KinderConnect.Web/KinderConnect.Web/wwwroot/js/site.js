@@ -38,3 +38,16 @@ function confirmRemove(id) {
         form.submit();
     }
 }
+$(document).ready(function () {
+    // Toggle navigation bar
+    $('.navbar-toggler').on('click', function () {
+        var target = $(this).data('target');
+        $(target).toggleClass('show');
+    });
+
+    // Close navigation bar when a nav item is clicked
+    $('.navbar-nav .nav-link').on('click', function () {
+        var target = $('.navbar-toggler').data('target');
+        $(target).removeClass('show');
+    });
+});
