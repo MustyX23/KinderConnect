@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using KinderConnect.Data.Models;
+using KinderConnect.Web.Infrastructure.CustomAttributes;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -77,6 +78,24 @@ namespace KinderConnect.Web.Areas.Identity.Pages.Account
             [Display(Name = "Username")]
             public string Username { get; set; }
 
+            [Required]
+            [Display(Name = "First Name:")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "Last Name:")]
+            public string LastName { get; set; }
+
+            [Required]
+            [Display(Name = "Gender:")]
+            public string Gender { get; set; }
+
+            [Required(ErrorMessage = "Date of Birth is required.")]
+            [DataType(DataType.Date)]
+            [Display(Name = "Date of Birth")]
+            [ValidateAge(18, ErrorMessage = "You must be at least 18 years old.")]
+            public DateTime DateOfBirth { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -98,10 +117,16 @@ namespace KinderConnect.Web.Areas.Identity.Pages.Account
         }
 
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
+            if (User.Identity?.IsAuthenticated ?? false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -113,6 +138,10 @@ namespace KinderConnect.Web.Areas.Identity.Pages.Account
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
+                user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.DateOfBirth = Input.DateOfBirth;
+                user.Gender = Input.Gender;
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
