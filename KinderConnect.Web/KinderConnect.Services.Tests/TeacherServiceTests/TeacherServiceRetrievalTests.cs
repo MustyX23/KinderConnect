@@ -221,5 +221,21 @@ namespace KinderConnect.Services.Tests.TeacherServiceTests
             Assert.AreEqual("M.Sc", result.Teachers.First().Qualification);
             Assert.AreEqual("B.Sc", result.Teachers.Last().Qualification);
         }
+        //Add more unit tests
+        //[Test]
+        //public async Task GetTeacherByIdAsync_ShouldReturnTheCorrectTeacher()
+        //{
+        //    Teacher teacher = new Teacher() 
+        //    {s
+        //        Id = Guid.Parse("111111111111-11"),
+        //    };
+
+        //    // Act
+        //    var result = await teacherService.AllAsync(queryModel);
+
+        //    // Assert
+        //    Assert.AreEqual("Jane", result.Teachers.First().FirstName);
+        //    Assert.AreEqual("John", result.Teachers.Last().FirstName);
+        //}
     }
 }
