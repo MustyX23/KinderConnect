@@ -397,3 +397,4 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 KinderConnect.Web/KinderConnect.Web/appsettings.json
+KinderConnect.Web/docker-compose.yml
